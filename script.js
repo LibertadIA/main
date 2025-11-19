@@ -1,48 +1,167 @@
-// Mobile Navigation Toggle
+// ============================================
+// CONFIGURATION & VARIABLES
+// ============================================
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ============================================
+// GSAP CONFIGURATION & ANIMATIONS
+// ============================================
+
 document.addEventListener('DOMContentLoaded', function() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
+    // Enregistrer ScrollTrigger
+    if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
 
-    if (hamburger) {
-        hamburger.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-
-            // Animate hamburger
-            this.classList.toggle('active');
-        });
-
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-                navMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-            }
-        });
+        // Configuration GSAP
+        if (!prefersReducedMotion) {
+            initGSAPAnimations();
+        }
     }
 
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+    // Initialiser les autres fonctionnalités
+    initMobileNav();
+    initScrollReveal();
+    initROICounters();
+    initSmoothScroll();
+    initContactForm();
+    initNavbarScroll();
+});
+
+// ============================================
+// ANIMATIONS GSAP
+// ============================================
+
+function initGSAPAnimations() {
+    // Animation du Hero au chargement
+    gsap.from('.hero-title-new', {
+        duration: 1,
+        y: 50,
+        opacity: 0,
+        ease: 'power3.out'
+    });
+
+    gsap.from('.hero-subtitle-new', {
+        duration: 1,
+        y: 30,
+        opacity: 0,
+        delay: 0.2,
+        ease: 'power3.out'
+    });
+
+    gsap.from('.hero-cta-new a', {
+        duration: 0.8,
+        y: 20,
+        opacity: 0,
+        stagger: 0.2,
+        delay: 0.4,
+        ease: 'power3.out'
+    });
+
+    gsap.from('.hero-trust .trust-item', {
+        duration: 0.6,
+        y: 20,
+        opacity: 0,
+        stagger: 0.1,
+        delay: 0.8,
+        ease: 'power2.out'
+    });
+
+    // Animation du SVG d'automatisation
+    gsap.from('.automation-svg', {
+        duration: 1.2,
+        scale: 0.8,
+        opacity: 0,
+        delay: 0.3,
+        ease: 'back.out(1.7)'
+    });
+
+    // Animations au scroll avec ScrollTrigger
+
+    // Section Problème/Solution
+    gsap.utils.toArray('.comparison-side').forEach((el, index) => {
+        gsap.from(el, {
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 80%',
+                end: 'top 50%',
+                toggleActions: 'play none none reverse'
+            },
+            duration: 0.8,
+            y: 50,
+            opacity: 0,
+            delay: index * 0.2,
+            ease: 'power2.out'
         });
     });
 
-    // Fade-in animation on scroll
+    // Animation de la flèche de transition
+    gsap.from('.transition-arrow', {
+        scrollTrigger: {
+            trigger: '.transition-arrow',
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+        },
+        duration: 0.6,
+        scale: 0,
+        opacity: 0,
+        ease: 'back.out(1.7)'
+    });
+
+    // Section ROI - Animation des cartes
+    gsap.utils.toArray('.roi-card').forEach((card, index) => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+            },
+            duration: 0.8,
+            y: 60,
+            opacity: 0,
+            scale: 0.9,
+            delay: index * 0.15,
+            ease: 'power3.out'
+        });
+    });
+
+    // Animation du CTA final
+    gsap.from('.cta-content-wrapper', {
+        scrollTrigger: {
+            trigger: '.final-cta',
+            start: 'top 70%',
+            toggleActions: 'play none none reverse'
+        },
+        duration: 1,
+        y: 50,
+        opacity: 0,
+        ease: 'power3.out'
+    });
+
+    // Animation des cercles de fond du hero avec parallax
+    gsap.utils.toArray('.bg-circle').forEach((circle, index) => {
+        gsap.to(circle, {
+            scrollTrigger: {
+                trigger: '.hero-new',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: true
+            },
+            y: index * 100 + 50,
+            ease: 'none'
+        });
+    });
+}
+
+// ============================================
+// SCROLL REVEAL (Intersection Observer)
+// ============================================
+
+function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+    if (revealElements.length === 0) return;
+
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -51,115 +170,191 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                const delay = entry.target.dataset.delay || 0;
+                setTimeout(() => {
+                    entry.target.classList.add('revealed');
+                }, delay);
+
+                // Ne plus observer après révélation
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe elements for animation
-    const animatedElements = document.querySelectorAll('.benefit-card, .step, .project-card, .service-item');
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
+    revealElements.forEach(el => {
+        if (!prefersReducedMotion) {
+            observer.observe(el);
+        } else {
+            // Si l'utilisateur préfère moins d'animations, révéler directement
+            el.classList.add('revealed');
+        }
     });
+}
 
-    // Contact Form Handling
-    const contactForm = document.getElementById('contactForm');
-    const formSuccess = document.getElementById('formSuccess');
+// ============================================
+// COMPTEURS ANIMÉS ROI
+// ============================================
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
+function initROICounters() {
+    const counters = document.querySelectorAll('.roi-number');
+    let countersAnimated = false;
 
-            // Get form data
-            const formData = new FormData(contactForm);
-            const data = Object.fromEntries(formData);
+    if (counters.length === 0) return;
 
-            // Here you would typically send the data to a server
-            // For this demo, we'll just show the success message
-            console.log('Form submitted:', data);
+    const observerOptions = {
+        threshold: 0.5
+    };
 
-            // Show success message
-            contactForm.style.display = 'none';
-            formSuccess.classList.add('show');
-
-            // Optional: Reset form after 5 seconds and hide success message
-            setTimeout(() => {
-                contactForm.reset();
-                contactForm.style.display = 'block';
-                formSuccess.classList.remove('show');
-            }, 5000);
-
-            // In a real application, you would send the data like this:
-            /*
-            fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-            .then(response => response.json())
-            .then(data => {
-                contactForm.style.display = 'none';
-                formSuccess.classList.add('show');
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Une erreur est survenue. Veuillez réessayer.');
-            });
-            */
+    const counterObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !countersAnimated) {
+                animateCounters();
+                countersAnimated = true;
+            }
         });
+    }, observerOptions);
+
+    const roiSection = document.querySelector('.roi-section');
+    if (roiSection) {
+        counterObserver.observe(roiSection);
     }
 
-    // Add active state to navbar on scroll
-    let lastScroll = 0;
+    function animateCounters() {
+        counters.forEach(counter => {
+            const target = parseInt(counter.dataset.target);
+            const duration = 2000; // 2 secondes
+            const start = 0;
+            const increment = target / (duration / 16); // 60 FPS
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    counter.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    counter.textContent = Math.floor(current);
+                }
+            }, 16);
+        });
+    }
+}
+
+// ============================================
+// NAVIGATION MOBILE
+// ============================================
+
+function initMobileNav() {
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (!hamburger || !navMenu) return;
+
+    hamburger.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+        this.classList.toggle('active');
+    });
+
+    // Fermer le menu en cliquant sur un lien
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        });
+    });
+
+    // Fermer le menu en cliquant en dehors
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    });
+}
+
+// ============================================
+// SMOOTH SCROLL
+// ============================================
+
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+
+            // Ignorer les liens vides ou juste "#"
+            if (!href || href === '#') return;
+
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                const offsetTop = target.offsetTop - 80; // Hauteur de la navbar
+
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// ============================================
+// NAVBAR AU SCROLL
+// ============================================
+
+function initNavbarScroll() {
     const navbar = document.querySelector('.navbar');
+    let lastScroll = 0;
+
+    if (!navbar) return;
 
     window.addEventListener('scroll', () => {
         const currentScroll = window.pageYOffset;
 
+        // Ajouter une ombre plus prononcée au scroll
         if (currentScroll > 100) {
-            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
         } else {
             navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
         }
 
         lastScroll = currentScroll;
     });
+}
 
-    // Form validation enhancement
-    const formInputs = document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea');
+// ============================================
+// FORMULAIRE DE CONTACT
+// ============================================
+
+function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    const formSuccess = document.getElementById('formSuccess');
+
+    if (!contactForm) return;
+
+    // Validation en temps réel des champs
+    const formInputs = contactForm.querySelectorAll('input, select, textarea');
 
     formInputs.forEach(input => {
+        // Validation au blur
         input.addEventListener('blur', function() {
-            if (this.hasAttribute('required') && !this.value.trim()) {
-                this.style.borderColor = '#ef4444';
-            } else {
-                this.style.borderColor = '#e2e8f0';
-            }
+            validateField(this);
         });
 
+        // Retirer la bordure d'erreur au focus
         input.addEventListener('focus', function() {
-            this.style.borderColor = '#2563eb';
+            this.style.borderColor = 'var(--primary-color)';
         });
+
+        // Validation en temps réel pour l'email
+        if (input.type === 'email') {
+            input.addEventListener('input', function() {
+                validateEmail(this);
+            });
+        }
     });
 
-    // Email validation
-    const emailInput = document.getElementById('email');
-    if (emailInput) {
-        emailInput.addEventListener('blur', function() {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (this.value && !emailRegex.test(this.value)) {
-                this.style.borderColor = '#ef4444';
-            }
-        });
-    }
-
-    // Phone formatting (French format)
+    // Formatage du téléphone
     const phoneInput = document.getElementById('phone');
     if (phoneInput) {
         phoneInput.addEventListener('input', function(e) {
@@ -171,8 +366,106 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Add ripple effect to buttons
-    const buttons = document.querySelectorAll('.btn');
+    // Soumission du formulaire
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        // Validation complète
+        let isValid = true;
+        formInputs.forEach(input => {
+            if (!validateField(input)) {
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            return;
+        }
+
+        // Récupérer les données du formulaire
+        const formData = new FormData(contactForm);
+        const data = Object.fromEntries(formData);
+
+        console.log('Formulaire soumis:', data);
+
+        // Afficher le message de succès
+        contactForm.style.display = 'none';
+        if (formSuccess) {
+            formSuccess.classList.add('show');
+
+            // Réinitialiser après 5 secondes
+            setTimeout(() => {
+                contactForm.reset();
+                contactForm.style.display = 'block';
+                formSuccess.classList.remove('show');
+            }, 5000);
+        }
+
+        // Dans un environnement de production, envoyer les données à un serveur:
+        /*
+        fetch('/api/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            contactForm.style.display = 'none';
+            formSuccess.classList.add('show');
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert('Une erreur est survenue. Veuillez réessayer.');
+        });
+        */
+    });
+}
+
+// Fonction de validation de champ
+function validateField(field) {
+    if (!field.hasAttribute('required')) return true;
+
+    const value = field.value.trim();
+
+    if (!value) {
+        field.style.borderColor = 'var(--red-color)';
+        return false;
+    }
+
+    if (field.type === 'email') {
+        return validateEmail(field);
+    }
+
+    field.style.borderColor = 'var(--green-color)';
+    return true;
+}
+
+// Validation email
+function validateEmail(field) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const value = field.value.trim();
+
+    if (value && !emailRegex.test(value)) {
+        field.style.borderColor = 'var(--red-color)';
+        return false;
+    }
+
+    if (value) {
+        field.style.borderColor = 'var(--green-color)';
+    }
+    return true;
+}
+
+// ============================================
+// MICRO-INTERACTIONS
+// ============================================
+
+// Effet ripple sur les boutons
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.btn-cta-primary, .btn-cta-secondary, .btn-cta-large, .btn-cta-outline, .btn-nav');
+
     buttons.forEach(button => {
         button.addEventListener('click', function(e) {
             const ripple = document.createElement('span');
@@ -195,10 +488,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Add CSS for ripple effect dynamically
+// ============================================
+// CSS DYNAMIQUE POUR LES ANIMATIONS
+// ============================================
+
 const style = document.createElement('style');
 style.textContent = `
-    .btn {
+    /* Ripple effect */
+    .btn-cta-primary,
+    .btn-cta-secondary,
+    .btn-cta-large,
+    .btn-cta-outline,
+    .btn-nav {
         position: relative;
         overflow: hidden;
     }
@@ -219,6 +520,7 @@ style.textContent = `
         }
     }
 
+    /* Animation du hamburger */
     .hamburger.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
@@ -230,5 +532,86 @@ style.textContent = `
     .hamburger.active span:nth-child(3) {
         transform: rotate(-45deg) translate(7px, -6px);
     }
+
+    /* Amélioration des transitions pour les icônes de comparaison */
+    .comparison-icon {
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    /* Pulse au hover pour les cartes ROI */
+    .roi-card:hover .roi-icon {
+        animation: iconPulse 0.6s ease-in-out;
+    }
+
+    @keyframes iconPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    /* Animation du gradient dans le CTA final */
+    .cta-gradient-bg {
+        will-change: background-position;
+    }
+
+    /* Optimisation des performances pour les animations */
+    .automation-svg,
+    .node,
+    .connection,
+    .data-particle {
+        will-change: transform, opacity;
+    }
+
+    /* Amélioration de l'accessibilité - Focus visible */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+        outline: 3px solid var(--primary-color);
+        outline-offset: 2px;
+    }
 `;
+
 document.head.appendChild(style);
+
+// ============================================
+// PERFORMANCE MONITORING (Development)
+// ============================================
+
+if (typeof performance !== 'undefined' && console) {
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            const perfData = performance.getEntriesByType('navigation')[0];
+            if (perfData) {
+                console.log(`⚡ Page Load Time: ${Math.round(perfData.loadEventEnd - perfData.fetchStart)}ms`);
+                console.log(`🎨 DOM Content Loaded: ${Math.round(perfData.domContentLoadedEventEnd - perfData.fetchStart)}ms`);
+            }
+        }, 0);
+    });
+}
+
+// ============================================
+// LAZY LOADING POUR LES ANIMATIONS COMPLEXES
+// ============================================
+
+// Charger les animations complexes uniquement si l'utilisateur scrolle
+let complexAnimationsLoaded = false;
+
+window.addEventListener('scroll', function() {
+    if (!complexAnimationsLoaded && window.scrollY > 100) {
+        complexAnimationsLoaded = true;
+        // Charger des animations supplémentaires si nécessaire
+    }
+}, { passive: true });
+
+// ============================================
+// GESTION DES ERREURS
+// ============================================
+
+window.addEventListener('error', function(e) {
+    console.error('Erreur détectée:', e.message);
+    // En production, envoyer à un service de monitoring
+});
+
+console.log('🚀 LibertadIA - Site chargé avec succès');
+console.log('💡 GSAP et animations activés');

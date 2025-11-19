@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibertadIA - Automatisation IA pour PME</title>
-    <meta name="description" content="Solutions d'automatisation IA pour PME. Gagnez du temps, des clients et de la marge grâce à l'intelligence artificielle.">
+    <title>LibertadIA - Automatisez au lieu d'embaucher | ROI en 6 mois</title>
+    <meta name="description" content="Gagnez 40% de temps et réduisez vos coûts sans embaucher. Automatisation IA pour PME avec ROI garanti en moins de 6 mois.">
+    <meta property="og:title" content="LibertadIA - Automatisation IA pour PME">
+    <meta property="og:description" content="Automatisez vos processus au lieu d'embaucher. ROI en 6 mois garanti.">
+    <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="logo-libertadia.png">
     <link rel="stylesheet" href="styles.css">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -29,76 +35,296 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero-new">
         <div class="container">
-            <div class="hero-content">
-                <h1 class="hero-title">Automatisez votre entreprise avec l'IA</h1>
-                <p class="hero-subtitle">Déléguez vos tâches répétitives à l'intelligence artificielle et concentrez-vous sur l'essentiel : faire croître votre business</p>
-                <div class="hero-cta">
-                    <a href="contact.html" class="btn btn-primary">Demander un audit gratuit</a>
-                    <a href="services.html" class="btn btn-secondary">Découvrir mes services</a>
+            <div class="hero-grid">
+                <div class="hero-content-new">
+                    <h1 class="hero-title-new">Automatisez au lieu d'embaucher</h1>
+                    <p class="hero-subtitle-new">Gagnez jusqu'à 40% de temps sur vos processus sans recruter. Économisez des milliers d'euros tout en scalant votre PME.</p>
+                    <div class="hero-cta-new">
+                        <a href="contact.html" class="btn-cta-primary">Obtenir une démo gratuite</a>
+                        <a href="#roi-section" class="btn-cta-secondary">Voir le ROI</a>
+                    </div>
+                    <div class="hero-trust">
+                        <div class="trust-item">
+                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>ROI en moins de 6 mois</span>
+                        </div>
+                        <div class="trust-item">
+                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span>Sans embauche, sans RH</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <!-- Animation SVG d'automatisation -->
+                    <svg class="automation-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Nœuds du système -->
+                        <circle class="node node-1" cx="50" cy="150" r="20" fill="#2563eb" opacity="0.2"/>
+                        <circle class="node node-2" cx="200" cy="80" r="25" fill="#f97316" opacity="0.2"/>
+                        <circle class="node node-3" cx="200" cy="220" r="25" fill="#06b6d4" opacity="0.2"/>
+                        <circle class="node node-4" cx="350" cy="150" r="20" fill="#10b981" opacity="0.2"/>
+
+                        <!-- Connexions animées -->
+                        <path class="connection connection-1" d="M 70 150 Q 135 115 175 80" stroke="#2563eb" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        <path class="connection connection-2" d="M 70 150 Q 135 185 175 220" stroke="#2563eb" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        <path class="connection connection-3" d="M 225 80 Q 287 115 330 150" stroke="#f97316" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                        <path class="connection connection-4" d="M 225 220 Q 287 185 330 150" stroke="#06b6d4" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+
+                        <!-- Particules de données -->
+                        <circle class="data-particle particle-1" cx="50" cy="150" r="3" fill="#2563eb"/>
+                        <circle class="data-particle particle-2" cx="50" cy="150" r="3" fill="#f97316"/>
+                        <circle class="data-particle particle-3" cx="200" cy="80" r="3" fill="#06b6d4"/>
+                        <circle class="data-particle particle-4" cx="200" cy="220" r="3" fill="#10b981"/>
+
+                        <!-- Icônes dans les nœuds -->
+                        <g class="icon-group icon-1" transform="translate(50, 150)">
+                            <path d="M-6,-6 L6,-6 L6,6 L-6,6 Z" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+                        </g>
+                        <g class="icon-group icon-2" transform="translate(200, 80)">
+                            <circle r="8" fill="white" stroke="#f97316" stroke-width="1.5"/>
+                            <path d="M-3,0 L3,0 M0,-3 L0,3" stroke="#f97316" stroke-width="1.5"/>
+                        </g>
+                        <g class="icon-group icon-3" transform="translate(200, 220)">
+                            <path d="M-6,-6 L6,6 M-6,6 L6,-6" stroke="#06b6d4" stroke-width="2"/>
+                        </g>
+                        <g class="icon-group icon-4" transform="translate(350, 150)">
+                            <circle r="8" fill="white" stroke="#10b981" stroke-width="1.5"/>
+                            <path d="M-3,-1 L0,3 L5,-4" stroke="#10b981" stroke-width="1.5" fill="none"/>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <!-- Animated background -->
+        <div class="hero-background">
+            <div class="bg-circle bg-circle-1"></div>
+            <div class="bg-circle bg-circle-2"></div>
+            <div class="bg-circle bg-circle-3"></div>
+        </div>
+    </section>
+
+    <!-- Problem/Solution Section -->
+    <section class="problem-solution">
+        <div class="container">
+            <h2 class="section-title-center">Le vrai coût de faire les choses manuellement</h2>
+
+            <div class="comparison-container">
+                <!-- Avant -->
+                <div class="comparison-side before-side reveal-on-scroll">
+                    <div class="comparison-header">
+                        <div class="status-badge status-before">Avant</div>
+                        <h3>Processus manuels</h3>
+                    </div>
+
+                    <div class="comparison-items">
+                        <div class="comparison-item">
+                            <svg class="comparison-icon icon-negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                            </svg>
+                            <div class="comparison-text">
+                                <h4>Temps perdu</h4>
+                                <p>40h/semaine sur des tâches répétitives</p>
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <svg class="comparison-icon icon-negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                            </svg>
+                            <div class="comparison-text">
+                                <h4>Erreurs humaines</h4>
+                                <p>Saisies incorrectes, oublis, retards</p>
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <svg class="comparison-icon icon-negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            <div class="comparison-text">
+                                <h4>Coûts élevés</h4>
+                                <p>3500€+/mois pour un employé supplémentaire</p>
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <svg class="comparison-icon icon-negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 20V10"></path>
+                                <path d="M12 20V4"></path>
+                                <path d="M6 20v-6"></path>
+                            </svg>
+                            <div class="comparison-text">
+                                <h4>Difficile à scaler</h4>
+                                <p>Chaque croissance = nouvelles embauches</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Arrow/Transition -->
+                <div class="transition-arrow reveal-on-scroll">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                    </svg>
+                </div>
+
+                <!-- Après -->
+                <div class="comparison-side after-side reveal-on-scroll">
+                    <div class="comparison-header">
+                        <div class="status-badge status-after">Après</div>
+                        <h3>Automatisation IA</h3>
+                    </div>
+
+                    <div class="comparison-items">
+                        <div class="comparison-item">
+                            <svg class="comparison-icon icon-positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <div class="comparison-text">
+                                <h4>Gain de temps massif</h4>
+                                <p>Jusqu'à 40% de temps libéré immédiatement</p>
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <svg class="comparison-icon icon-positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <div class="comparison-text">
+                                <h4>Zéro erreur</h4>
+                                <p>Précision à 99.9%, processus fiables</p>
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <svg class="comparison-icon icon-positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                            </svg>
+                            <div class="comparison-text">
+                                <h4>Économies garanties</h4>
+                                <p>Dès 990€/mois, ROI en moins de 6 mois</p>
+                            </div>
+                        </div>
+
+                        <div class="comparison-item">
+                            <svg class="comparison-icon icon-positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                <polyline points="17 6 23 6 23 12"></polyline>
+                            </svg>
+                            <div class="comparison-text">
+                                <h4>Scalabilité infinie</h4>
+                                <p>Croissance sans limite de ressources</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Benefits Section -->
-    <section class="benefits">
+    <!-- ROI Section -->
+    <section class="roi-section" id="roi-section">
         <div class="container">
-            <h2 class="section-title">Transformez votre PME avec l'IA</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">⏱️</div>
-                    <h3>Gagnez du temps</h3>
-                    <p>Automatisez jusqu'à 80% de vos tâches répétitives et libérez du temps pour vos projets stratégiques</p>
+            <h2 class="section-title-center">Des résultats mesurables et rapides</h2>
+            <p class="section-subtitle-center">L'automatisation IA n'est pas une dépense, c'est un investissement rentable</p>
+
+            <div class="roi-grid">
+                <div class="roi-card reveal-on-scroll" data-delay="0">
+                    <div class="roi-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
+                    <div class="roi-number" data-target="40">0</div>
+                    <div class="roi-unit">%</div>
+                    <h3 class="roi-title">Gain de temps</h3>
+                    <p class="roi-description">Sur les processus administratifs et répétitifs en moyenne</p>
                 </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">👥</div>
-                    <h3>Augmentez vos clients</h3>
-                    <p>Optimisez votre prospection et votre relation client grâce à des systèmes intelligents</p>
+
+                <div class="roi-card roi-card-highlight reveal-on-scroll" data-delay="200">
+                    <div class="roi-badge">Le plus important</div>
+                    <div class="roi-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="1" x2="12" y2="23"></line>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                        </svg>
+                    </div>
+                    <div class="roi-number" data-target="6">0</div>
+                    <div class="roi-unit">mois</div>
+                    <h3 class="roi-title">ROI garanti</h3>
+                    <p class="roi-description">Retour sur investissement moyen constaté chez nos clients PME</p>
                 </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">📈</div>
-                    <h3>Boostez votre marge</h3>
-                    <p>Réduisez vos coûts opérationnels et augmentez votre rentabilité sans embaucher</p>
+
+                <div class="roi-card reveal-on-scroll" data-delay="400">
+                    <div class="roi-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                    </div>
+                    <div class="roi-number" data-target="2500">0</div>
+                    <div class="roi-unit">€/mois</div>
+                    <h3 class="roi-title">Économie moyenne</h3>
+                    <p class="roi-description">Versus l'embauche d'un collaborateur à temps plein</p>
                 </div>
+            </div>
+
+            <div class="roi-cta">
+                <a href="contact.html" class="btn-cta-primary">Calculer mon ROI personnalisé</a>
             </div>
         </div>
     </section>
 
-    <!-- Process Section -->
-    <section class="process">
+    <!-- Final CTA Section -->
+    <section class="final-cta">
         <div class="container">
-            <h2 class="section-title">Une méthode éprouvée en 3 étapes</h2>
-            <div class="process-steps">
-                <div class="step">
-                    <div class="step-number">01</div>
-                    <h3>Audit approfondi</h3>
-                    <p>Je diagnostique vos systèmes existants pour comprendre vos besoins réels et identifier les opportunités d'automatisation</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">02</div>
-                    <h3>Diagnostic stratégique</h3>
-                    <p>J'évalue la fiabilité et la faisabilité de votre projet d'automatisation IA pour garantir un ROI optimal</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">03</div>
-                    <h3>Installation & déploiement</h3>
-                    <p>Je mets en place votre système d'automatisation IA, testé et prêt à transformer votre activité</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="cta-content-wrapper reveal-on-scroll">
+                <h2 class="cta-title">Prêt à libérer le potentiel de votre entreprise ?</h2>
+                <p class="cta-subtitle">Discutons de vos processus et identifions ensemble les opportunités d'automatisation. Audit gratuit sans engagement.</p>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Prêt à automatiser votre entreprise ?</h2>
-                <p>Discutons de votre projet et découvrez comment l'IA peut transformer votre activité</p>
-                <a href="contact.html" class="btn btn-primary btn-large">Démarrer mon projet IA</a>
+                <div class="cta-benefits">
+                    <div class="cta-benefit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Audit gratuit de vos processus</span>
+                    </div>
+                    <div class="cta-benefit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Démo personnalisée en 30 min</span>
+                    </div>
+                    <div class="cta-benefit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                        <span>Sans engagement, sans frais cachés</span>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn-cta-large">Démarrer mon projet IA</a>
+                    <a href="services.html" class="btn-cta-outline">Voir les cas d'usage</a>
+                </div>
             </div>
         </div>
+        <div class="cta-gradient-bg"></div>
     </section>
 
     <!-- Footer -->
