@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - LibertadIA</title>
+    <meta name="description" content="Contactez-moi pour automatiser votre entreprise avec l'IA. Audit gratuit disponible.">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h2>LibertadIA</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="btn-nav active">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Démarrez votre transformation IA</h1>
+            <p>Discutons de votre projet et des opportunités d'automatisation dans votre entreprise</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info">
+                    <h2>Pourquoi me contacter ?</h2>
+                    <div class="info-item">
+                        <div class="info-icon">🎯</div>
+                        <div class="info-content">
+                            <h3>Audit gratuit</h3>
+                            <p>Je vous offre un premier diagnostic de vos opportunités d'automatisation</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">💡</div>
+                        <div class="info-content">
+                            <h3>Conseils personnalisés</h3>
+                            <p>Chaque entreprise est unique, je m'adapte à vos besoins spécifiques</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">⚡</div>
+                        <div class="info-content">
+                            <h3>Réponse rapide</h3>
+                            <p>Je vous réponds sous 24h pour démarrer votre projet rapidement</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-icon">🤝</div>
+                        <div class="info-content">
+                            <h3>Sans engagement</h3>
+                            <p>Discutons librement de votre projet, aucune obligation</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet *</label>
+                            <input type="text" id="name" name="name" required placeholder="Jean Dupont">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="company">Entreprise *</label>
+                            <input type="text" id="company" name="company" required placeholder="Nom de votre entreprise">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email professionnel *</label>
+                            <input type="email" id="email" name="email" required placeholder="jean@entreprise.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="projectType">Type de projet *</label>
+                            <select id="projectType" name="projectType" required>
+                                <option value="">Sélectionnez une option</option>
+                                <option value="audit">Audit des systèmes existants</option>
+                                <option value="diagnostic">Diagnostic de faisabilité</option>
+                                <option value="installation">Installation système IA</option>
+                                <option value="complete">Projet complet (audit + installation)</option>
+                                <option value="autre">Autre / Je ne sais pas encore</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Décrivez votre projet *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Parlez-moi de votre entreprise et de ce que vous souhaitez automatiser..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="budget">Budget prévisionnel</label>
+                            <select id="budget" name="budget">
+                                <option value="">Sélectionnez une fourchette</option>
+                                <option value="moins-5k">Moins de 5 000€</option>
+                                <option value="5k-10k">5 000€ - 10 000€</option>
+                                <option value="10k-20k">10 000€ - 20 000€</option>
+                                <option value="20k-plus">Plus de 20 000€</option>
+                                <option value="non-defini">Budget non défini</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-large btn-full">
+                            Envoyer ma demande
+                        </button>
+
+                        <p class="form-note">* Champs obligatoires. Vos données sont confidentielles et ne seront jamais partagées.</p>
+                    </form>
+
+                    <div class="form-success" id="formSuccess">
+                        <div class="success-icon">✓</div>
+                        <h3>Message envoyé avec succès !</h3>
+                        <p>Je vous réponds sous 24h. À très bientôt !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>LibertadIA</h3>
+                    <p>Expert en automatisation IA pour PME</p>
+                </div>
+                <div class="footer-links">
+                    <a href="index.html">Accueil</a>
+                    <a href="services.html">Services</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LibertadIA. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
