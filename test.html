@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - LibertadIA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f8fafc;
+        }
+        .test-box {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success { color: #10b981; }
+        .error { color: #ef4444; }
+        h1 { color: #2563eb; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Test de diagnostic LibertadIA</h1>
+
+    <div class="test-box">
+        <h2>✅ Chargement HTML</h2>
+        <p class="success">Si vous voyez ce message, le HTML fonctionne !</p>
+    </div>
+
+    <div class="test-box">
+        <h2 id="css-test">CSS Test</h2>
+        <p>Si cette boîte a un fond blanc et une ombre, le CSS inline fonctionne.</p>
+    </div>
+
+    <div class="test-box">
+        <h2>JavaScript Test</h2>
+        <p id="js-test" class="error">❌ JavaScript ne fonctionne pas encore...</p>
+        <button id="test-btn" style="background: #2563eb; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">Cliquer pour tester JS</button>
+    </div>
+
+    <div class="test-box">
+        <h2>GSAP Test</h2>
+        <p id="gsap-test" class="error">❌ GSAP non chargé...</p>
+    </div>
+
+    <div class="test-box">
+        <h2>Fichiers externes</h2>
+        <p id="css-file-test" class="error">❌ styles.css non testé...</p>
+        <p id="js-file-test" class="error">❌ script.js non testé...</p>
+    </div>
+
+    <div class="test-box">
+        <h2>Retour à l'accueil</h2>
+        <a href="index.html" style="background: #f97316; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">← Retour à index.html</a>
+    </div>
+
+    <!-- Test GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+    <script>
+        // Test JavaScript basique
+        document.getElementById('js-test').innerHTML = '✅ JavaScript fonctionne !';
+        document.getElementById('js-test').className = 'success';
+
+        // Test bouton
+        document.getElementById('test-btn').addEventListener('click', function() {
+            alert('✅ Les événements JavaScript fonctionnent !');
+        });
+
+        // Test GSAP
+        if (typeof gsap !== 'undefined') {
+            document.getElementById('gsap-test').innerHTML = '✅ GSAP chargé avec succès depuis le CDN !';
+            document.getElementById('gsap-test').className = 'success';
+        } else {
+            document.getElementById('gsap-test').innerHTML = '❌ GSAP ne se charge pas - Problème de connexion internet ?';
+        }
+
+        // Test styles.css
+        fetch('styles.css')
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('css-file-test').innerHTML = '✅ styles.css trouvé et accessible';
+                    document.getElementById('css-file-test').className = 'success';
+                } else {
+                    document.getElementById('css-file-test').innerHTML = '❌ styles.css non trouvé (erreur ' + response.status + ')';
+                }
+            })
+            .catch(err => {
+                document.getElementById('css-file-test').innerHTML = '❌ Erreur de chargement styles.css : ' + err.message;
+            });
+
+        // Test script.js
+        fetch('script.js')
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('js-file-test').innerHTML = '✅ script.js trouvé et accessible';
+                    document.getElementById('js-file-test').className = 'success';
+                } else {
+                    document.getElementById('js-file-test').innerHTML = '❌ script.js non trouvé (erreur ' + response.status + ')';
+                }
+            })
+            .catch(err => {
+                document.getElementById('js-file-test').innerHTML = '❌ Erreur de chargement script.js : ' + err.message;
+            });
+
+        // Informations navigateur
+        console.log('🔍 Informations de diagnostic :');
+        console.log('Navigateur:', navigator.userAgent);
+        console.log('URL actuelle:', window.location.href);
+        console.log('GSAP disponible:', typeof gsap !== 'undefined');
+    </script>
+</body>
+</html>
