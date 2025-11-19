@@ -4,11 +4,33 @@
 
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Timeout de sécurité : si GSAP ne charge pas en 3 secondes, afficher le contenu
+setTimeout(function() {
+    if (typeof gsap === 'undefined') {
+        console.warn('⚠️ GSAP timeout - affichage du contenu sans animations');
+        makeAllVisibleFallback();
+    }
+}, 3000);
+
+function makeAllVisibleFallback() {
+    const elements = document.querySelectorAll('.hero-title-new, .hero-subtitle-new, .hero-cta-new, .hero-trust, .automation-svg, .comparison-side, .roi-card, .cta-content-wrapper');
+    elements.forEach(el => {
+        if (el && window.getComputedStyle(el).opacity === '0') {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+            el.style.visibility = 'visible';
+        }
+    });
+}
+
 // ============================================
 // GSAP CONFIGURATION & ANIMATIONS
 // ============================================
 
 document.addEventListener('DOMContentLoaded', function() {
+    // Marquer que JS est chargé
+    document.documentElement.classList.add('js-loaded');
+
     // Enregistrer ScrollTrigger
     if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
@@ -16,7 +38,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Configuration GSAP
         if (!prefersReducedMotion) {
             initGSAPAnimations();
+        } else {
+            // Si reduced motion, assurer que tout est visible
+            makeAllVisible();
         }
+    } else {
+        // Si GSAP ne charge pas, assurer que tout est visible
+        console.warn('GSAP non chargé - animations désactivées mais contenu visible');
+        makeAllVisible();
     }
 
     // Initialiser les autres fonctionnalités
@@ -28,129 +57,183 @@ document.addEventListener('DOMContentLoaded', function() {
     initNavbarScroll();
 });
 
+// Fonction pour rendre tout visible si GSAP échoue
+function makeAllVisible() {
+    const elements = document.querySelectorAll('.hero-title-new, .hero-subtitle-new, .hero-cta-new, .hero-trust, .automation-svg');
+    elements.forEach(el => {
+        if (el) {
+            el.style.opacity = '1';
+            el.style.transform = 'none';
+        }
+    });
+}
+
 // ============================================
 // ANIMATIONS GSAP
 // ============================================
 
 function initGSAPAnimations() {
+    // S'assurer que les éléments existent avant d'animer
+    const heroTitle = document.querySelector('.hero-title-new');
+    const heroSubtitle = document.querySelector('.hero-subtitle-new');
+    const heroCTA = document.querySelectorAll('.hero-cta-new a');
+    const trustItems = document.querySelectorAll('.hero-trust .trust-item');
+    const autoSVG = document.querySelector('.automation-svg');
+
     // Animation du Hero au chargement
-    gsap.from('.hero-title-new', {
-        duration: 1,
-        y: 50,
-        opacity: 0,
-        ease: 'power3.out'
-    });
+    if (heroTitle) {
+        gsap.from(heroTitle, {
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            clearProps: 'all' // Nettoyer les props inline après animation
+        });
+    }
 
-    gsap.from('.hero-subtitle-new', {
-        duration: 1,
-        y: 30,
-        opacity: 0,
-        delay: 0.2,
-        ease: 'power3.out'
-    });
+    if (heroSubtitle) {
+        gsap.from(heroSubtitle, {
+            duration: 1,
+            y: 30,
+            opacity: 0,
+            delay: 0.2,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+    }
 
-    gsap.from('.hero-cta-new a', {
-        duration: 0.8,
-        y: 20,
-        opacity: 0,
-        stagger: 0.2,
-        delay: 0.4,
-        ease: 'power3.out'
-    });
+    if (heroCTA.length > 0) {
+        gsap.from(heroCTA, {
+            duration: 0.8,
+            y: 20,
+            opacity: 0,
+            stagger: 0.2,
+            delay: 0.4,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+    }
 
-    gsap.from('.hero-trust .trust-item', {
-        duration: 0.6,
-        y: 20,
-        opacity: 0,
-        stagger: 0.1,
-        delay: 0.8,
-        ease: 'power2.out'
-    });
+    if (trustItems.length > 0) {
+        gsap.from(trustItems, {
+            duration: 0.6,
+            y: 20,
+            opacity: 0,
+            stagger: 0.1,
+            delay: 0.8,
+            ease: 'power2.out',
+            clearProps: 'all'
+        });
+    }
 
     // Animation du SVG d'automatisation
-    gsap.from('.automation-svg', {
-        duration: 1.2,
-        scale: 0.8,
-        opacity: 0,
-        delay: 0.3,
-        ease: 'back.out(1.7)'
-    });
+    if (autoSVG) {
+        gsap.from(autoSVG, {
+            duration: 1.2,
+            scale: 0.8,
+            opacity: 0,
+            delay: 0.3,
+            ease: 'back.out(1.7)',
+            clearProps: 'all'
+        });
+    }
 
     // Animations au scroll avec ScrollTrigger
 
     // Section Problème/Solution
-    gsap.utils.toArray('.comparison-side').forEach((el, index) => {
-        gsap.from(el, {
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 80%',
-                end: 'top 50%',
-                toggleActions: 'play none none reverse'
-            },
-            duration: 0.8,
-            y: 50,
-            opacity: 0,
-            delay: index * 0.2,
-            ease: 'power2.out'
+    const comparisonSides = document.querySelectorAll('.comparison-side');
+    if (comparisonSides.length > 0) {
+        comparisonSides.forEach((el, index) => {
+            gsap.from(el, {
+                scrollTrigger: {
+                    trigger: el,
+                    start: 'top 80%',
+                    end: 'top 50%',
+                    toggleActions: 'play none none none' // Ne pas reverse pour garder visible
+                },
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                delay: index * 0.2,
+                ease: 'power2.out',
+                clearProps: 'all'
+            });
         });
-    });
+    }
 
     // Animation de la flèche de transition
-    gsap.from('.transition-arrow', {
-        scrollTrigger: {
-            trigger: '.transition-arrow',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-        },
-        duration: 0.6,
-        scale: 0,
-        opacity: 0,
-        ease: 'back.out(1.7)'
-    });
+    const transitionArrow = document.querySelector('.transition-arrow');
+    if (transitionArrow) {
+        gsap.from(transitionArrow, {
+            scrollTrigger: {
+                trigger: transitionArrow,
+                start: 'top 80%',
+                toggleActions: 'play none none none'
+            },
+            duration: 0.6,
+            scale: 0,
+            opacity: 0,
+            ease: 'back.out(1.7)',
+            clearProps: 'all'
+        });
+    }
 
     // Section ROI - Animation des cartes
-    gsap.utils.toArray('.roi-card').forEach((card, index) => {
-        gsap.from(card, {
-            scrollTrigger: {
-                trigger: card,
-                start: 'top 85%',
-                toggleActions: 'play none none reverse'
-            },
-            duration: 0.8,
-            y: 60,
-            opacity: 0,
-            scale: 0.9,
-            delay: index * 0.15,
-            ease: 'power3.out'
+    const roiCards = document.querySelectorAll('.roi-card');
+    if (roiCards.length > 0) {
+        roiCards.forEach((card, index) => {
+            gsap.from(card, {
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top 85%',
+                    toggleActions: 'play none none none'
+                },
+                duration: 0.8,
+                y: 60,
+                opacity: 0,
+                scale: 0.9,
+                delay: index * 0.15,
+                ease: 'power3.out',
+                clearProps: 'all'
+            });
         });
-    });
+    }
 
     // Animation du CTA final
-    gsap.from('.cta-content-wrapper', {
-        scrollTrigger: {
-            trigger: '.final-cta',
-            start: 'top 70%',
-            toggleActions: 'play none none reverse'
-        },
-        duration: 1,
-        y: 50,
-        opacity: 0,
-        ease: 'power3.out'
-    });
+    const ctaWrapper = document.querySelector('.cta-content-wrapper');
+    if (ctaWrapper) {
+        gsap.from(ctaWrapper, {
+            scrollTrigger: {
+                trigger: '.final-cta',
+                start: 'top 70%',
+                toggleActions: 'play none none none'
+            },
+            duration: 1,
+            y: 50,
+            opacity: 0,
+            ease: 'power3.out',
+            clearProps: 'all'
+        });
+    }
 
     // Animation des cercles de fond du hero avec parallax
-    gsap.utils.toArray('.bg-circle').forEach((circle, index) => {
-        gsap.to(circle, {
-            scrollTrigger: {
-                trigger: '.hero-new',
-                start: 'top top',
-                end: 'bottom top',
-                scrub: true
-            },
-            y: index * 100 + 50,
-            ease: 'none'
+    const bgCircles = document.querySelectorAll('.bg-circle');
+    if (bgCircles.length > 0) {
+        bgCircles.forEach((circle, index) => {
+            gsap.to(circle, {
+                scrollTrigger: {
+                    trigger: '.hero-new',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1 // Smooth scrub
+                },
+                y: index * 100 + 50,
+                ease: 'none'
+            });
         });
-    });
+    }
+
+    console.log('✅ Animations GSAP initialisées avec succès!');
 }
 
 // ============================================

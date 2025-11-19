@@ -196,12 +196,19 @@ body {
     font-size: 3.5rem;
     font-weight: 800;
     line-height: 1.1;
+    color: #0f172a; /* Fallback color */
     color: var(--secondary-color);
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--primary-color), var(--cyan-color));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+}
+
+/* Gradient sur le titre si supporté */
+@supports (background-clip: text) or (-webkit-background-clip: text) {
+    .hero-title-new {
+        background: linear-gradient(135deg, var(--primary-color), var(--cyan-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
 }
 
 .hero-subtitle-new {
@@ -218,7 +225,10 @@ body {
 }
 
 .btn-cta-primary {
+    display: inline-block;
+    background: #f97316; /* Fallback solid color */
     background: var(--gradient-cta);
+    color: #ffffff;
     color: var(--bg-white);
     padding: 1rem 2rem;
     border-radius: 10px;
@@ -229,6 +239,8 @@ body {
     box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
     position: relative;
     overflow: hidden;
+    cursor: pointer;
+    border: none;
 }
 
 .btn-cta-primary::before {
@@ -252,15 +264,19 @@ body {
 }
 
 .btn-cta-secondary {
+    display: inline-block;
     background: transparent;
+    color: #2563eb;
     color: var(--primary-color);
     padding: 1rem 2rem;
     border-radius: 10px;
     text-decoration: none;
     font-weight: 600;
     font-size: 1.1rem;
+    border: 2px solid #2563eb;
     border: 2px solid var(--primary-color);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .btn-cta-secondary:hover {
@@ -795,7 +811,10 @@ body {
 }
 
 .btn-cta-large {
+    display: inline-block;
+    background: #f97316; /* Fallback */
     background: var(--gradient-cta);
+    color: #ffffff;
     color: var(--bg-white);
     padding: 1.2rem 2.5rem;
     border-radius: 12px;
@@ -804,6 +823,8 @@ body {
     font-size: 1.15rem;
     transition: all 0.3s ease;
     box-shadow: 0 8px 20px rgba(249, 115, 22, 0.4);
+    cursor: pointer;
+    border: none;
 }
 
 .btn-cta-large:hover {
@@ -812,15 +833,19 @@ body {
 }
 
 .btn-cta-outline {
+    display: inline-block;
     background: transparent;
+    color: #ffffff;
     color: var(--bg-white);
     padding: 1.2rem 2.5rem;
     border-radius: 12px;
     text-decoration: none;
     font-weight: 700;
     font-size: 1.15rem;
+    border: 2px solid #ffffff;
     border: 2px solid var(--bg-white);
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .btn-cta-outline:hover {
