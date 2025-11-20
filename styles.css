@@ -94,9 +94,9 @@ body {
 }
 
 .nav-brand .logo {
-    height: 45px;
+    height: 60px;
     width: auto;
-    max-width: 200px;
+    max-width: 250px;
     object-fit: contain;
     display: block;
     transition: all 0.3s ease;
@@ -948,8 +948,8 @@ body {
 /* Large Desktop - Optimisation pour grands écrans */
 @media (min-width: 1280px) {
     .nav-brand .logo {
-        height: 50px;
-        max-width: 220px;
+        height: 65px;
+        max-width: 280px;
     }
 
     .footer-brand .footer-logo {
@@ -961,8 +961,8 @@ body {
 @media (max-width: 1024px) {
     /* Logo optimisé pour tablette */
     .nav-brand .logo {
-        height: 38px;
-        max-width: 170px;
+        height: 50px;
+        max-width: 220px;
     }
 
     .footer-brand .footer-logo {
@@ -998,9 +998,9 @@ body {
 
     /* Logo optimisé pour mobile */
     .nav-brand .logo {
-        height: 35px;
-        max-width: 160px;
-        min-height: 30px; /* Éviter que le logo soit trop petit */
+        height: 45px;
+        max-width: 200px;
+        min-height: 40px; /* Éviter que le logo soit trop petit */
     }
 
     .footer-brand .footer-logo {
@@ -1116,9 +1116,9 @@ body {
 @media (max-width: 480px) {
     /* Logo optimisé pour très petits écrans */
     .nav-brand .logo {
-        height: 30px;
-        max-width: 140px;
-        min-height: 28px;
+        height: 38px;
+        max-width: 180px;
+        min-height: 35px;
     }
 
     .footer-brand .footer-logo {
