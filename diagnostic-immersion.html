@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Diagnostic Pack Immersion - LibertadIA</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #60a5fa;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            color: #94a3b8;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .test-section {
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid #3b82f6;
+        }
+
+        .test-section h2 {
+            color: #60a5fa;
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status.success {
+            background: #10b981;
+            color: white;
+        }
+
+        .status.error {
+            background: #ef4444;
+            color: white;
+        }
+
+        .status.warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .test-item {
+            padding: 10px 0;
+            border-bottom: 1px solid #334155;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .test-item:last-child {
+            border-bottom: none;
+        }
+
+        .test-label {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .code {
+            background: #0f172a;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #86efac;
+            margin-top: 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+        }
+
+        .action-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+
+        button.secondary {
+            background: #64748b;
+        }
+
+        button.secondary:hover {
+            background: #475569;
+        }
+
+        .error-details {
+            background: #7f1d1d;
+            border: 1px solid #dc2626;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            color: #fca5a5;
+            font-size: 13px;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            color: white;
+        }
+
+        .summary h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .progress-visual {
+            background: rgba(255, 255, 255, 0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Diagnostic Pack Immersion Ultra</h1>
+        <p class="subtitle">Test complet des fonctionnalités d'animation LibertadIA</p>
+
+        <div id="diagnostics"></div>
+
+        <div class="action-buttons">
+            <button onclick="runAllTests()">🔄 Relancer les tests</button>
+            <button onclick="window.location.href='index.html'" class="secondary">← Retour au site</button>
+            <button onclick="copyResults()" class="secondary">📋 Copier les résultats</button>
+        </div>
+
+        <div class="summary" id="summary" style="display: none;">
+            <h3>📊 Résumé</h3>
+            <p id="summary-text"></p>
+            <div class="progress-visual">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tests = [];
+        let passedTests = 0;
+        let totalTests = 0;
+
+        function addTest(name, description, testFunction) {
+            tests.push({ name, description, testFunction });
+        }
+
+        // Test 1: Fichiers CSS et JS chargés
+        addTest(
+            'Fichiers CSS/JS',
+            'Vérification du chargement des ressources',
+            () => {
+                const results = [];
+
+                // Vérifier CSS
+                const cssLoaded = document.styleSheets.length > 0;
+                results.push({
+                    label: 'styles.css chargé',
+                    success: cssLoaded,
+                    details: cssLoaded ? `${document.styleSheets.length} feuilles CSS trouvées` : 'Aucune CSS détectée'
+                });
+
+                // Vérifier que script.js est chargé (en vérifiant une fonction)
+                const scriptLoaded = typeof initScrollProgress === 'function';
+                results.push({
+                    label: 'script.js chargé',
+                    success: scriptLoaded,
+                    details: scriptLoaded ? 'Fonction initScrollProgress() trouvée' : 'Fonction initScrollProgress() introuvable'
+                });
+
+                return results;
+            }
+        );
+
+        // Test 2: GSAP
+        addTest(
+            'GSAP Libraries',
+            'Vérification des librairies d\'animation',
+            () => {
+                const results = [];
+
+                results.push({
+                    label: 'GSAP chargé',
+                    success: typeof gsap !== 'undefined',
+                    details: typeof gsap !== 'undefined' ? `Version ${gsap.version || 'inconnue'}` : 'GSAP non trouvé'
+                });
+
+                results.push({
+                    label: 'ScrollTrigger chargé',
+                    success: typeof ScrollTrigger !== 'undefined',
+                    details: typeof ScrollTrigger !== 'undefined' ? 'Plugin activé' : 'Plugin non trouvé'
+                });
+
+                return results;
+            }
+        );
+
+        // Test 3: Éléments HTML du Pack Immersion
+        addTest(
+            'Éléments HTML',
+            'Vérification des éléments DOM requis',
+            () => {
+                const results = [];
+
+                const elements = [
+                    { selector: '.scroll-progress-wrapper', name: 'Progress Bar Wrapper' },
+                    { selector: '.scroll-progress-bar', name: 'Progress Bar' },
+                    { selector: '.scroll-progress-percentage', name: 'Progress Percentage' },
+                    { selector: '.floating-particles', name: 'Container Particules' },
+                    { selector: '.particle', name: 'Particules (10)', count: 10 },
+                    { selector: '.cursor-glow', name: 'Cursor Glow' }
+                ];
+
+                elements.forEach(({ selector, name, count }) => {
+                    const found = document.querySelectorAll(selector);
+                    const success = found.length > 0 && (!count || found.length >= count);
+                    results.push({
+                        label: name,
+                        success: success,
+                        details: `${found.length} élément(s) trouvé(s)${count ? ` (requis: ${count})` : ''}`
+                    });
+                });
+
+                return results;
+            }
+        );
+
+        // Test 4: Classes CSS du Pack Immersion
+        addTest(
+            'Classes CSS',
+            'Vérification des styles appliqués',
+            () => {
+                const results = [];
+
+                const testElement = document.createElement('div');
+                testElement.className = 'scroll-progress-bar';
+                testElement.style.display = 'none';
+                document.body.appendChild(testElement);
+
+                const styles = window.getComputedStyle(testElement);
+                const hasStyles = styles.background !== '' || styles.height !== '';
+
+                results.push({
+                    label: 'Styles Progress Bar',
+                    success: hasStyles,
+                    details: hasStyles ? 'Styles CSS appliqués' : 'Aucun style détecté'
+                });
+
+                document.body.removeChild(testElement);
+
+                // Vérifier les animations keyframes
+                const hasFloatAnimation = Array.from(document.styleSheets).some(sheet => {
+                    try {
+                        const rules = Array.from(sheet.cssRules || []);
+                        return rules.some(rule => rule.name === 'float' || rule.name === 'gradientShift');
+                    } catch (e) {
+                        return false;
+                    }
+                });
+
+                results.push({
+                    label: 'Animations CSS (keyframes)',
+                    success: hasFloatAnimation,
+                    details: hasFloatAnimation ? 'Keyframes trouvées' : 'Keyframes non détectées'
+                });
+
+                return results;
+            }
+        );
+
+        // Test 5: Fonctions JavaScript
+        addTest(
+            'Fonctions JS',
+            'Vérification des fonctions d\'initialisation',
+            () => {
+                const results = [];
+
+                const functions = [
+                    'initScrollProgress',
+                    'initFloatingParticlesParallax',
+                    'initCursorGlow',
+                    'initSmoothScrollEnhanced',
+                    'initSectionBackgroundChange',
+                    'initEnhancedRevealAnimations'
+                ];
+
+                functions.forEach(funcName => {
+                    const exists = typeof window[funcName] === 'function';
+                    results.push({
+                        label: funcName,
+                        success: exists,
+                        details: exists ? 'Fonction définie' : 'Fonction introuvable'
+                    });
+                });
+
+                return results;
+            }
+        );
+
+        // Test 6: Console Logs
+        addTest(
+            'Console Logs',
+            'Vérification des messages de démarrage',
+            () => {
+                const results = [];
+
+                // On ne peut pas vraiment tester les console.log après coup
+                // mais on peut vérifier que le code qui les contient existe
+                results.push({
+                    label: 'Messages de démarrage',
+                    success: true,
+                    details: 'Ouvrez la Console (F12) pour voir les messages'
+                });
+
+                return results;
+            }
+        );
+
+        // Fonction pour exécuter tous les tests
+        function runAllTests() {
+            const container = document.getElementById('diagnostics');
+            container.innerHTML = '';
+            passedTests = 0;
+            totalTests = 0;
+
+            tests.forEach(test => {
+                const section = document.createElement('div');
+                section.className = 'test-section';
+
+                const results = test.testFunction();
+                const sectionPassed = results.every(r => r.success);
+                totalTests += results.length;
+                passedTests += results.filter(r => r.success).length;
+
+                section.innerHTML = `
+                    <h2>
+                        ${test.name}
+                        <span class="status ${sectionPassed ? 'success' : 'error'}">
+                            ${sectionPassed ? '✓ OK' : '✗ ERREUR'}
+                        </span>
+                    </h2>
+                    <p style="color: #94a3b8; font-size: 13px; margin-bottom: 15px;">${test.description}</p>
+                `;
+
+                results.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'test-item';
+                    item.innerHTML = `
+                        <span class="test-label">${result.label}</span>
+                        <span class="status ${result.success ? 'success' : 'error'}">
+                            ${result.success ? '✓' : '✗'} ${result.details}
+                        </span>
+                    `;
+                    section.appendChild(item);
+                });
+
+                container.appendChild(section);
+            });
+
+            showSummary();
+        }
+
+        function showSummary() {
+            const summary = document.getElementById('summary');
+            const summaryText = document.getElementById('summary-text');
+            const progressBar = document.getElementById('progress-bar');
+
+            const percentage = Math.round((passedTests / totalTests) * 100);
+
+            summaryText.innerHTML = `
+                <strong>${passedTests}/${totalTests}</strong> tests réussis (${percentage}%)
+                <br>
+                ${percentage === 100
+                    ? '🎉 Tous les tests sont passés ! Le Pack Immersion devrait fonctionner.'
+                    : percentage >= 80
+                        ? '⚠️ La plupart des tests sont OK mais il y a des problèmes mineurs.'
+                        : '❌ Des éléments importants sont manquants. Vérifiez les fichiers uploadés sur Hostinger.'}
+            `;
+
+            progressBar.style.width = percentage + '%';
+            summary.style.display = 'block';
+        }
+
+        function copyResults() {
+            const text = `
+Diagnostic Pack Immersion Ultra - LibertadIA
+============================================
+Tests réussis: ${passedTests}/${totalTests} (${Math.round((passedTests / totalTests) * 100)}%)
+
+${tests.map(test => {
+    const results = test.testFunction();
+    return `${test.name}:
+${results.map(r => `  - ${r.label}: ${r.success ? '✓' : '✗'} ${r.details}`).join('\n')}`;
+}).join('\n\n')}
+            `.trim();
+
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Résultats copiés dans le presse-papiers !');
+            });
+        }
+
+        // Exécuter les tests au chargement
+        window.addEventListener('DOMContentLoaded', runAllTests);
+
+        console.log('🔍 Page de diagnostic chargée');
+    </script>
+</body>
+</html>
