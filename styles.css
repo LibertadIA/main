@@ -94,10 +94,20 @@ body {
 }
 
 .nav-brand .logo {
-    height: 40px;
+    height: 45px;
     width: auto;
-    max-width: 180px;
+    max-width: 200px;
     object-fit: contain;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Assurer une bonne qualité sur tous les écrans */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .nav-brand .logo {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
 }
 
 .nav-menu {
@@ -887,12 +897,22 @@ body {
 }
 
 .footer-brand .footer-logo {
-    height: 50px;
+    height: 55px;
     width: auto;
-    max-width: 200px;
+    max-width: 220px;
     object-fit: contain;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
     filter: brightness(0) invert(1);
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Assurer une bonne qualité sur écrans Retina */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .footer-brand .footer-logo {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
 }
 
 .footer-brand p {
@@ -924,7 +944,32 @@ body {
 /* ============================================
    RESPONSIVE DESIGN
    ============================================ */
+
+/* Large Desktop - Optimisation pour grands écrans */
+@media (min-width: 1280px) {
+    .nav-brand .logo {
+        height: 50px;
+        max-width: 220px;
+    }
+
+    .footer-brand .footer-logo {
+        height: 60px;
+        max-width: 240px;
+    }
+}
+
 @media (max-width: 1024px) {
+    /* Logo optimisé pour tablette */
+    .nav-brand .logo {
+        height: 38px;
+        max-width: 170px;
+    }
+
+    .footer-brand .footer-logo {
+        height: 48px;
+        max-width: 190px;
+    }
+
     .hero-grid {
         gap: 3rem;
     }
@@ -951,14 +996,17 @@ body {
         display: flex;
     }
 
+    /* Logo optimisé pour mobile */
     .nav-brand .logo {
-        height: 32px;
-        max-width: 150px;
+        height: 35px;
+        max-width: 160px;
+        min-height: 30px; /* Éviter que le logo soit trop petit */
     }
 
     .footer-brand .footer-logo {
-        height: 40px;
-        max-width: 160px;
+        height: 45px;
+        max-width: 180px;
+        min-height: 35px;
     }
 
     .nav-menu {
@@ -1066,6 +1114,19 @@ body {
 }
 
 @media (max-width: 480px) {
+    /* Logo optimisé pour très petits écrans */
+    .nav-brand .logo {
+        height: 30px;
+        max-width: 140px;
+        min-height: 28px;
+    }
+
+    .footer-brand .footer-logo {
+        height: 40px;
+        max-width: 160px;
+        min-height: 35px;
+    }
+
     .hero-title-new {
         font-size: 1.75rem;
     }
