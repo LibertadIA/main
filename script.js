@@ -55,6 +55,14 @@ document.addEventListener('DOMContentLoaded', function() {
     initSmoothScroll();
     initContactForm();
     initNavbarScroll();
+
+    // PACK IMMERSION ULTRA - Nouvelles fonctionnalités
+    initScrollProgress();
+    initFloatingParticlesParallax();
+    initCursorGlow();
+    initSmoothScrollEnhanced();
+    initSectionBackgroundChange();
+    initEnhancedRevealAnimations();
 });
 
 // Fonction pour rendre tout visible si GSAP échoue
@@ -696,5 +704,188 @@ window.addEventListener('error', function(e) {
     // En production, envoyer à un service de monitoring
 });
 
+// ============================================
+// PACK IMMERSION ULTRA - FONCTIONNALITÉS AVANCÉES
+// ============================================
+
+// 1. Progress Bar avec pourcentage
+function initScrollProgress() {
+    const progressBar = document.querySelector('.scroll-progress-bar');
+    const progressPercentage = document.querySelector('.scroll-progress-percentage');
+
+    if (!progressBar || !progressPercentage) return;
+
+    window.addEventListener('scroll', function() {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+
+        progressBar.style.width = scrolled + '%';
+        progressPercentage.textContent = Math.round(scrolled) + '%';
+
+        // Changer la couleur du badge selon le scroll
+        if (scrolled < 25) {
+            progressPercentage.style.background = 'rgba(37, 99, 235, 0.95)'; // Bleu
+        } else if (scrolled < 50) {
+            progressPercentage.style.background = 'rgba(6, 182, 212, 0.95)'; // Cyan
+        } else if (scrolled < 75) {
+            progressPercentage.style.background = 'rgba(249, 115, 22, 0.95)'; // Orange
+        } else {
+            progressPercentage.style.background = 'rgba(16, 185, 129, 0.95)'; // Vert
+        }
+    }, { passive: true });
+}
+
+// 2. Particules flottantes avec effet parallax
+function initFloatingParticlesParallax() {
+    const particles = document.querySelectorAll('.particle');
+
+    if (particles.length === 0 || prefersReducedMotion) return;
+
+    let ticking = false;
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                const scrollY = window.scrollY;
+
+                particles.forEach((particle, index) => {
+                    // Vitesse différente pour chaque particule (effet parallax)
+                    const speed = 0.1 + (index * 0.05);
+                    const yPos = -(scrollY * speed);
+
+                    particle.style.transform = `translateY(${yPos}px)`;
+                });
+
+                ticking = false;
+            });
+
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
+// 3. Cursor Glow Effect
+function initCursorGlow() {
+    const cursorGlow = document.querySelector('.cursor-glow');
+
+    if (!cursorGlow || prefersReducedMotion) return;
+
+    // Désactiver sur mobile/tablette
+    if (window.matchMedia('(max-width: 768px)').matches) return;
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let glowX = 0;
+    let glowY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    // Animation fluide avec requestAnimationFrame
+    function animateGlow() {
+        // Smooth suivit du curseur (easing)
+        glowX += (mouseX - glowX) * 0.15;
+        glowY += (mouseY - glowY) * 0.15;
+
+        cursorGlow.style.left = glowX + 'px';
+        cursorGlow.style.top = glowY + 'px';
+
+        requestAnimationFrame(animateGlow);
+    }
+
+    animateGlow();
+
+    // Agrandir le glow au survol de liens et boutons
+    const interactiveElements = document.querySelectorAll('a, button, .btn-cta-primary, .btn-cta-secondary');
+
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', function() {
+            cursorGlow.style.width = '500px';
+            cursorGlow.style.height = '500px';
+            cursorGlow.style.opacity = '1';
+        });
+
+        el.addEventListener('mouseleave', function() {
+            cursorGlow.style.width = '400px';
+            cursorGlow.style.height = '400px';
+            cursorGlow.style.opacity = '0.8';
+        });
+    });
+}
+
+// 4. Smooth Scroll Amélioré avec easing personnalisé
+function initSmoothScrollEnhanced() {
+    if (prefersReducedMotion) return;
+
+    // Smooth scroll personnalisé pour tous les liens d'ancrage
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+
+            // Ignorer les liens vides
+            if (!href || href === '#') return;
+
+            e.preventDefault();
+            const target = document.querySelector(href);
+
+            if (target) {
+                // Utiliser scrollIntoView avec smooth behavior
+                const navbarHeight = 80;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// 5. Changement de couleur du background par section au scroll
+function initSectionBackgroundChange() {
+    const sections = document.querySelectorAll('section[data-bg-color]');
+
+    if (sections.length === 0 || prefersReducedMotion) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const bgColor = entry.target.getAttribute('data-bg-color');
+                document.body.style.backgroundColor = bgColor;
+            }
+        });
+    }, {
+        threshold: 0.3 // Déclencher quand 30% de la section est visible
+    });
+
+    sections.forEach(section => observer.observe(section));
+}
+
+// 6. Reveal Animations Améliorées (fade + slide + scale)
+function initEnhancedRevealAnimations() {
+    const revealElements = document.querySelectorAll('.reveal-on-scroll');
+
+    if (revealElements.length === 0) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                // Ne plus observer après révélation pour performance
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.15, // Déclencher quand 15% visible
+        rootMargin: '0px 0px -50px 0px' // Offset du bas
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+}
+
 console.log('🚀 LibertadIA - Site chargé avec succès');
+console.log('✨ Pack Immersion Ultra activé');
 console.log('💡 GSAP et animations activés');
