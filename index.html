@@ -90,181 +90,175 @@
 
     <!-- Contenu principal -->
     <main class="main">
-        <!-- Section Hero avec animation SVG -->
+        <!-- Section Hero redesignée - Impact immédiat pour décideurs PME -->
         <section class="hero section" id="hero">
             <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title animate-on-scroll">
-                        Libérez le vrai potentiel de votre entreprise grâce à l'automatisation IA
-                    </h1>
-                    <p class="hero-subtitle animate-on-scroll">
-                        Transformez vos processus chronophages en systèmes intelligents et gagnez des centaines d'heures chaque mois
-                    </p>
-                    <div class="hero-cta animate-on-scroll">
-                        <a href="./contact.html" class="btn btn-primary btn-large">
-                            Réserver mon audit gratuit
-                        </a>
-                        <p class="hero-cta-note">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 0L10.1 5.9L16 8L10.1 10.1L8 16L5.9 10.1L0 8L5.9 5.9L8 0Z" fill="currentColor"/>
+                <div class="hero-grid">
+                    <!-- Contenu principal à gauche -->
+                    <div class="hero-content">
+                        <div class="hero-badge animate-on-scroll">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 2L12 8L18 10L12 12L10 18L8 12L2 10L8 8L10 2Z" fill="#F97316"/>
                             </svg>
-                            Audit gratuit et sans engagement
+                            <span>5 places disponibles ce mois-ci</span>
+                        </div>
+
+                        <h1 class="hero-title animate-on-scroll">
+                            Multipliez la productivité de votre PME
+                            <span class="text-gradient">sans embaucher</span>
+                        </h1>
+
+                        <p class="hero-subtitle animate-on-scroll">
+                            Vos concurrents automatisent déjà. Rejoignez les <strong>dirigeants visionnaires</strong> qui transforment leurs processus répétitifs en systèmes IA autonomes — et gagnent jusqu'à <strong class="text-orange">70 heures par mois</strong>.
                         </p>
+
+                        <!-- Statistiques clés en vedette -->
+                        <div class="hero-stats animate-on-scroll">
+                            <div class="hero-stat">
+                                <div class="stat-number">
+                                    <span class="stat-count" data-target="70">0</span>
+                                    <span class="stat-unit">%</span>
+                                </div>
+                                <div class="stat-label">de temps gagné</div>
+                            </div>
+                            <div class="hero-stat-divider"></div>
+                            <div class="hero-stat">
+                                <div class="stat-number">
+                                    <span class="stat-count" data-target="4">0</span>
+                                    <span class="stat-unit"> mois</span>
+                                </div>
+                                <div class="stat-label">ROI garanti</div>
+                            </div>
+                            <div class="hero-stat-divider"></div>
+                            <div class="hero-stat">
+                                <div class="stat-number">
+                                    <span class="stat-count" data-target="90">0</span>
+                                    <span class="stat-unit">%</span>
+                                </div>
+                                <div class="stat-label">d'erreurs en moins</div>
+                            </div>
+                        </div>
+
+                        <!-- CTA principal -->
+                        <div class="hero-cta animate-on-scroll">
+                            <a href="./contact.html" class="btn btn-primary btn-large">
+                                <span>Réserver mon audit gratuit (90 min)</span>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 10H16M16 10L11 5M16 10L11 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </a>
+                            <p class="hero-cta-note">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="8" cy="8" r="7" stroke="#10B981" stroke-width="2"/>
+                                    <path d="M5 8L7 10L11 6" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Sans engagement • Résultats garantis • Conforme RGPD
+                            </p>
+                        </div>
+
+                        <!-- Preuves sociales -->
+                        <div class="hero-social-proof animate-on-scroll">
+                            <div class="proof-avatars">
+                                <div class="avatar" style="background: linear-gradient(135deg, #2563EB, #3B82F6);"></div>
+                                <div class="avatar" style="background: linear-gradient(135deg, #F97316, #FB923C);"></div>
+                                <div class="avatar" style="background: linear-gradient(135deg, #10B981, #34D399);"></div>
+                                <div class="avatar" style="background: linear-gradient(135deg, #8B5CF6, #A78BFA);"></div>
+                            </div>
+                            <div class="proof-text">
+                                <div class="proof-stars">★★★★★</div>
+                                <p><strong>23 PME</strong> ont déjà automatisé leurs processus ce trimestre</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Animation SVG centrale illustrant la transformation -->
-                <div class="hero-animation animate-on-scroll">
-                    <svg id="heroSvg" width="100%" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Gradient definitions -->
-                        <defs>
-                            <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#2563EB;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
-                            </linearGradient>
-                            <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" style="stop-color:#F97316;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#FB923C;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
+                    <!-- Cards de valeur à droite -->
+                    <div class="hero-value-cards">
+                        <!-- Card 1: ROI -->
+                        <div class="value-card value-card-primary animate-on-scroll" style="animation-delay: 0.1s;">
+                            <div class="value-card-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M16 8V16L22 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="value-card-content">
+                                <h3 class="value-card-title">Retour sur investissement rapide</h3>
+                                <p class="value-card-text">ROI garanti en <strong>moins de 4 mois</strong> — ou nous travaillons gratuitement jusqu'à l'atteinte de vos objectifs</p>
+                            </div>
+                            <div class="value-card-badge">
+                                <span class="badge-text">Garantie</span>
+                            </div>
+                        </div>
 
-                        <!-- Côté gauche : Processus manuel chaotique -->
-                        <g id="manualProcess">
-                            <!-- Documents -->
-                            <rect x="50" y="50" width="50" height="60" fill="#E5E7EB" stroke="#6B7280" stroke-width="2" rx="4">
-                                <animate attributeName="y" values="50;45;50" dur="2s" repeatCount="indefinite"/>
-                            </rect>
-                            <line x1="60" y1="70" x2="90" y2="70" stroke="#6B7280" stroke-width="2"/>
-                            <line x1="60" y1="80" x2="90" y2="80" stroke="#6B7280" stroke-width="2"/>
-                            <line x1="60" y1="90" x2="80" y2="90" stroke="#6B7280" stroke-width="2"/>
+                        <!-- Card 2: Économies -->
+                        <div class="value-card value-card-secondary animate-on-scroll" style="animation-delay: 0.2s;">
+                            <div class="value-card-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 16L12 22L26 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="value-card-content">
+                                <h3 class="value-card-title">15 000 € à 50 000 € économisés par an</h3>
+                                <p class="value-card-text">En automatisant seulement <strong>20h de tâches par semaine</strong> — l'équivalent d'un demi-poste sans les charges</p>
+                            </div>
+                        </div>
 
-                            <!-- Emails -->
-                            <rect x="50" y="150" width="50" height="40" fill="#E5E7EB" stroke="#6B7280" stroke-width="2" rx="4">
-                                <animate attributeName="y" values="150;145;150" dur="2.3s" repeatCount="indefinite"/>
-                            </rect>
-                            <polyline points="55,160 75,175 95,160" fill="none" stroke="#6B7280" stroke-width="2"/>
+                        <!-- Card 3: Accompagnement -->
+                        <div class="value-card value-card-accent animate-on-scroll" style="animation-delay: 0.3s;">
+                            <div class="value-card-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="6" y="10" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M10 10V8C10 5.79086 11.7909 4 14 4H18C20.2091 4 22 5.79086 22 8V10" stroke="currentColor" stroke-width="2"/>
+                                    <circle cx="16" cy="18" r="2" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="value-card-content">
+                                <h3 class="value-card-title">Accompagnement sur-mesure</h3>
+                                <p class="value-card-text">Pas de solution générique : nous analysons <strong>VOS processus spécifiques</strong> et déployons VOS automatisations clé en main</p>
+                            </div>
+                        </div>
 
-                            <!-- Calendrier -->
-                            <rect x="50" y="240" width="50" height="50" fill="#E5E7EB" stroke="#6B7280" stroke-width="2" rx="4">
-                                <animate attributeName="y" values="240;235;240" dur="2.7s" repeatCount="indefinite"/>
-                            </rect>
-                            <line x1="60" y1="250" x2="60" y2="260" stroke="#6B7280" stroke-width="2"/>
-                            <line x1="90" y1="250" x2="90" y2="260" stroke="#6B7280" stroke-width="2"/>
-
-                            <!-- Lignes chaotiques -->
-                            <path d="M 100 80 Q 150 100, 200 120" stroke="#6B7280" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="5,5">
-                                <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-                            </path>
-                            <path d="M 100 170 Q 150 180, 200 150" stroke="#6B7280" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="5,5">
-                                <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-                            </path>
-                            <path d="M 100 265 Q 150 250, 200 180" stroke="#6B7280" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="5,5">
-                                <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
-                            </path>
-                        </g>
-
-                        <!-- Centre : Système LibertadIA -->
-                        <g id="aiSystem">
-                            <circle cx="400" cy="200" r="60" fill="url(#blueGradient)" opacity="0.1">
-                                <animate attributeName="r" values="60;65;60" dur="3s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="400" cy="200" r="45" fill="url(#blueGradient)">
-                                <animate attributeName="opacity" values="1;0.8;1" dur="2s" repeatCount="indefinite"/>
-                            </circle>
-
-                            <!-- Icône IA au centre -->
-                            <g transform="translate(400, 200)">
-                                <!-- Cerveau stylisé -->
-                                <path d="M -15,-10 Q -20,-15 -15,-20 Q -10,-15 -10,-10 L -10,10 Q -10,15 -15,15 Q -20,15 -20,10 Z" fill="white"/>
-                                <path d="M 15,-10 Q 20,-15 15,-20 Q 10,-15 10,-10 L 10,10 Q 10,15 15,15 Q 20,15 20,10 Z" fill="white"/>
-                                <circle cx="0" cy="-5" r="3" fill="white"/>
-                                <circle cx="-8" cy="0" r="2" fill="white"/>
-                                <circle cx="8" cy="0" r="2" fill="white"/>
-                                <path d="M -5,8 Q 0,12 5,8" stroke="white" stroke-width="2" fill="none"/>
-                            </g>
-
-                            <!-- Particules animées autour -->
-                            <circle cx="350" cy="160" r="3" fill="#F97316">
-                                <animate attributeName="cx" values="350;360;350" dur="2s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="450" cy="180" r="3" fill="#F97316">
-                                <animate attributeName="cx" values="450;440;450" dur="2.5s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="380" cy="240" r="3" fill="#F97316">
-                                <animate attributeName="cy" values="240;250;240" dur="1.8s" repeatCount="indefinite"/>
-                            </circle>
-                            <circle cx="420" cy="250" r="3" fill="#F97316">
-                                <animate attributeName="cy" values="250;240;250" dur="2.2s" repeatCount="indefinite"/>
-                            </circle>
-                        </g>
-
-                        <!-- Côté droit : Processus automatisé organisé -->
-                        <g id="automatedProcess">
-                            <!-- Documents organisés -->
-                            <rect x="700" y="50" width="50" height="60" fill="url(#blueGradient)" opacity="0.8" rx="4">
-                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
-                            </rect>
-                            <line x1="710" y1="70" x2="740" y2="70" stroke="white" stroke-width="2"/>
-                            <line x1="710" y1="80" x2="740" y2="80" stroke="white" stroke-width="2"/>
-                            <line x1="710" y1="90" x2="730" y2="90" stroke="white" stroke-width="2"/>
-                            <circle cx="770" cy="65" r="8" fill="#10B981" stroke="white" stroke-width="2"/>
-                            <polyline points="766,65 769,68 774,62" fill="none" stroke="white" stroke-width="2"/>
-
-                            <!-- Emails automatisés -->
-                            <rect x="700" y="150" width="50" height="40" fill="url(#blueGradient)" opacity="0.8" rx="4">
-                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2.3s" repeatCount="indefinite"/>
-                            </rect>
-                            <polyline points="705,160 725,175 745,160" fill="none" stroke="white" stroke-width="2"/>
-                            <circle cx="770" cy="165" r="8" fill="#10B981" stroke="white" stroke-width="2"/>
-                            <polyline points="766,165 769,168 774,162" fill="none" stroke="white" stroke-width="2"/>
-
-                            <!-- Calendrier optimisé -->
-                            <rect x="700" y="240" width="50" height="50" fill="url(#blueGradient)" opacity="0.8" rx="4">
-                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2.7s" repeatCount="indefinite"/>
-                            </rect>
-                            <line x1="710" y1="250" x2="710" y2="260" stroke="white" stroke-width="2"/>
-                            <line x1="740" y1="250" x2="740" y2="260" stroke="white" stroke-width="2"/>
-                            <circle cx="770" cy="260" r="8" fill="#10B981" stroke="white" stroke-width="2"/>
-                            <polyline points="766,260 769,263 774,257" fill="none" stroke="white" stroke-width="2"/>
-
-                            <!-- Lignes fluides -->
-                            <path d="M 600 80 L 700 80" stroke="url(#orangeGradient)" stroke-width="3" fill="none">
-                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite"/>
-                            </path>
-                            <path d="M 600 170 L 700 170" stroke="url(#orangeGradient)" stroke-width="3" fill="none">
-                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite"/>
-                            </path>
-                            <path d="M 600 265 L 700 265" stroke="url(#orangeGradient)" stroke-width="3" fill="none">
-                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite"/>
-                            </path>
-
-                            <!-- Flux de données animés -->
-                            <circle r="4" fill="#F97316">
-                                <animateMotion dur="3s" repeatCount="indefinite" path="M 600 80 L 700 80"/>
-                            </circle>
-                            <circle r="4" fill="#F97316">
-                                <animateMotion dur="3s" begin="0.5s" repeatCount="indefinite" path="M 600 170 L 700 170"/>
-                            </circle>
-                            <circle r="4" fill="#F97316">
-                                <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M 600 265 L 700 265"/>
-                            </circle>
-                        </g>
-
-                        <!-- Flèches de flux de gauche vers le centre -->
-                        <path d="M 200 120 L 345 180" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowgray)"/>
-                        <path d="M 200 150 L 345 190" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowgray)"/>
-                        <path d="M 200 180 L 345 200" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowgray)"/>
-
-                        <!-- Flèches de flux du centre vers la droite -->
-                        <defs>
-                            <marker id="arrowgray" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#6B7280" />
-                            </marker>
-                            <marker id="arroworange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
-                                <path d="M0,0 L0,6 L9,3 z" fill="#F97316" />
-                            </marker>
-                        </defs>
-                    </svg>
+                        <!-- Card 4: Audit gratuit -->
+                        <div class="value-card value-card-highlight animate-on-scroll" style="animation-delay: 0.4s;">
+                            <div class="highlight-content">
+                                <div class="highlight-icon">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20 4L24 16L36 20L24 24L20 36L16 24L4 20L16 16L20 4Z" fill="currentColor"/>
+                                    </svg>
+                                </div>
+                                <h3 class="highlight-title">Audit gratuit de 90 minutes</h3>
+                                <ul class="highlight-list">
+                                    <li>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 8L6 11L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Analyse complète de vos processus
+                                    </li>
+                                    <li>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 8L6 11L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Plan d'automatisation chiffré
+                                    </li>
+                                    <li>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 8L6 11L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Estimation précise du ROI
+                                    </li>
+                                    <li>
+                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 8L6 11L13 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                        Zéro engagement
+                                    </li>
+                                </ul>
+                                <a href="./contact.html" class="btn btn-secondary btn-full">
+                                    Je réserve mon créneau
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
