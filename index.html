@@ -3,377 +3,891 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LibertadIA - Automatisez au lieu d'embaucher | ROI en 6 mois</title>
-    <meta name="description" content="Gagnez 40% de temps et réduisez vos coûts sans embaucher. Automatisation IA pour PME avec ROI garanti en moins de 6 mois.">
-    <meta property="og:title" content="LibertadIA - Automatisation IA pour PME">
-    <meta property="og:description" content="Automatisez vos processus au lieu d'embaucher. ROI en 6 mois garanti.">
+    <meta name="description" content="LibertadIA transforme vos processus chronophages en systèmes intelligents. Gagnez des centaines d'heures chaque mois grâce à l'automatisation par IA pour votre PME.">
+    <meta name="keywords" content="automatisation IA, PME, processus automatisés, gain de productivité, N8N, intelligence artificielle">
+
+    <!-- Open Graph pour les réseaux sociaux -->
+    <meta property="og:title" content="LibertadIA - Libérez le vrai potentiel de votre entreprise grâce à l'automatisation IA">
+    <meta property="og:description" content="Transformez vos processus chronophages en systèmes intelligents et gagnez des centaines d'heures chaque mois">
+    <meta property="og:image" content="./assets/logo-libertadia.png">
+    <meta property="og:url" content="https://libertadia.fr">
     <meta property="og:type" content="website">
-    <link rel="icon" type="image/png" href="logo-libertadia.png">
-    <link rel="stylesheet" href="styles.css">
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://libertadia.fr">
+
+    <title>LibertadIA - Automatisation IA pour PME | Gagnez du temps et de l'argent</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="./assets/Favicon.png">
+
+    <!-- Préconnexion aux ressources externes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Google Fonts - Optimisé avec display=swap -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Feuille de style principale -->
+    <link rel="stylesheet" href="./css/styles.css">
+
+    <!-- Données structurées JSON-LD pour le SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "LibertadIA",
+      "description": "Agence d'automatisation de systèmes IA pour les PME françaises",
+      "url": "https://libertadia.fr",
+      "logo": "https://libertadia.fr/assets/logo-libertadia.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Service client",
+        "availableLanguage": "French"
+      },
+      "areaServed": "FR",
+      "serviceType": "Automatisation par Intelligence Artificielle"
+    }
+    </script>
 </head>
 <body>
-    <!-- ============================================
-         PACK IMMERSION : Éléments d'animation
-         ============================================ -->
+    <!-- Barre de progression de scroll -->
+    <div class="progress-bar" id="progressBar"></div>
 
-    <!-- Progress Bar avec pourcentage -->
-    <div class="scroll-progress-wrapper">
-        <div class="scroll-progress-bar"></div>
-        <div class="scroll-progress-percentage">0%</div>
-    </div>
-
-    <!-- Particules flottantes pour effet parallax -->
-    <div class="floating-particles">
-        <div class="particle particle-1"></div>
-        <div class="particle particle-2"></div>
-        <div class="particle particle-3"></div>
-        <div class="particle particle-4"></div>
-        <div class="particle particle-5"></div>
-        <div class="particle particle-6"></div>
-        <div class="particle particle-7"></div>
-        <div class="particle particle-8"></div>
-        <div class="particle particle-9"></div>
-        <div class="particle particle-10"></div>
-    </div>
-
-    <!-- Cursor Glow Effect -->
-    <div class="cursor-glow"></div>
-
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="nav-brand">
-                <img src="logo-libertadia.png" alt="LibertadIA Logo" class="logo">
+    <!-- Navigation principale fixe -->
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="./index.html" class="nav-logo">
+                <img src="./assets/logo-libertadia.png" alt="Logo LibertadIA" class="logo-image">
             </a>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">Accueil</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html" class="btn-nav">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-new" data-bg-color="#f8fafc">
-        <div class="container">
-            <div class="hero-grid">
-                <div class="hero-content-new">
-                    <h1 class="hero-title-new">Automatisez au lieu d'embaucher</h1>
-                    <p class="hero-subtitle-new">Gagnez jusqu'à 40% de temps sur vos processus sans recruter. Économisez des milliers d'euros tout en scalant votre PME.</p>
-                    <div class="hero-cta-new">
-                        <a href="contact.html" class="btn-cta-primary">Obtenir une démo gratuite</a>
-                        <a href="#roi-section" class="btn-cta-secondary">Voir le ROI</a>
-                    </div>
-                    <div class="hero-trust">
-                        <div class="trust-item">
-                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            <!-- Menu desktop -->
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="./index.html" class="nav-link active" aria-current="page">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./services.html" class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+
+                <!-- CTA dans le menu -->
+                <a href="./contact.html" class="btn btn-primary nav-cta">Réserver un audit</a>
+            </div>
+
+            <!-- Bouton hamburger mobile -->
+            <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu de navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="main">
+        <!-- Section Hero avec animation SVG -->
+        <section class="hero section" id="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title animate-on-scroll">
+                        Libérez le vrai potentiel de votre entreprise grâce à l'automatisation IA
+                    </h1>
+                    <p class="hero-subtitle animate-on-scroll">
+                        Transformez vos processus chronophages en systèmes intelligents et gagnez des centaines d'heures chaque mois
+                    </p>
+                    <div class="hero-cta animate-on-scroll">
+                        <a href="./contact.html" class="btn btn-primary btn-large">
+                            Réserver mon audit gratuit
+                        </a>
+                        <p class="hero-cta-note">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 0L10.1 5.9L16 8L10.1 10.1L8 16L5.9 10.1L0 8L5.9 5.9L8 0Z" fill="currentColor"/>
                             </svg>
-                            <span>ROI en moins de 6 mois</span>
-                        </div>
-                        <div class="trust-item">
-                            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                            </svg>
-                            <span>Sans embauche, sans RH</span>
-                        </div>
+                            Audit gratuit et sans engagement
+                        </p>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <!-- Animation SVG d'automatisation -->
-                    <svg class="automation-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Nœuds du système -->
-                        <circle class="node node-1" cx="50" cy="150" r="20" fill="#2563eb" opacity="0.2"/>
-                        <circle class="node node-2" cx="200" cy="80" r="25" fill="#f97316" opacity="0.2"/>
-                        <circle class="node node-3" cx="200" cy="220" r="25" fill="#06b6d4" opacity="0.2"/>
-                        <circle class="node node-4" cx="350" cy="150" r="20" fill="#10b981" opacity="0.2"/>
 
-                        <!-- Connexions animées -->
-                        <path class="connection connection-1" d="M 70 150 Q 135 115 175 80" stroke="#2563eb" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-                        <path class="connection connection-2" d="M 70 150 Q 135 185 175 220" stroke="#2563eb" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-                        <path class="connection connection-3" d="M 225 80 Q 287 115 330 150" stroke="#f97316" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-                        <path class="connection connection-4" d="M 225 220 Q 287 185 330 150" stroke="#06b6d4" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
+                <!-- Animation SVG centrale illustrant la transformation -->
+                <div class="hero-animation animate-on-scroll">
+                    <svg id="heroSvg" width="100%" height="400" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Gradient definitions -->
+                        <defs>
+                            <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#2563EB;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:1" />
+                            </linearGradient>
+                            <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#F97316;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#FB923C;stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
 
-                        <!-- Particules de données -->
-                        <circle class="data-particle particle-1" cx="50" cy="150" r="3" fill="#2563eb"/>
-                        <circle class="data-particle particle-2" cx="50" cy="150" r="3" fill="#f97316"/>
-                        <circle class="data-particle particle-3" cx="200" cy="80" r="3" fill="#06b6d4"/>
-                        <circle class="data-particle particle-4" cx="200" cy="220" r="3" fill="#10b981"/>
+                        <!-- Côté gauche : Processus manuel chaotique -->
+                        <g id="manualProcess">
+                            <!-- Documents -->
+                            <rect x="50" y="50" width="50" height="60" fill="#E5E7EB" stroke="#6B7280" stroke-width="2" rx="4">
+                                <animate attributeName="y" values="50;45;50" dur="2s" repeatCount="indefinite"/>
+                            </rect>
+                            <line x1="60" y1="70" x2="90" y2="70" stroke="#6B7280" stroke-width="2"/>
+                            <line x1="60" y1="80" x2="90" y2="80" stroke="#6B7280" stroke-width="2"/>
+                            <line x1="60" y1="90" x2="80" y2="90" stroke="#6B7280" stroke-width="2"/>
 
-                        <!-- Icônes dans les nœuds -->
-                        <g class="icon-group icon-1" transform="translate(50, 150)">
-                            <path d="M-6,-6 L6,-6 L6,6 L-6,6 Z" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+                            <!-- Emails -->
+                            <rect x="50" y="150" width="50" height="40" fill="#E5E7EB" stroke="#6B7280" stroke-width="2" rx="4">
+                                <animate attributeName="y" values="150;145;150" dur="2.3s" repeatCount="indefinite"/>
+                            </rect>
+                            <polyline points="55,160 75,175 95,160" fill="none" stroke="#6B7280" stroke-width="2"/>
+
+                            <!-- Calendrier -->
+                            <rect x="50" y="240" width="50" height="50" fill="#E5E7EB" stroke="#6B7280" stroke-width="2" rx="4">
+                                <animate attributeName="y" values="240;235;240" dur="2.7s" repeatCount="indefinite"/>
+                            </rect>
+                            <line x1="60" y1="250" x2="60" y2="260" stroke="#6B7280" stroke-width="2"/>
+                            <line x1="90" y1="250" x2="90" y2="260" stroke="#6B7280" stroke-width="2"/>
+
+                            <!-- Lignes chaotiques -->
+                            <path d="M 100 80 Q 150 100, 200 120" stroke="#6B7280" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="5,5">
+                                <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M 100 170 Q 150 180, 200 150" stroke="#6B7280" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="5,5">
+                                <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M 100 265 Q 150 250, 200 180" stroke="#6B7280" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="5,5">
+                                <animate attributeName="stroke-dashoffset" from="0" to="10" dur="1s" repeatCount="indefinite"/>
+                            </path>
                         </g>
-                        <g class="icon-group icon-2" transform="translate(200, 80)">
-                            <circle r="8" fill="white" stroke="#f97316" stroke-width="1.5"/>
-                            <path d="M-3,0 L3,0 M0,-3 L0,3" stroke="#f97316" stroke-width="1.5"/>
+
+                        <!-- Centre : Système LibertadIA -->
+                        <g id="aiSystem">
+                            <circle cx="400" cy="200" r="60" fill="url(#blueGradient)" opacity="0.1">
+                                <animate attributeName="r" values="60;65;60" dur="3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="400" cy="200" r="45" fill="url(#blueGradient)">
+                                <animate attributeName="opacity" values="1;0.8;1" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+
+                            <!-- Icône IA au centre -->
+                            <g transform="translate(400, 200)">
+                                <!-- Cerveau stylisé -->
+                                <path d="M -15,-10 Q -20,-15 -15,-20 Q -10,-15 -10,-10 L -10,10 Q -10,15 -15,15 Q -20,15 -20,10 Z" fill="white"/>
+                                <path d="M 15,-10 Q 20,-15 15,-20 Q 10,-15 10,-10 L 10,10 Q 10,15 15,15 Q 20,15 20,10 Z" fill="white"/>
+                                <circle cx="0" cy="-5" r="3" fill="white"/>
+                                <circle cx="-8" cy="0" r="2" fill="white"/>
+                                <circle cx="8" cy="0" r="2" fill="white"/>
+                                <path d="M -5,8 Q 0,12 5,8" stroke="white" stroke-width="2" fill="none"/>
+                            </g>
+
+                            <!-- Particules animées autour -->
+                            <circle cx="350" cy="160" r="3" fill="#F97316">
+                                <animate attributeName="cx" values="350;360;350" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="450" cy="180" r="3" fill="#F97316">
+                                <animate attributeName="cx" values="450;440;450" dur="2.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="380" cy="240" r="3" fill="#F97316">
+                                <animate attributeName="cy" values="240;250;240" dur="1.8s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="420" cy="250" r="3" fill="#F97316">
+                                <animate attributeName="cy" values="250;240;250" dur="2.2s" repeatCount="indefinite"/>
+                            </circle>
                         </g>
-                        <g class="icon-group icon-3" transform="translate(200, 220)">
-                            <path d="M-6,-6 L6,6 M-6,6 L6,-6" stroke="#06b6d4" stroke-width="2"/>
+
+                        <!-- Côté droit : Processus automatisé organisé -->
+                        <g id="automatedProcess">
+                            <!-- Documents organisés -->
+                            <rect x="700" y="50" width="50" height="60" fill="url(#blueGradient)" opacity="0.8" rx="4">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+                            </rect>
+                            <line x1="710" y1="70" x2="740" y2="70" stroke="white" stroke-width="2"/>
+                            <line x1="710" y1="80" x2="740" y2="80" stroke="white" stroke-width="2"/>
+                            <line x1="710" y1="90" x2="730" y2="90" stroke="white" stroke-width="2"/>
+                            <circle cx="770" cy="65" r="8" fill="#10B981" stroke="white" stroke-width="2"/>
+                            <polyline points="766,65 769,68 774,62" fill="none" stroke="white" stroke-width="2"/>
+
+                            <!-- Emails automatisés -->
+                            <rect x="700" y="150" width="50" height="40" fill="url(#blueGradient)" opacity="0.8" rx="4">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2.3s" repeatCount="indefinite"/>
+                            </rect>
+                            <polyline points="705,160 725,175 745,160" fill="none" stroke="white" stroke-width="2"/>
+                            <circle cx="770" cy="165" r="8" fill="#10B981" stroke="white" stroke-width="2"/>
+                            <polyline points="766,165 769,168 774,162" fill="none" stroke="white" stroke-width="2"/>
+
+                            <!-- Calendrier optimisé -->
+                            <rect x="700" y="240" width="50" height="50" fill="url(#blueGradient)" opacity="0.8" rx="4">
+                                <animate attributeName="opacity" values="0.8;1;0.8" dur="2.7s" repeatCount="indefinite"/>
+                            </rect>
+                            <line x1="710" y1="250" x2="710" y2="260" stroke="white" stroke-width="2"/>
+                            <line x1="740" y1="250" x2="740" y2="260" stroke="white" stroke-width="2"/>
+                            <circle cx="770" cy="260" r="8" fill="#10B981" stroke="white" stroke-width="2"/>
+                            <polyline points="766,260 769,263 774,257" fill="none" stroke="white" stroke-width="2"/>
+
+                            <!-- Lignes fluides -->
+                            <path d="M 600 80 L 700 80" stroke="url(#orangeGradient)" stroke-width="3" fill="none">
+                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M 600 170 L 700 170" stroke="url(#orangeGradient)" stroke-width="3" fill="none">
+                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite"/>
+                            </path>
+                            <path d="M 600 265 L 700 265" stroke="url(#orangeGradient)" stroke-width="3" fill="none">
+                                <animate attributeName="stroke-dashoffset" from="100" to="0" dur="2s" repeatCount="indefinite"/>
+                            </path>
+
+                            <!-- Flux de données animés -->
+                            <circle r="4" fill="#F97316">
+                                <animateMotion dur="3s" repeatCount="indefinite" path="M 600 80 L 700 80"/>
+                            </circle>
+                            <circle r="4" fill="#F97316">
+                                <animateMotion dur="3s" begin="0.5s" repeatCount="indefinite" path="M 600 170 L 700 170"/>
+                            </circle>
+                            <circle r="4" fill="#F97316">
+                                <animateMotion dur="3s" begin="1s" repeatCount="indefinite" path="M 600 265 L 700 265"/>
+                            </circle>
                         </g>
-                        <g class="icon-group icon-4" transform="translate(350, 150)">
-                            <circle r="8" fill="white" stroke="#10b981" stroke-width="1.5"/>
-                            <path d="M-3,-1 L0,3 L5,-4" stroke="#10b981" stroke-width="1.5" fill="none"/>
-                        </g>
+
+                        <!-- Flèches de flux de gauche vers le centre -->
+                        <path d="M 200 120 L 345 180" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowgray)"/>
+                        <path d="M 200 150 L 345 190" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowgray)"/>
+                        <path d="M 200 180 L 345 200" stroke="#6B7280" stroke-width="2" fill="none" marker-end="url(#arrowgray)"/>
+
+                        <!-- Flèches de flux du centre vers la droite -->
+                        <defs>
+                            <marker id="arrowgray" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#6B7280" />
+                            </marker>
+                            <marker id="arroworange" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                                <path d="M0,0 L0,6 L9,3 z" fill="#F97316" />
+                            </marker>
+                        </defs>
                     </svg>
                 </div>
             </div>
-        </div>
-        <!-- Animated background -->
-        <div class="hero-background">
-            <div class="bg-circle bg-circle-1"></div>
-            <div class="bg-circle bg-circle-2"></div>
-            <div class="bg-circle bg-circle-3"></div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Problem/Solution Section -->
-    <section class="problem-solution" data-bg-color="#ffffff">
-        <div class="container">
-            <h2 class="section-title-center">Le vrai coût de faire les choses manuellement</h2>
+        <!-- Section Problèmes identifiés -->
+        <section class="problems section section-alt" id="problems">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Vous vous reconnaissez dans ces situations ?</h2>
+                <p class="section-subtitle animate-on-scroll">Ces défis quotidiens ralentissent votre croissance et limitent le potentiel de votre entreprise</p>
 
-            <div class="comparison-container">
-                <!-- Avant -->
-                <div class="comparison-side before-side reveal-on-scroll">
-                    <div class="comparison-header">
-                        <div class="status-badge status-before">Avant</div>
-                        <h3>Processus manuels</h3>
+                <div class="problems-grid">
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="24" cy="24" r="20" stroke="#F97316" stroke-width="2"/>
+                                <path d="M24 12V26L32 30" stroke="#F97316" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="problem-title">Temps perdu sur des tâches répétitives</h3>
+                        <p class="problem-description">Vos équipes passent des heures chaque semaine sur des tâches manuelles sans valeur ajoutée qui pourraient être automatisées</p>
                     </div>
 
-                    <div class="comparison-items">
-                        <div class="comparison-item">
-                            <svg class="comparison-icon icon-negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <line x1="8" y1="12" x2="16" y2="12"></line>
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8 24L18 34L40 12" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <line x1="16" y1="24" x2="24" y2="32" stroke="#F97316" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="36" cy="36" r="8" fill="#DC2626" stroke="white" stroke-width="2"/>
+                                <line x1="33" y1="33" x2="39" y2="39" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <line x1="39" y1="33" x2="33" y2="39" stroke="white" stroke-width="2" stroke-linecap="round"/>
                             </svg>
-                            <div class="comparison-text">
-                                <h4>Temps perdu</h4>
-                                <p>40h/semaine sur des tâches répétitives</p>
-                            </div>
                         </div>
+                        <h3 class="problem-title">Erreurs humaines coûteuses</h3>
+                        <p class="problem-description">Les erreurs de saisie, les oublis et les doublons vous coûtent du temps et de l'argent en corrections et insatisfaction client</p>
+                    </div>
 
-                        <div class="comparison-item">
-                            <svg class="comparison-icon icon-negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                                <line x1="12" y1="9" x2="12" y2="13"></line>
-                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M24 4L28 20L44 24L28 28L24 44L20 28L4 24L20 20L24 4Z" stroke="#F97316" stroke-width="2" stroke-linejoin="round"/>
+                                <circle cx="24" cy="24" r="4" fill="#F97316"/>
                             </svg>
-                            <div class="comparison-text">
-                                <h4>Erreurs humaines</h4>
-                                <p>Saisies incorrectes, oublis, retards</p>
-                            </div>
                         </div>
+                        <h3 class="problem-title">Opportunités manquées</h3>
+                        <p class="problem-description">Vous manquez des opportunités de croissance parce que vos équipes n'ont pas le temps de se concentrer sur le développement commercial</p>
+                    </div>
 
-                        <div class="comparison-item">
-                            <svg class="comparison-icon icon-negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="1" x2="12" y2="23"></line>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                    <div class="problem-card animate-on-scroll">
+                        <div class="problem-icon">
+                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="8" y="12" width="32" height="28" rx="2" stroke="#F97316" stroke-width="2"/>
+                                <line x1="8" y1="20" x2="40" y2="20" stroke="#F97316" stroke-width="2"/>
+                                <circle cx="16" cy="16" r="1.5" fill="#F97316"/>
+                                <circle cx="20" cy="16" r="1.5" fill="#F97316"/>
+                                <circle cx="24" cy="16" r="1.5" fill="#F97316"/>
+                                <path d="M16 28L20 32L32 24" stroke="#DC2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <div class="comparison-text">
-                                <h4>Coûts élevés</h4>
-                                <p>3500€+/mois pour un employé supplémentaire</p>
-                            </div>
                         </div>
-
-                        <div class="comparison-item">
-                            <svg class="comparison-icon icon-negative" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 20V10"></path>
-                                <path d="M12 20V4"></path>
-                                <path d="M6 20v-6"></path>
-                            </svg>
-                            <div class="comparison-text">
-                                <h4>Difficile à scaler</h4>
-                                <p>Chaque croissance = nouvelles embauches</p>
-                            </div>
-                        </div>
+                        <h3 class="problem-title">Scaling impossible sans recrutement</h3>
+                        <p class="problem-description">Vous ne pouvez pas augmenter votre volume d'activité sans embaucher constamment, ce qui grève vos marges</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Arrow/Transition -->
-                <div class="transition-arrow reveal-on-scroll">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </div>
+        <!-- Section Solutions avec exemples concrets -->
+        <section class="solutions section" id="solutions">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Des solutions concrètes et mesurables</h2>
+                <p class="section-subtitle animate-on-scroll">Découvrez comment l'automatisation par IA transforme votre quotidien</p>
 
-                <!-- Après -->
-                <div class="comparison-side after-side reveal-on-scroll">
-                    <div class="comparison-header">
-                        <div class="status-badge status-after">Après</div>
-                        <h3>Automatisation IA</h3>
+                <div class="solutions-tabs">
+                    <div class="tabs-navigation animate-on-scroll">
+                        <button class="tab-btn active" data-tab="gestion-documentaire">Gestion documentaire</button>
+                        <button class="tab-btn" data-tab="service-client">Service client</button>
+                        <button class="tab-btn" data-tab="planification">Planification</button>
+                        <button class="tab-btn" data-tab="extraction-donnees">Extraction de données</button>
+                        <button class="tab-btn" data-tab="generation-documents">Génération de documents</button>
                     </div>
 
-                    <div class="comparison-items">
-                        <div class="comparison-item">
-                            <svg class="comparison-icon icon-positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                            </svg>
-                            <div class="comparison-text">
-                                <h4>Gain de temps massif</h4>
-                                <p>Jusqu'à 40% de temps libéré immédiatement</p>
+                    <div class="tabs-content">
+                        <!-- Tab 1: Gestion documentaire -->
+                        <div class="tab-panel active" data-panel="gestion-documentaire">
+                            <div class="solution-comparison">
+                                <div class="before-automation">
+                                    <div class="comparison-label label-before">Avant</div>
+                                    <h3>Processus manuel</h3>
+                                    <ul class="comparison-list">
+                                        <li>Réception de 50+ emails avec pièces jointes par jour</li>
+                                        <li>Tri manuel des documents par catégorie</li>
+                                        <li>Saisie manuelle des données dans l'ERP</li>
+                                        <li>Archivage manuel dans différents dossiers</li>
+                                        <li><strong class="text-orange">3-4 heures par jour</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="32" cy="32" r="30" fill="#F97316" opacity="0.1"/>
+                                        <path d="M20 32H44M44 32L36 24M44 32L36 40" stroke="#F97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="after-automation">
+                                    <div class="comparison-label label-after">Après</div>
+                                    <h3>Système automatisé</h3>
+                                    <ul class="comparison-list">
+                                        <li>Extraction automatique des données des PDF</li>
+                                        <li>Classification intelligente par IA</li>
+                                        <li>Intégration directe dans l'ERP</li>
+                                        <li>Archivage automatique selon les règles</li>
+                                        <li><strong class="text-orange">15 minutes par jour de supervision</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="solution-result">
+                                <p class="result-text">
+                                    <span class="result-icon">✨</span>
+                                    Gain de temps : <strong class="text-orange">jusqu'à 90%</strong> -
+                                    Libération de <strong class="text-orange">~70 heures par mois</strong>
+                                </p>
                             </div>
                         </div>
 
-                        <div class="comparison-item">
-                            <svg class="comparison-icon icon-positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="20 6 9 17 4 12"></polyline>
-                            </svg>
-                            <div class="comparison-text">
-                                <h4>Zéro erreur</h4>
-                                <p>Précision à 99.9%, processus fiables</p>
+                        <!-- Tab 2: Service client -->
+                        <div class="tab-panel" data-panel="service-client">
+                            <div class="solution-comparison">
+                                <div class="before-automation">
+                                    <div class="comparison-label label-before">Avant</div>
+                                    <h3>Processus manuel</h3>
+                                    <ul class="comparison-list">
+                                        <li>Lecture individuelle de chaque demande client</li>
+                                        <li>Recherche d'informations dans différents outils</li>
+                                        <li>Rédaction manuelle de chaque réponse</li>
+                                        <li>Transfert manuel vers le bon service si nécessaire</li>
+                                        <li><strong class="text-orange">15-20 minutes par demande</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="32" cy="32" r="30" fill="#F97316" opacity="0.1"/>
+                                        <path d="M20 32H44M44 32L36 24M44 32L36 40" stroke="#F97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="after-automation">
+                                    <div class="comparison-label label-after">Après</div>
+                                    <h3>Système automatisé</h3>
+                                    <ul class="comparison-list">
+                                        <li>Analyse automatique de l'intention du client</li>
+                                        <li>Récupération automatique des données pertinentes</li>
+                                        <li>Génération de réponses personnalisées par IA</li>
+                                        <li>Routage intelligent vers le bon département</li>
+                                        <li><strong class="text-orange">2-3 minutes de validation</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="solution-result">
+                                <p class="result-text">
+                                    <span class="result-icon">✨</span>
+                                    Gain de temps : <strong class="text-orange">jusqu'à 85%</strong> -
+                                    Temps de réponse divisé par <strong class="text-orange">6</strong>
+                                </p>
                             </div>
                         </div>
 
-                        <div class="comparison-item">
-                            <svg class="comparison-icon icon-positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <line x1="12" y1="1" x2="12" y2="23"></line>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                            </svg>
-                            <div class="comparison-text">
-                                <h4>Économies garanties</h4>
-                                <p>Dès 990€/mois, ROI en moins de 6 mois</p>
+                        <!-- Tab 3: Planification -->
+                        <div class="tab-panel" data-panel="planification">
+                            <div class="solution-comparison">
+                                <div class="before-automation">
+                                    <div class="comparison-label label-before">Avant</div>
+                                    <h3>Processus manuel</h3>
+                                    <ul class="comparison-list">
+                                        <li>Vérification manuelle des disponibilités de chacun</li>
+                                        <li>Multiples allers-retours par email ou téléphone</li>
+                                        <li>Gestion manuelle des conflits d'horaires</li>
+                                        <li>Mise à jour manuelle de l'agenda partagé</li>
+                                        <li><strong class="text-orange">30-45 minutes par réunion</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="32" cy="32" r="30" fill="#F97316" opacity="0.1"/>
+                                        <path d="M20 32H44M44 32L36 24M44 32L36 40" stroke="#F97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="after-automation">
+                                    <div class="comparison-label label-after">Après</div>
+                                    <h3>Système automatisé</h3>
+                                    <ul class="comparison-list">
+                                        <li>Analyse automatique des agendas de tous les participants</li>
+                                        <li>Proposition intelligente des meilleurs créneaux</li>
+                                        <li>Détection et résolution automatique des conflits</li>
+                                        <li>Envoi automatique des invitations et rappels</li>
+                                        <li><strong class="text-orange">30 secondes de validation</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="solution-result">
+                                <p class="result-text">
+                                    <span class="result-icon">✨</span>
+                                    Gain de temps : <strong class="text-orange">jusqu'à 95%</strong> -
+                                    Économie de <strong class="text-orange">20+ heures par mois</strong>
+                                </p>
                             </div>
                         </div>
 
-                        <div class="comparison-item">
-                            <svg class="comparison-icon icon-positive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                                <polyline points="17 6 23 6 23 12"></polyline>
-                            </svg>
-                            <div class="comparison-text">
-                                <h4>Scalabilité infinie</h4>
-                                <p>Croissance sans limite de ressources</p>
+                        <!-- Tab 4: Extraction de données -->
+                        <div class="tab-panel" data-panel="extraction-donnees">
+                            <div class="solution-comparison">
+                                <div class="before-automation">
+                                    <div class="comparison-label label-before">Avant</div>
+                                    <h3>Processus manuel</h3>
+                                    <ul class="comparison-list">
+                                        <li>Connexion à 5-10 outils différents</li>
+                                        <li>Export manuel des données de chaque source</li>
+                                        <li>Consolidation manuelle dans Excel</li>
+                                        <li>Création manuelle de tableaux et graphiques</li>
+                                        <li><strong class="text-orange">4-6 heures par rapport</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="32" cy="32" r="30" fill="#F97316" opacity="0.1"/>
+                                        <path d="M20 32H44M44 32L36 24M44 32L36 40" stroke="#F97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="after-automation">
+                                    <div class="comparison-label label-after">Après</div>
+                                    <h3>Système automatisé</h3>
+                                    <ul class="comparison-list">
+                                        <li>Connexion automatique à toutes les sources</li>
+                                        <li>Extraction et consolidation automatique des données</li>
+                                        <li>Génération automatique de rapports visuels</li>
+                                        <li>Envoi automatique aux bonnes personnes</li>
+                                        <li><strong class="text-orange">Rapport généré en 5 minutes</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="solution-result">
+                                <p class="result-text">
+                                    <span class="result-icon">✨</span>
+                                    Gain de temps : <strong class="text-orange">jusqu'à 95%</strong> -
+                                    Fréquence augmentée : <strong class="text-orange">rapports quotidiens vs hebdomadaires</strong>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Tab 5: Génération de documents -->
+                        <div class="tab-panel" data-panel="generation-documents">
+                            <div class="solution-comparison">
+                                <div class="before-automation">
+                                    <div class="comparison-label label-before">Avant</div>
+                                    <h3>Processus manuel</h3>
+                                    <ul class="comparison-list">
+                                        <li>Ouverture d'un modèle Word ou Excel</li>
+                                        <li>Remplissage manuel de chaque champ</li>
+                                        <li>Relecture et correction des erreurs</li>
+                                        <li>Enregistrement et envoi manuel par email</li>
+                                        <li><strong class="text-orange">15-20 minutes par document</strong></li>
+                                    </ul>
+                                </div>
+                                <div class="comparison-arrow">
+                                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="32" cy="32" r="30" fill="#F97316" opacity="0.1"/>
+                                        <path d="M20 32H44M44 32L36 24M44 32L36 40" stroke="#F97316" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                                <div class="after-automation">
+                                    <div class="comparison-label label-after">Après</div>
+                                    <h3>Système automatisé</h3>
+                                    <ul class="comparison-list">
+                                        <li>Récupération automatique des données client</li>
+                                        <li>Génération automatique du document personnalisé</li>
+                                        <li>Validation automatique des données</li>
+                                        <li>Envoi automatique par email avec accusé de lecture</li>
+                                        <li><strong class="text-orange">30 secondes par document</strong></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="solution-result">
+                                <p class="result-text">
+                                    <span class="result-icon">✨</span>
+                                    Gain de temps : <strong class="text-orange">jusqu'à 97%</strong> -
+                                    Capacité : <strong class="text-orange">100+ documents par heure</strong>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ROI Section -->
-    <section class="roi-section" id="roi-section" data-bg-color="#eff6ff">
-        <div class="container">
-            <h2 class="section-title-center">Des résultats mesurables et rapides</h2>
-            <p class="section-subtitle-center">L'automatisation IA n'est pas une dépense, c'est un investissement rentable</p>
+        <!-- Section ROI avec calculateur interactif -->
+        <section class="roi section section-alt" id="roi">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Calculez votre retour sur investissement</h2>
+                <p class="section-subtitle animate-on-scroll">Découvrez combien vous pourriez économiser chaque mois en automatisant vos processus</p>
 
-            <div class="roi-grid">
-                <div class="roi-card reveal-on-scroll" data-delay="0">
-                    <div class="roi-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
+                <div class="roi-content">
+                    <!-- Calculateur interactif -->
+                    <div class="roi-calculator animate-on-scroll">
+                        <h3 class="calculator-title">Calculateur de ROI</h3>
+
+                        <div class="calculator-input-group">
+                            <label for="costPerHour" class="calculator-label">
+                                Coût horaire moyen par employé (€)
+                                <span class="tooltip-icon" data-tooltip="Salaire brut + charges sociales divisé par le nombre d'heures travaillées">ℹ️</span>
+                            </label>
+                            <input type="number" id="costPerHour" class="calculator-input" value="35" min="15" max="150" step="5">
+                            <input type="range" id="costPerHourRange" class="calculator-slider" value="35" min="15" max="150" step="5">
+                        </div>
+
+                        <div class="calculator-input-group">
+                            <label for="hoursPerWeek" class="calculator-label">
+                                Heures hebdomadaires sur tâches répétitives
+                                <span class="tooltip-icon" data-tooltip="Nombre d'heures totales passées par vos équipes sur des tâches qui pourraient être automatisées">ℹ️</span>
+                            </label>
+                            <input type="number" id="hoursPerWeek" class="calculator-input" value="20" min="5" max="100" step="5">
+                            <input type="range" id="hoursPerWeekRange" class="calculator-slider" value="20" min="5" max="100" step="5">
+                        </div>
+
+                        <div class="calculator-input-group">
+                            <label for="automationRate" class="calculator-label">
+                                Taux d'automatisation estimé (%)
+                                <span class="tooltip-icon" data-tooltip="Pourcentage de ces tâches qui peuvent être automatisées (moyenne : 70%)">ℹ️</span>
+                            </label>
+                            <input type="number" id="automationRate" class="calculator-input" value="70" min="30" max="95" step="5">
+                            <input type="range" id="automationRateRange" class="calculator-slider" value="70" min="30" max="95" step="5">
+                        </div>
+
+                        <div class="calculator-results">
+                            <div class="result-item">
+                                <span class="result-label">Économie mensuelle</span>
+                                <span class="result-value text-orange" id="monthlySavings">2 450 €</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Économie annuelle</span>
+                                <span class="result-value text-orange" id="yearlySavings">29 400 €</span>
+                            </div>
+                            <div class="result-item">
+                                <span class="result-label">Heures libérées par mois</span>
+                                <span class="result-value text-orange" id="hoursFreed">56 heures</span>
+                            </div>
+                        </div>
+
+                        <div class="calculator-gauge">
+                            <div class="gauge-label">Potentiel d'économie</div>
+                            <div class="gauge-bar">
+                                <div class="gauge-fill" id="gaugeFill"></div>
+                            </div>
+                            <div class="gauge-levels">
+                                <span>Faible</span>
+                                <span>Moyen</span>
+                                <span>Élevé</span>
+                                <span>Excellent</span>
+                            </div>
+                        </div>
                     </div>
-                    <div class="roi-number" data-target="40">0</div>
-                    <div class="roi-unit">%</div>
-                    <h3 class="roi-title">Gain de temps</h3>
-                    <p class="roi-description">Sur les processus administratifs et répétitifs en moyenne</p>
+
+                    <!-- Statistiques clés -->
+                    <div class="roi-stats">
+                        <div class="stat-card animate-on-scroll">
+                            <div class="stat-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24 4L28 20L44 24L28 28L24 44L20 28L4 24L20 20L24 4Z" stroke="#F97316" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value text-orange" data-target="4">0</div>
+                                <div class="stat-label">ROI garanti en moins de<br><strong class="text-orange">4 mois</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card animate-on-scroll">
+                            <div class="stat-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="24" cy="24" r="20" stroke="#F97316" stroke-width="2"/>
+                                    <path d="M24 12V26L32 30" stroke="#F97316" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value text-orange" data-target="70">0</div>
+                                <div class="stat-suffix text-orange">%</div>
+                                <div class="stat-label">Jusqu'à <strong class="text-orange">70%</strong> de temps gagné<br>sur les processus automatisés</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card animate-on-scroll">
+                            <div class="stat-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 24L18 34L40 12" stroke="#10B981" stroke-width="3" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value text-orange" data-target="90">0</div>
+                                <div class="stat-suffix text-orange">%</div>
+                                <div class="stat-label">Réduction de <strong class="text-orange">90%</strong><br>des erreurs humaines</div>
+                            </div>
+                        </div>
+
+                        <div class="stat-card animate-on-scroll">
+                            <div class="stat-icon">
+                                <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="12" y="12" width="24" height="24" rx="2" stroke="#F97316" stroke-width="2"/>
+                                    <path d="M12 20H36M20 12V36M28 12V36" stroke="#F97316" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-value text-orange">24/7</div>
+                                <div class="stat-label">Vos systèmes travaillent<br><strong class="text-orange">jour et nuit</strong></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="roi-card roi-card-highlight reveal-on-scroll" data-delay="200">
-                    <div class="roi-badge">Le plus important</div>
-                    <div class="roi-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="1" x2="12" y2="23"></line>
-                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                <!-- CTA après le calculateur -->
+                <div class="roi-cta animate-on-scroll">
+                    <h3>Prêt à concrétiser ces économies ?</h3>
+                    <a href="./contact.html" class="btn btn-primary btn-large">Réserver mon audit gratuit</a>
+                    <p class="cta-note">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6 8L7.5 9.5L10 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                    </div>
-                    <div class="roi-number" data-target="6">0</div>
-                    <div class="roi-unit">mois</div>
-                    <h3 class="roi-title">ROI garanti</h3>
-                    <p class="roi-description">Retour sur investissement moyen constaté chez nos clients PME</p>
-                </div>
-
-                <div class="roi-card reveal-on-scroll" data-delay="400">
-                    <div class="roi-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
-                            <polyline points="17 6 23 6 23 12"></polyline>
-                        </svg>
-                    </div>
-                    <div class="roi-number" data-target="2500">0</div>
-                    <div class="roi-unit">€/mois</div>
-                    <h3 class="roi-title">Économie moyenne</h3>
-                    <p class="roi-description">Versus l'embauche d'un collaborateur à temps plein</p>
+                        Sans engagement - Audit gratuit de 90 minutes
+                    </p>
                 </div>
             </div>
+        </section>
 
-            <div class="roi-cta">
-                <a href="contact.html" class="btn-cta-primary">Calculer mon ROI personnalisé</a>
-            </div>
-        </div>
-    </section>
+        <!-- Section Bénéfices mesurables -->
+        <section class="benefits section" id="benefits">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Des bénéfices concrets et mesurables</h2>
+                <p class="section-subtitle animate-on-scroll">L'automatisation transforme durablement votre entreprise</p>
 
-    <!-- Final CTA Section -->
-    <section class="final-cta" data-bg-color="#1e293b">
-        <div class="container">
-            <div class="cta-content-wrapper reveal-on-scroll">
-                <h2 class="cta-title">Prêt à libérer le potentiel de votre entreprise ?</h2>
-                <p class="cta-subtitle">Discutons de vos processus et identifions ensemble les opportunités d'automatisation. Audit gratuit sans engagement.</p>
-
-                <div class="cta-benefits">
-                    <div class="cta-benefit">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>Audit gratuit de vos processus</span>
+                <div class="benefits-grid">
+                    <div class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="28" fill="#EFF6FF"/>
+                                <path d="M20 32L28 40L44 24" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="benefit-title">Réduction drastique des erreurs</h3>
+                        <p class="benefit-description">Les processus standardisés et vérifiés automatiquement éliminent jusqu'à 90% des erreurs humaines, améliorant la qualité et la satisfaction client.</p>
                     </div>
-                    <div class="cta-benefit">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>Démo personnalisée en 30 min</span>
+
+                    <div class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="28" fill="#FFF7ED"/>
+                                <circle cx="32" cy="32" r="8" fill="#F97316"/>
+                                <circle cx="32" cy="32" r="16" stroke="#F97316" stroke-width="2"/>
+                                <circle cx="32" cy="32" r="24" stroke="#F97316" stroke-width="2" stroke-dasharray="4 4"/>
+                            </svg>
+                        </div>
+                        <h3 class="benefit-title">Disponibilité 24/7</h3>
+                        <p class="benefit-description">Vos systèmes automatisés travaillent sans interruption, même la nuit et le week-end, pour traiter les demandes et maintenir votre activité en continu.</p>
                     </div>
-                    <div class="cta-benefit">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                        <span>Sans engagement, sans frais cachés</span>
+
+                    <div class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="28" fill="#EFF6FF"/>
+                                <path d="M20 44L20 32L26 28L32 32L38 26L44 30L44 44" stroke="#2563EB" stroke-width="2" fill="none"/>
+                                <path d="M20 32L26 28L32 32L38 26L44 30" stroke="#2563EB" stroke-width="3" fill="none"/>
+                            </svg>
+                        </div>
+                        <h3 class="benefit-title">Scalabilité sans embauche</h3>
+                        <p class="benefit-description">Augmentez votre volume d'activité de 50% ou 100% avec les mêmes équipes grâce à l'automatisation des tâches répétitives et chronophages.</p>
+                    </div>
+
+                    <div class="benefit-card animate-on-scroll">
+                        <div class="benefit-icon">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="28" fill="#FFF7ED"/>
+                                <path d="M24 24L24 40M28 28L28 40M32 20L32 40M36 32L36 40M40 26L40 40" stroke="#F97316" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="benefit-title">Focus sur la valeur ajoutée</h3>
+                        <p class="benefit-description">Libérez vos équipes des tâches répétitives pour qu'elles se concentrent sur les activités stratégiques, créatives et relationnelles à forte valeur.</p>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="cta-buttons">
-                    <a href="contact.html" class="btn-cta-large">Démarrer mon projet IA</a>
-                    <a href="services.html" class="btn-cta-outline">Voir les cas d'usage</a>
+        <!-- Section CTA finale -->
+        <section class="final-cta section section-alt" id="final-cta">
+            <div class="container">
+                <div class="cta-content animate-on-scroll">
+                    <h2 class="cta-title">Prêt à transformer votre entreprise ?</h2>
+                    <p class="cta-text">
+                        Réservez dès maintenant votre audit gratuit et sans engagement. En 90 minutes, nous analysons vos processus et vous présentons un plan d'automatisation chiffré et personnalisé.
+                    </p>
+
+                    <div class="cta-benefits">
+                        <div class="cta-benefit">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#10B981" stroke-width="2"/>
+                                <path d="M8 12L11 15L16 9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Audit gratuit de 90 minutes</span>
+                        </div>
+                        <div class="cta-benefit">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#10B981" stroke-width="2"/>
+                                <path d="M8 12L11 15L16 9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Sans engagement ni carte bancaire</span>
+                        </div>
+                        <div class="cta-benefit">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#10B981" stroke-width="2"/>
+                                <path d="M8 12L11 15L16 9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Rapport détaillé avec recommandations chiffrées</span>
+                        </div>
+                        <div class="cta-benefit">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#10B981" stroke-width="2"/>
+                                <path d="M8 12L11 15L16 9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <span>Limité à 5 entreprises par mois</span>
+                        </div>
+                    </div>
+
+                    <!-- Formulaire de contact simplifié -->
+                    <form class="cta-form" id="ctaForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ctaName" class="form-label">Nom complet *</label>
+                                <input type="text" id="ctaName" name="name" class="form-input" placeholder="Jean Dupont" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ctaCompany" class="form-label">Entreprise *</label>
+                                <input type="text" id="ctaCompany" name="company" class="form-input" placeholder="Mon Entreprise SAS" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ctaEmail" class="form-label">Email professionnel *</label>
+                                <input type="email" id="ctaEmail" name="email" class="form-input" placeholder="jean.dupont@entreprise.fr" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ctaPhone" class="form-label">Téléphone *</label>
+                                <input type="tel" id="ctaPhone" name="phone" class="form-input" placeholder="06 12 34 56 78" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large btn-full">
+                            Réserver mon audit gratuit maintenant
+                        </button>
+                        <p class="form-note">
+                            En soumettant ce formulaire, vous acceptez d'être contacté par LibertadIA concernant nos services d'automatisation. Vos données sont sécurisées et conformes RGPD.
+                        </p>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="cta-gradient-bg"></div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="logo-libertadia.png" alt="LibertadIA Logo" class="footer-logo">
-                    <p>Expert en automatisation IA pour PME</p>
+                    <img src="./assets/logo-libertadia.png" alt="Logo LibertadIA" class="footer-logo">
+                    <p class="footer-tagline">Libérez le potentiel de votre entreprise grâce à l'automatisation IA</p>
                 </div>
+
                 <div class="footer-links">
-                    <a href="index.html">Accueil</a>
-                    <a href="services.html">Services</a>
-                    <a href="contact.html">Contact</a>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Navigation</h4>
+                        <ul class="footer-list">
+                            <li><a href="./index.html" class="footer-link">Accueil</a></li>
+                            <li><a href="./services.html" class="footer-link">Services</a></li>
+                            <li><a href="./contact.html" class="footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4 class="footer-title">Informations</h4>
+                        <ul class="footer-list">
+                            <li><a href="#" class="footer-link">Mentions légales</a></li>
+                            <li><a href="#" class="footer-link">Politique de confidentialité</a></li>
+                            <li><a href="#" class="footer-link">Conditions générales</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4 class="footer-title">Réassurance</h4>
+                        <ul class="footer-list">
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 1L10 6L15 8L10 10L8 15L6 10L1 8L6 6L8 1Z" fill="currentColor"/>
+                                </svg>
+                                Audit gratuit et sans engagement
+                            </li>
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="6" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M5 6V4C5 2.34315 6.34315 1 8 1C9.65685 1 11 2.34315 11 4V6" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="8" cy="10" r="1" fill="currentColor"/>
+                                </svg>
+                                Données sécurisées et conformes RGPD
+                            </li>
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M8 4V8L11 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                Support disponible 7j/7
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2024 LibertadIA. Tous droits réservés.</p>
+                <p class="footer-copyright">© 2024 LibertadIA. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Script JavaScript principal -->
+    <script src="./js/main.js"></script>
 </body>
 </html>

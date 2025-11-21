@@ -3,163 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - LibertadIA</title>
-    <meta name="description" content="Contactez-moi pour automatiser votre entreprise avec l'IA. Audit gratuit disponible.">
-    <link rel="icon" type="image/png" href="logo-libertadia.png">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Contactez LibertadIA pour réserver votre audit gratuit et découvrir comment automatiser vos processus. Formulaire de contact intelligent pour qualifier votre projet.">
+    <meta property="og:title" content="Contact | LibertadIA - Réservez votre audit gratuit">
+    <meta property="og:description" content="Réservez votre audit gratuit de 90 minutes et découvrez le potentiel d'automatisation de votre PME">
+    <meta property="og:image" content="./assets/logo-libertadia.png">
+    <meta property="og:url" content="https://libertadia.fr/contact">
+
+    <link rel="canonical" href="https://libertadia.fr/contact">
+    <title>Contact & Audit Gratuit | LibertadIA - Automatisation IA</title>
+    <link rel="icon" type="image/png" href="./assets/Favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="nav-brand">
-                <img src="logo-libertadia.png" alt="LibertadIA Logo" class="logo">
+    <div class="progress-bar" id="progressBar"></div>
+
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="./index.html" class="nav-logo">
+                <img src="./assets/logo-libertadia.png" alt="Logo LibertadIA" class="logo-image">
             </a>
-            <ul class="nav-menu">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="contact.html" class="btn-nav active">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="./index.html" class="nav-link">Accueil</a></li>
+                    <li class="nav-item"><a href="./services.html" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="./contact.html" class="nav-link active" aria-current="page">Contact</a></li>
+                </ul>
+                <a href="./contact.html" class="btn btn-primary nav-cta">Réserver un audit</a>
             </div>
-        </div>
-    </nav>
+            <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu de navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </nav>
+    </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Démarrez votre transformation IA</h1>
-            <p>Discutons de votre projet et des opportunités d'automatisation dans votre entreprise</p>
-        </div>
-    </section>
+    <main class="main">
+        <section class="contact-hero section">
+            <div class="container">
+                <h1 class="hero-title animate-on-scroll">Réservez votre audit gratuit</h1>
+                <p class="hero-subtitle animate-on-scroll">En 90 minutes, nous analysons vos processus et vous présentons un plan d'automatisation chiffré</p>
+            </div>
+        </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="contact-wrapper">
-                <div class="contact-info">
-                    <h2>Pourquoi me contacter ?</h2>
-                    <div class="info-item">
-                        <div class="info-icon">🎯</div>
-                        <div class="info-content">
-                            <h3>Audit gratuit</h3>
-                            <p>Je vous offre un premier diagnostic de vos opportunités d'automatisation</p>
+        <section class="contact-content section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-form-wrapper animate-on-scroll">
+                        <h2 class="form-title">Parlez-nous de votre projet</h2>
+                        <form class="contact-form" id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="name" class="form-label">Nom complet *</label>
+                                    <input type="text" id="name" name="name" class="form-input" placeholder="Jean Dupont" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="company" class="form-label">Entreprise *</label>
+                                    <input type="text" id="company" name="company" class="form-input" placeholder="Mon Entreprise SAS" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">Email professionnel *</label>
+                                    <input type="email" id="email" name="email" class="form-input" placeholder="jean.dupont@entreprise.fr" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Téléphone *</label>
+                                    <input type="tel" id="phone" name="phone" class="form-input" placeholder="06 12 34 56 78" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="sector" class="form-label">Secteur d'activité *</label>
+                                <select id="sector" name="sector" class="form-select" required>
+                                    <option value="">Sélectionnez votre secteur</option>
+                                    <option value="commerce">Commerce & Distribution</option>
+                                    <option value="services">Services aux entreprises</option>
+                                    <option value="industrie">Industrie & Manufacturing</option>
+                                    <option value="batiment">Bâtiment & Travaux publics</option>
+                                    <option value="sante">Santé & Bien-être</option>
+                                    <option value="tech">Tech & Digital</option>
+                                    <option value="restauration">Restauration & Hôtellerie</option>
+                                    <option value="immobilier">Immobilier</option>
+                                    <option value="transport">Transport & Logistique</option>
+                                    <option value="autre">Autre</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="employees" class="form-label">Nombre d'employés *</label>
+                                <select id="employees" name="employees" class="form-select" required>
+                                    <option value="">Sélectionnez une tranche</option>
+                                    <option value="1-5">1 à 5 employés</option>
+                                    <option value="6-10">6 à 10 employés</option>
+                                    <option value="11-20">11 à 20 employés</option>
+                                    <option value="21-50">21 à 50 employés</option>
+                                    <option value="51-100">51 à 100 employés</option>
+                                    <option value="100+">Plus de 100 employés</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="processes" class="form-label">Quels processus souhaitez-vous automatiser ? *</label>
+                                <textarea id="processes" name="processes" class="form-textarea" rows="5" placeholder="Décrivez les tâches répétitives qui vous font perdre du temps (gestion documentaire, service client, reporting, etc.)" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="budget" class="form-label">Budget approximatif</label>
+                                <select id="budget" name="budget" class="form-select">
+                                    <option value="">Sélectionnez une fourchette</option>
+                                    <option value="less-5k">Moins de 5 000 €</option>
+                                    <option value="5k-10k">5 000 € - 10 000 €</option>
+                                    <option value="10k-20k">10 000 € - 20 000 €</option>
+                                    <option value="20k-50k">20 000 € - 50 000 €</option>
+                                    <option value="50k+">Plus de 50 000 €</option>
+                                    <option value="undefined">Non défini</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Objectifs principaux (plusieurs choix possibles)</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="goals" value="time">
+                                        <span>Gagner du temps</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="goals" value="cost">
+                                        <span>Réduire les coûts</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="goals" value="quality">
+                                        <span>Améliorer la qualité</span>
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="goals" value="scale">
+                                        <span>Scaler l'activité</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-large btn-full">
+                                Envoyer ma demande
+                            </button>
+
+                            <p class="form-note">
+                                En soumettant ce formulaire, vous acceptez d'être contacté par LibertadIA. Vos données sont sécurisées et conformes RGPD.
+                            </p>
+                        </form>
+
+                        <div class="form-success" id="formSuccess" style="display: none;">
+                            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="32" cy="32" r="30" fill="#10B981" opacity="0.1"/>
+                                <circle cx="32" cy="32" r="24" fill="#10B981" opacity="0.2"/>
+                                <path d="M20 32L28 40L44 24" stroke="#10B981" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <h3>Message envoyé avec succès !</h3>
+                            <p>Nous vous recontactons sous 24h pour planifier votre audit gratuit.</p>
                         </div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-icon">💡</div>
-                        <div class="info-content">
-                            <h3>Conseils personnalisés</h3>
-                            <p>Chaque entreprise est unique, je m'adapte à vos besoins spécifiques</p>
+
+                    <div class="contact-info">
+                        <div class="info-card animate-on-scroll">
+                            <h3>Pourquoi nous contacter ?</h3>
+                            <ul class="info-list">
+                                <li>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#F97316"/>
+                                    </svg>
+                                    <span><strong>Audit gratuit</strong> de 90 minutes sans engagement</span>
+                                </li>
+                                <li>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="12" cy="12" r="10" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M12 6V12L16 14" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    <span><strong>Réponse sous 24h</strong> pour démarrer rapidement</span>
+                                </li>
+                                <li>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 12L12 16L22 6" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M2 12L6 16L8 14" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span><strong>ROI garanti</strong> en moins de 4 mois</span>
+                                </li>
+                                <li>
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="8" width="18" height="13" rx="2" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M7 8V6C7 3.79086 8.79086 2 11 2H13C15.2091 2 17 3.79086 17 6V8" stroke="#2563EB" stroke-width="2"/>
+                                        <circle cx="12" cy="14" r="2" fill="#2563EB"/>
+                                    </svg>
+                                    <span><strong>Données sécurisées</strong> et conformes RGPD</span>
+                                </li>
+                            </ul>
                         </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">⚡</div>
-                        <div class="info-content">
-                            <h3>Réponse rapide</h3>
-                            <p>Je vous réponds sous 24h pour démarrer votre projet rapidement</p>
+
+                        <div class="info-card animate-on-scroll">
+                            <h3>Coordonnées</h3>
+                            <div class="contact-details">
+                                <p><strong>Email :</strong><br><a href="mailto:contact@libertadia.fr">contact@libertadia.fr</a></p>
+                                <p><strong>Téléphone :</strong><br><a href="tel:+33612345678">06 12 34 56 78</a></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">🤝</div>
-                        <div class="info-content">
-                            <h3>Sans engagement</h3>
-                            <p>Discutons librement de votre projet, aucune obligation</p>
+
+                        <div class="info-card animate-on-scroll">
+                            <h3>Limité à 5 entreprises par mois</h3>
+                            <p class="text-highlight">Pour garantir un accompagnement de qualité, nous ne prenons que <strong class="text-orange">5 nouveaux clients par mois</strong>. Réservez dès maintenant votre audit gratuit.</p>
                         </div>
                     </div>
                 </div>
-
-                <div class="contact-form-wrapper">
-                    <form class="contact-form" id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Nom complet *</label>
-                            <input type="text" id="name" name="name" required placeholder="Jean Dupont">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="company">Entreprise *</label>
-                            <input type="text" id="company" name="company" required placeholder="Nom de votre entreprise">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Email professionnel *</label>
-                            <input type="email" id="email" name="email" required placeholder="jean@entreprise.com">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="phone">Téléphone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="06 12 34 56 78">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="projectType">Type de projet *</label>
-                            <select id="projectType" name="projectType" required>
-                                <option value="">Sélectionnez une option</option>
-                                <option value="audit">Audit des systèmes existants</option>
-                                <option value="diagnostic">Diagnostic de faisabilité</option>
-                                <option value="installation">Installation système IA</option>
-                                <option value="complete">Projet complet (audit + installation)</option>
-                                <option value="autre">Autre / Je ne sais pas encore</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message">Décrivez votre projet *</label>
-                            <textarea id="message" name="message" rows="5" required placeholder="Parlez-moi de votre entreprise et de ce que vous souhaitez automatiser..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="budget">Budget prévisionnel</label>
-                            <select id="budget" name="budget">
-                                <option value="">Sélectionnez une fourchette</option>
-                                <option value="moins-5k">Moins de 5 000€</option>
-                                <option value="5k-10k">5 000€ - 10 000€</option>
-                                <option value="10k-20k">10 000€ - 20 000€</option>
-                                <option value="20k-plus">Plus de 20 000€</option>
-                                <option value="non-defini">Budget non défini</option>
-                            </select>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary btn-large btn-full">
-                            Envoyer ma demande
-                        </button>
-
-                        <p class="form-note">* Champs obligatoires. Vos données sont confidentielles et ne seront jamais partagées.</p>
-                    </form>
-
-                    <div class="form-success" id="formSuccess">
-                        <div class="success-icon">✓</div>
-                        <h3>Message envoyé avec succès !</h3>
-                        <p>Je vous réponds sous 24h. À très bientôt !</p>
-                    </div>
-                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="logo-libertadia.png" alt="LibertadIA Logo" class="footer-logo">
-                    <p>Expert en automatisation IA pour PME</p>
+                    <img src="./assets/logo-libertadia.png" alt="Logo LibertadIA" class="footer-logo">
+                    <p class="footer-tagline">Libérez le potentiel de votre entreprise grâce à l'automatisation IA</p>
                 </div>
                 <div class="footer-links">
-                    <a href="index.html">Accueil</a>
-                    <a href="services.html">Services</a>
-                    <a href="contact.html">Contact</a>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Navigation</h4>
+                        <ul class="footer-list">
+                            <li><a href="./index.html" class="footer-link">Accueil</a></li>
+                            <li><a href="./services.html" class="footer-link">Services</a></li>
+                            <li><a href="./contact.html" class="footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Informations</h4>
+                        <ul class="footer-list">
+                            <li><a href="#" class="footer-link">Mentions légales</a></li>
+                            <li><a href="#" class="footer-link">Politique de confidentialité</a></li>
+                            <li><a href="#" class="footer-link">Conditions générales</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Réassurance</h4>
+                        <ul class="footer-list">
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 1L10 6L15 8L10 10L8 15L6 10L1 8L6 6L8 1Z" fill="currentColor"/>
+                                </svg>
+                                Audit gratuit et sans engagement
+                            </li>
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="6" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M5 6V4C5 2.34315 6.34315 1 8 1C9.65685 1 11 2.34315 11 4V6" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="8" cy="10" r="1" fill="currentColor"/>
+                                </svg>
+                                Données sécurisées et conformes RGPD
+                            </li>
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M8 4V8L11 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                Support disponible 7j/7
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 LibertadIA. Tous droits réservés.</p>
+                <p class="footer-copyright">© 2024 LibertadIA. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="./js/main.js"></script>
 </body>
 </html>
