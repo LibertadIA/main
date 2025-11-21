@@ -1,0 +1,405 @@
+/* ============================================
+   HERO ANIMATION CSS - LibertadIA
+   Animation SVG sophistiquée pour automatisation IA
+   ============================================ */
+
+/* Variables de couleurs */
+:root {
+  --hero-primary: #6366F1;
+  --hero-primary-light: #8B5CF6;
+  --hero-accent: #10B981;
+  --hero-secondary: #F59E0B;
+  --hero-neutral-light: #F3F4F6;
+  --hero-neutral-dark: #1F2937;
+  --hero-bg: #FAFBFC;
+}
+
+/* ============================================
+   CONTENEUR SVG RESPONSIVE
+   ============================================ */
+#hero-automation-animation {
+  width: 100%;
+  max-width: 800px;
+  height: auto;
+  margin: 0 auto;
+  display: block;
+}
+
+/* ============================================
+   OPTIMISATIONS DE PERFORMANCE
+   ============================================ */
+.particle,
+.node-glow,
+.node-glow-rect,
+#central-processor,
+.processor-core,
+.connection-line {
+  will-change: transform, opacity;
+}
+
+/* Accélération GPU pour animations */
+.particle,
+.processor-ring-outer,
+.processor-ring-mid,
+.core-center {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* ============================================
+   STYLES DES NŒUDS D'ENTRÉE/SORTIE
+   ============================================ */
+.node-bg,
+.node-bg-rect {
+  fill: var(--hero-neutral-light);
+  stroke: var(--hero-primary);
+  stroke-width: 2;
+  transition: all 0.3s ease;
+}
+
+.node-icon {
+  fill: var(--hero-primary);
+  stroke: var(--hero-primary);
+  transition: all 0.3s ease;
+}
+
+/* Glow effect pour les nœuds */
+.node-glow {
+  fill: var(--hero-accent);
+  filter: blur(12px);
+  transition: opacity 0.5s ease;
+}
+
+.node-glow-rect {
+  fill: var(--hero-accent);
+  filter: blur(12px);
+  transition: opacity 0.5s ease;
+}
+
+/* Animation pulse pour le glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+}
+
+/* ============================================
+   PROCESSEUR CENTRAL
+   ============================================ */
+.processor-core {
+  filter: url(#processor-glow);
+  transition: all 0.6s ease;
+}
+
+.processor-ring-outer,
+.processor-ring-mid {
+  transition: all 0.4s ease;
+}
+
+/* Animation rotation subtile du processeur */
+@keyframes rotate-processor {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+#central-processor {
+  transform-origin: 400px 310px;
+  animation: rotate-processor 60s linear infinite;
+}
+
+/* Animation pulsation du cœur */
+@keyframes pulse-core {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.processor-core {
+  transform-origin: 400px 310px;
+  animation: pulse-core 3s ease-in-out infinite;
+}
+
+/* Point central brillant */
+.core-center {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Anneaux pulsants */
+@keyframes ring-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(1.02);
+  }
+}
+
+.processor-ring-outer {
+  transform-origin: 400px 310px;
+  animation: ring-pulse 4s ease-in-out infinite;
+}
+
+.processor-ring-mid {
+  transform-origin: 400px 310px;
+  animation: ring-pulse 3s ease-in-out infinite 0.5s;
+}
+
+/* ============================================
+   CONNEXIONS (Lignes)
+   ============================================ */
+.connection-line {
+  stroke-linecap: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  opacity: 0;
+}
+
+/* Animation dessin des lignes (contrôlée par GSAP mais fallback CSS) */
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   PARTICULES
+   ============================================ */
+.particle {
+  filter: drop-shadow(0 0 4px var(--hero-accent));
+  opacity: 0;
+}
+
+/* Animation scintillement des particules */
+@keyframes particle-twinkle {
+  0%, 100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* ============================================
+   MICRO-INTERACTIONS
+   ============================================ */
+
+/* Hover sur l'animation complète : accélération */
+#hero-automation-animation:hover .particle {
+  animation-duration: 3s !important;
+}
+
+#hero-automation-animation:hover .processor-core {
+  filter: url(#processor-glow) drop-shadow(0 0 8px var(--hero-primary-light));
+}
+
+/* Hover sur les nœuds */
+.input-node:hover .node-bg,
+.output-node:hover .node-bg-rect {
+  fill: var(--hero-primary);
+  stroke: var(--hero-accent);
+  cursor: pointer;
+}
+
+.input-node:hover .node-icon,
+.output-node:hover .node-icon {
+  fill: var(--hero-neutral-light);
+  stroke: var(--hero-neutral-light);
+}
+
+.input-node:hover .node-glow,
+.output-node:hover .node-glow-rect {
+  opacity: 0.7 !important;
+  animation: pulse-glow 1s ease-in-out infinite;
+}
+
+/* ============================================
+   ÉTATS D'ANIMATION (Contrôlés par JS)
+   ============================================ */
+
+/* État initial (avant animation d'entrée) */
+.animation-initial .input-node,
+.animation-initial .output-node,
+.animation-initial #central-processor {
+  opacity: 0;
+  transform: scale(0);
+}
+
+/* État animé */
+.animation-running .particle {
+  opacity: 1;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  #hero-automation-animation {
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 768px) {
+  #hero-automation-animation {
+    max-width: 100%;
+    padding: 0 20px;
+  }
+
+  /* Simplifier certaines animations sur mobile */
+  .processor-ring-outer {
+    opacity: 0.2;
+  }
+
+  /* Réduire nombre de particules visibles sur mobile via opacity */
+  .particle:nth-child(odd) {
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Désactiver rotation du processeur sur très petits écrans */
+  #central-processor {
+    animation: none;
+  }
+
+  .processor-label {
+    font-size: 10px;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITÉ
+   ============================================ */
+
+/* Respect du prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .particle {
+    display: none; /* Masquer complètement les particules si motion désactivée */
+  }
+
+  #central-processor {
+    animation: none;
+  }
+
+  .connection-line {
+    stroke-dasharray: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+/* Focus visible pour accessibilité clavier */
+.input-node:focus-visible,
+.output-node:focus-visible {
+  outline: 3px solid var(--hero-accent);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* ============================================
+   ANIMATIONS POUR ÉTATS SPÉCIAUX
+   ============================================ */
+
+/* Animation de "chargement" pour le processeur */
+@keyframes processing {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.05) rotate(90deg);
+  }
+  50% {
+    transform: scale(1) rotate(180deg);
+  }
+  75% {
+    transform: scale(1.05) rotate(270deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+/* Classe à ajouter dynamiquement pour montrer activité */
+.processor-active .processor-core {
+  animation: processing 2s ease-in-out infinite;
+}
+
+/* Animation de succès (vert) */
+@keyframes success-pulse {
+  0%, 100% {
+    fill: url(#processor-gradient);
+  }
+  50% {
+    fill: var(--hero-accent);
+  }
+}
+
+.processor-success .processor-core {
+  animation: success-pulse 0.8s ease-in-out 3;
+}
+
+/* ============================================
+   THÈME SOMBRE (Optionnel)
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --hero-neutral-light: #1F2937;
+    --hero-neutral-dark: #F3F4F6;
+    --hero-bg: #111827;
+  }
+
+  .node-bg,
+  .node-bg-rect {
+    fill: var(--hero-neutral-light);
+  }
+
+  .node-icon {
+    fill: var(--hero-neutral-dark);
+    stroke: var(--hero-primary);
+  }
+
+  .processor-label {
+    fill: var(--hero-neutral-dark);
+  }
+}
+
+/* ============================================
+   UTILITAIRES
+   ============================================ */
+
+/* Classe pour masquer temporairement */
+.hidden {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Classe pour pause animation */
+.paused * {
+  animation-play-state: paused !important;
+}

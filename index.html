@@ -10,9 +10,11 @@
     <meta property="og:type" content="website">
     <link rel="icon" type="image/png" href="logo-libertadia.png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="hero-animation.css">
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
 </head>
 <body>
     <!-- ============================================
@@ -90,41 +92,145 @@
                     </div>
                 </div>
                 <div class="hero-visual">
-                    <!-- Animation SVG d'automatisation -->
-                    <svg class="automation-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Nœuds du système -->
-                        <circle class="node node-1" cx="50" cy="150" r="20" fill="#2563eb" opacity="0.2"/>
-                        <circle class="node node-2" cx="200" cy="80" r="25" fill="#f97316" opacity="0.2"/>
-                        <circle class="node node-3" cx="200" cy="220" r="25" fill="#06b6d4" opacity="0.2"/>
-                        <circle class="node node-4" cx="350" cy="150" r="20" fill="#10b981" opacity="0.2"/>
-
-                        <!-- Connexions animées -->
-                        <path class="connection connection-1" d="M 70 150 Q 135 115 175 80" stroke="#2563eb" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-                        <path class="connection connection-2" d="M 70 150 Q 135 185 175 220" stroke="#2563eb" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-                        <path class="connection connection-3" d="M 225 80 Q 287 115 330 150" stroke="#f97316" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-                        <path class="connection connection-4" d="M 225 220 Q 287 185 330 150" stroke="#06b6d4" stroke-width="2" fill="none" stroke-dasharray="5,5"/>
-
-                        <!-- Particules de données -->
-                        <circle class="data-particle particle-1" cx="50" cy="150" r="3" fill="#2563eb"/>
-                        <circle class="data-particle particle-2" cx="50" cy="150" r="3" fill="#f97316"/>
-                        <circle class="data-particle particle-3" cx="200" cy="80" r="3" fill="#06b6d4"/>
-                        <circle class="data-particle particle-4" cx="200" cy="220" r="3" fill="#10b981"/>
-
-                        <!-- Icônes dans les nœuds -->
-                        <g class="icon-group icon-1" transform="translate(50, 150)">
-                            <path d="M-6,-6 L6,-6 L6,6 L-6,6 Z" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+                    <!-- Animation SVG d'automatisation sophistiquée -->
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <svg id="hero-automation-animation" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" aria-label="Animation représentant l'automatisation intelligente" role="img">
+                      <defs>
+                        <radialGradient id="processor-gradient" cx="50%" cy="50%">
+                          <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:0.8"/>
+                          <stop offset="50%" style="stop-color:#6366F1;stop-opacity:0.6"/>
+                          <stop offset="100%" style="stop-color:#6366F1;stop-opacity:0.2"/>
+                        </radialGradient>
+                        <linearGradient id="particle-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" style="stop-color:#10B981;stop-opacity:1"/>
+                          <stop offset="100%" style="stop-color:#6366F1;stop-opacity:0.8"/>
+                        </linearGradient>
+                        <linearGradient id="connection-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" style="stop-color:#6366F1;stop-opacity:0.4"/>
+                          <stop offset="50%" style="stop-color:#10B981;stop-opacity:0.7"/>
+                          <stop offset="100%" style="stop-color:#6366F1;stop-opacity:0.4"/>
+                        </linearGradient>
+                        <filter id="glow-filter" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur"/>
+                          <feFlood flood-color="#10B981" flood-opacity="0.5"/>
+                          <feComposite in2="blur" operator="in"/>
+                          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <filter id="processor-glow" x="-50%" y="-50%" width="200%" height="200%">
+                          <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+                          <feFlood flood-color="#8B5CF6" flood-opacity="0.6"/>
+                          <feComposite in2="blur" operator="in"/>
+                          <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+                        </filter>
+                        <path id="connection-path-1" d="M 120,150 Q 260,150 380,280" fill="none"/>
+                        <path id="connection-path-2" d="M 120,250 Q 260,250 380,300" fill="none"/>
+                        <path id="connection-path-3" d="M 120,350 Q 260,350 380,320" fill="none"/>
+                        <path id="connection-path-4" d="M 120,450 Q 260,450 380,340" fill="none"/>
+                        <path id="connection-path-5" d="M 420,280 Q 560,150 680,150" fill="none"/>
+                        <path id="connection-path-6" d="M 420,300 Q 560,250 680,250" fill="none"/>
+                        <path id="connection-path-7" d="M 420,320 Q 560,350 680,350" fill="none"/>
+                        <path id="connection-path-8" d="M 420,340 Q 560,450 680,450" fill="none"/>
+                      </defs>
+                      <g id="background-grid" opacity="0.08">
+                        <line x1="0" y1="150" x2="800" y2="150" stroke="#6366F1" stroke-width="0.5"/>
+                        <line x1="0" y1="250" x2="800" y2="250" stroke="#6366F1" stroke-width="0.5"/>
+                        <line x1="0" y1="350" x2="800" y2="350" stroke="#6366F1" stroke-width="0.5"/>
+                        <line x1="0" y1="450" x2="800" y2="450" stroke="#6366F1" stroke-width="0.5"/>
+                        <line x1="200" y1="0" x2="200" y2="600" stroke="#6366F1" stroke-width="0.5"/>
+                        <line x1="400" y1="0" x2="400" y2="600" stroke="#6366F1" stroke-width="0.5"/>
+                        <line x1="600" y1="0" x2="600" y2="600" stroke="#6366F1" stroke-width="0.5"/>
+                      </g>
+                      <g id="connections">
+                        <path class="connection-line" d="M 120,150 Q 260,150 380,280" stroke="url(#connection-gradient)" stroke-width="2" fill="none"/>
+                        <path class="connection-line" d="M 120,250 Q 260,250 380,300" stroke="url(#connection-gradient)" stroke-width="2" fill="none"/>
+                        <path class="connection-line" d="M 120,350 Q 260,350 380,320" stroke="url(#connection-gradient)" stroke-width="2" fill="none"/>
+                        <path class="connection-line" d="M 120,450 Q 260,450 380,340" stroke="url(#connection-gradient)" stroke-width="2" fill="none"/>
+                        <path class="connection-line" d="M 420,280 Q 560,150 680,150" stroke="url(#connection-gradient)" stroke-width="2" fill="none"/>
+                        <path class="connection-line" d="M 420,300 Q 560,250 680,250" stroke="url(#connection-gradient)" stroke-width="2" fill="none"/>
+                        <path class="connection-line" d="M 420,320 Q 560,350 680,350" stroke="url(#connection-gradient)" stroke-width="2" fill="none"/>
+                        <path class="connection-line" d="M 420,340 Q 560,450 680,450" stroke="url(#connection-gradient)" stroke-width="2" fill="none"/>
+                      </g>
+                      <g id="data-particles">
+                        <circle class="particle particle-1" r="5" fill="url(#particle-gradient)" opacity="0.9"/>
+                        <circle class="particle particle-2" r="4" fill="url(#particle-gradient)" opacity="0.85"/>
+                        <circle class="particle particle-3" r="5" fill="url(#particle-gradient)" opacity="0.9"/>
+                        <circle class="particle particle-4" r="4" fill="url(#particle-gradient)" opacity="0.85"/>
+                        <circle class="particle particle-5" r="5" fill="url(#particle-gradient)" opacity="0.9"/>
+                        <circle class="particle particle-6" r="4" fill="url(#particle-gradient)" opacity="0.85"/>
+                        <circle class="particle particle-7" r="5" fill="url(#particle-gradient)" opacity="0.9"/>
+                        <circle class="particle particle-8" r="4" fill="url(#particle-gradient)" opacity="0.85"/>
+                      </g>
+                      <g id="input-nodes">
+                        <g class="input-node node-document" data-type="document">
+                          <circle cx="100" cy="150" r="20" class="node-glow" opacity="0"/>
+                          <circle cx="100" cy="150" r="18" class="node-bg"/>
+                          <path d="M 95,145 L 95,155 L 105,155 L 105,147 L 102,145 Z M 102,145 L 102,147 L 105,147" class="node-icon" fill="none" stroke="#6366F1" stroke-width="1.5"/>
                         </g>
-                        <g class="icon-group icon-2" transform="translate(200, 80)">
-                            <circle r="8" fill="white" stroke="#f97316" stroke-width="1.5"/>
-                            <path d="M-3,0 L3,0 M0,-3 L0,3" stroke="#f97316" stroke-width="1.5"/>
+                        <g class="input-node node-email" data-type="email">
+                          <circle cx="100" cy="250" r="20" class="node-glow" opacity="0"/>
+                          <circle cx="100" cy="250" r="18" class="node-bg"/>
+                          <path d="M 93,246 L 107,246 L 107,254 L 93,254 Z M 93,246 L 100,251 L 107,246" class="node-icon" fill="none" stroke="#6366F1" stroke-width="1.5"/>
                         </g>
-                        <g class="icon-group icon-3" transform="translate(200, 220)">
-                            <path d="M-6,-6 L6,6 M-6,6 L6,-6" stroke="#06b6d4" stroke-width="2"/>
+                        <g class="input-node node-form" data-type="form">
+                          <circle cx="100" cy="350" r="20" class="node-glow" opacity="0"/>
+                          <circle cx="100" cy="350" r="18" class="node-bg"/>
+                          <rect x="94" y="345" width="12" height="2" rx="1" class="node-icon"/>
+                          <rect x="94" y="350" width="12" height="2" rx="1" class="node-icon"/>
+                          <rect x="94" y="355" width="8" height="2" rx="1" class="node-icon"/>
                         </g>
-                        <g class="icon-group icon-4" transform="translate(350, 150)">
-                            <circle r="8" fill="white" stroke="#10b981" stroke-width="1.5"/>
-                            <path d="M-3,-1 L0,3 L5,-4" stroke="#10b981" stroke-width="1.5" fill="none"/>
+                        <g class="input-node node-database" data-type="database">
+                          <circle cx="100" cy="450" r="20" class="node-glow" opacity="0"/>
+                          <circle cx="100" cy="450" r="18" class="node-bg"/>
+                          <ellipse cx="100" cy="447" rx="8" ry="3" class="node-icon" fill="none" stroke="#6366F1" stroke-width="1.5"/>
+                          <path d="M 92,447 L 92,453 Q 92,456 100,456 Q 108,456 108,453 L 108,447" class="node-icon" fill="none" stroke="#6366F1" stroke-width="1.5"/>
                         </g>
+                      </g>
+                      <g id="central-processor">
+                        <circle cx="400" cy="310" r="50" class="processor-ring-outer" fill="none" stroke="#6366F1" stroke-width="1" opacity="0.3"/>
+                        <circle cx="400" cy="310" r="42" class="processor-ring-mid" fill="none" stroke="#8B5CF6" stroke-width="1.5" opacity="0.5"/>
+                        <circle cx="400" cy="310" r="35" class="processor-core" fill="url(#processor-gradient)"/>
+                        <g class="internal-connections" opacity="0.6">
+                          <line x1="385" y1="295" x2="415" y2="325" stroke="#F3F4F6" stroke-width="1"/>
+                          <line x1="415" y1="295" x2="385" y2="325" stroke="#F3F4F6" stroke-width="1"/>
+                          <line x1="390" y1="310" x2="410" y2="310" stroke="#F3F4F6" stroke-width="1"/>
+                          <line x1="400" y1="295" x2="400" y2="325" stroke="#F3F4F6" stroke-width="1"/>
+                          <circle cx="385" cy="295" r="2" fill="#10B981"/>
+                          <circle cx="415" cy="295" r="2" fill="#10B981"/>
+                          <circle cx="385" cy="325" r="2" fill="#10B981"/>
+                          <circle cx="415" cy="325" r="2" fill="#10B981"/>
+                          <circle cx="400" cy="310" r="3" fill="#F59E0B" class="core-center"/>
+                        </g>
+                        <text x="400" y="370" class="processor-label" text-anchor="middle" fill="#6366F1" font-size="12" font-weight="600" opacity="0.7">IA Engine</text>
+                      </g>
+                      <g id="output-nodes">
+                        <g class="output-node node-report" data-type="report">
+                          <rect x="682" y="132" width="36" height="36" rx="6" class="node-glow-rect" opacity="0"/>
+                          <rect x="685" y="135" width="30" height="30" rx="5" class="node-bg-rect"/>
+                          <rect x="690" y="142" width="8" height="2" rx="1" class="node-icon"/>
+                          <rect x="690" y="147" width="12" height="2" rx="1" class="node-icon"/>
+                          <rect x="690" y="152" width="10" height="2" rx="1" class="node-icon"/>
+                          <rect x="690" y="157" width="14" height="2" rx="1" class="node-icon"/>
+                        </g>
+                        <g class="output-node node-notification" data-type="notification">
+                          <rect x="682" y="232" width="36" height="36" rx="6" class="node-glow-rect" opacity="0"/>
+                          <rect x="685" y="235" width="30" height="30" rx="5" class="node-bg-rect"/>
+                          <path d="M 693,247 L 693,252 Q 693,254 695,254 L 705,254 Q 707,254 707,252 L 707,247 Q 707,245 705,245 L 695,245 Q 693,245 693,247 Z" class="node-icon" fill="none" stroke="#6366F1" stroke-width="1.5"/>
+                          <path d="M 697,254 Q 697,256 700,256 Q 703,256 703,254" class="node-icon" fill="none" stroke="#6366F1" stroke-width="1.5"/>
+                        </g>
+                        <g class="output-node node-dashboard" data-type="dashboard">
+                          <rect x="682" y="332" width="36" height="36" rx="6" class="node-glow-rect" opacity="0"/>
+                          <rect x="685" y="335" width="30" height="30" rx="5" class="node-bg-rect"/>
+                          <rect x="690" y="342" width="7" height="12" class="node-icon" fill="#6366F1" opacity="0.3"/>
+                          <rect x="699" y="346" width="7" height="8" class="node-icon" fill="#10B981" opacity="0.4"/>
+                          <line x1="690" y1="358" x2="708" y2="358" stroke="#6366F1" stroke-width="1"/>
+                        </g>
+                        <g class="output-node node-structured" data-type="structured">
+                          <rect x="682" y="432" width="36" height="36" rx="6" class="node-glow-rect" opacity="0"/>
+                          <rect x="685" y="435" width="30" height="30" rx="5" class="node-bg-rect"/>
+                          <circle cx="700" cy="450" r="3" class="node-icon" fill="#10B981"/>
+                          <path d="M 700,447 L 697,453 M 700,447 L 703,453" class="node-icon" fill="none" stroke="#10B981" stroke-width="1.5"/>
+                        </g>
+                      </g>
                     </svg>
                 </div>
             </div>
@@ -374,6 +480,8 @@
         </div>
     </footer>
 
+    <!-- Hero Animation Script (GSAP) -->
+    <script src="hero-animation.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
