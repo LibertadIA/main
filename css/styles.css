@@ -711,7 +711,13 @@ ul, ol {
 /* ============================================
    GRILLES
    ============================================ */
-.problems-grid,
+.problems-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
 .benefits-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -719,7 +725,92 @@ ul, ol {
     margin-top: var(--spacing-xl);
 }
 
-.problem-card,
+/* Cards de problèmes avec hover bleu engageant */
+.problem-card {
+    background: var(--color-bg-white);
+    padding: var(--spacing-xl);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-base);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+}
+
+.problem-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary-blue), var(--color-performance-orange));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.problem-card:hover::before {
+    transform: scaleX(1);
+}
+
+.problem-card:hover {
+    background: var(--color-primary-blue);
+    border-color: var(--color-primary-blue);
+    box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.4);
+    transform: translateY(-8px) scale(1.02);
+}
+
+.problem-icon {
+    margin-bottom: var(--spacing-md);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.problem-icon svg {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.problem-card:hover .problem-icon svg {
+    stroke: white;
+    fill: white;
+}
+
+.problem-card:hover .problem-icon svg path,
+.problem-card:hover .problem-icon svg circle,
+.problem-card:hover .problem-icon svg line,
+.problem-card:hover .problem-icon svg rect {
+    stroke: white;
+}
+
+.problem-card:hover .problem-icon svg circle[fill="#DC2626"] {
+    fill: white;
+}
+
+.problem-title {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-text-primary);
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.problem-card:hover .problem-title {
+    color: white;
+}
+
+.problem-description {
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    font-size: var(--font-size-base);
+    transition: color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.problem-card:hover .problem-description {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Benefits grid reste inchangé */
 .benefit-card {
     background: var(--color-bg-white);
     padding: var(--spacing-lg);
@@ -728,28 +819,41 @@ ul, ol {
     transition: all var(--transition-base);
 }
 
-.problem-card:hover,
 .benefit-card:hover {
     box-shadow: var(--shadow-md);
     transform: translateY(-4px);
 }
 
-.problem-icon,
 .benefit-icon {
     margin-bottom: var(--spacing-md);
 }
 
-.problem-title,
 .benefit-title {
     font-size: var(--font-size-xl);
     font-weight: 600;
     margin-bottom: var(--spacing-sm);
 }
 
-.problem-description,
 .benefit-description {
     color: var(--color-text-secondary);
     line-height: 1.7;
+}
+
+/* Responsive pour les problem-cards */
+@media (max-width: 1200px) {
+    .problems-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .problems-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .problem-card {
+        padding: var(--spacing-lg);
+    }
 }
 
 /* ============================================
