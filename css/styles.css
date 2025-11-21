@@ -695,22 +695,24 @@ ul, ol {
     font-size: clamp(1.875rem, 4vw, 3rem);
     font-weight: 800;
     text-align: center;
-    margin-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
     color: var(--color-text-primary);
     position: relative;
-    padding-bottom: var(--spacing-md);
+    padding-bottom: 1.5rem;
+    display: inline-block;
+    width: 100%;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 0.5rem;
     left: 50%;
     transform: translateX(-50%);
     width: 80px;
-    height: 4px;
-    background: linear-gradient(90deg, var(--color-primary-blue), var(--color-performance-orange));
-    border-radius: 2px;
+    height: 5px;
+    background: linear-gradient(90deg, #2563EB, #F97316);
+    border-radius: 3px;
 }
 
 .section-subtitle {
@@ -786,17 +788,17 @@ ul, ol {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Changement de couleur des icônes au hover - pas de disparition */
-.problem-card:hover .problem-icon svg path,
-.problem-card:hover .problem-icon svg circle:not([fill]),
-.problem-card:hover .problem-icon svg line,
-.problem-card:hover .problem-icon svg rect {
+/* Forcer le changement de couleur des icônes au hover */
+.problem-card:hover .problem-icon svg * {
     stroke: white !important;
 }
 
 .problem-card:hover .problem-icon svg circle[fill],
 .problem-card:hover .problem-icon svg path[fill] {
     fill: white !important;
+}
+
+.problem-card:hover .problem-icon svg [stroke="white"] {
     stroke: white !important;
 }
 
