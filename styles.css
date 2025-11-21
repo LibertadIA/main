@@ -1198,7 +1198,7 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1; /* Derrière tout le contenu */
     overflow: hidden;
 }
 
@@ -1337,7 +1337,7 @@ body {
     border-radius: 50%;
     background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(249, 115, 22, 0.1) 30%, transparent 70%);
     pointer-events: none;
-    z-index: 1;
+    z-index: 9998; /* Au-dessus de tout sauf progress bar (9999) */
     transform: translate(-50%, -50%);
     transition: opacity 0.3s ease;
     opacity: 0;
@@ -1356,7 +1356,7 @@ html {
 /* Sections avec z-index pour le layering */
 section {
     position: relative;
-    z-index: 2;
+    z-index: 1; /* Au-dessus des particules (z-index: -1) mais sous le cursor glow */
     transition: background-color 0.6s ease;
 }
 

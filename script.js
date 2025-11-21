@@ -850,18 +850,29 @@ function initSectionBackgroundChange() {
 
     if (sections.length === 0 || prefersReducedMotion) return;
 
+    // Ajouter transition sur le body
+    document.body.style.transition = 'background-color 0.8s ease';
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const bgColor = entry.target.getAttribute('data-bg-color');
                 document.body.style.backgroundColor = bgColor;
+                console.log('🎨 Changement de couleur:', bgColor); // Debug
             }
         });
     }, {
-        threshold: 0.3 // Déclencher quand 30% de la section est visible
+        threshold: 0.15, // Déclencher plus tôt (15% au lieu de 30%)
+        rootMargin: '0px 0px -100px 0px' // Déclencher un peu avant d'atteindre le bas du viewport
     });
 
     sections.forEach(section => observer.observe(section));
+
+    // Définir la couleur initiale au chargement
+    if (sections.length > 0) {
+        const firstColor = sections[0].getAttribute('data-bg-color');
+        document.body.style.backgroundColor = firstColor;
+    }
 }
 
 // 6. Reveal Animations Améliorées (fade + slide + scale)
