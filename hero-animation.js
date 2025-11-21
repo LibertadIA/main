@@ -31,11 +31,11 @@
   // CONFIGURATION
   // ============================================
   const config = {
-    particleSpeed: 5, // Durée en secondes pour un cycle complet
-    staggerDelay: 0.1,
-    entryDuration: 0.8,
-    lineDrawDuration: 1.5,
-    processorPulseDuration: 3
+    particleSpeed: 3.5, // Durée en secondes pour un cycle complet (plus rapide = plus spectaculaire)
+    staggerDelay: 0.08,
+    entryDuration: 0.6,
+    lineDrawDuration: 1.2,
+    processorPulseDuration: 2
   };
 
   // ============================================
@@ -133,16 +133,16 @@
   // ANIMATION DES PARTICULES (MotionPath)
   // ============================================
   function animateParticles() {
-    // Tableau des particules et leurs paths correspondants
+    // Tableau des particules et leurs paths correspondants (durées RÉDUITES pour plus de spectacle)
     const particlesPaths = [
-      { particle: '.particle-1', path: '#connection-path-1', duration: 5 },
-      { particle: '.particle-2', path: '#connection-path-2', duration: 5.5 },
-      { particle: '.particle-3', path: '#connection-path-3', duration: 4.8 },
-      { particle: '.particle-4', path: '#connection-path-4', duration: 5.2 },
-      { particle: '.particle-5', path: '#connection-path-5', duration: 4.5 },
-      { particle: '.particle-6', path: '#connection-path-6', duration: 5.3 },
-      { particle: '.particle-7', path: '#connection-path-7', duration: 4.7 },
-      { particle: '.particle-8', path: '#connection-path-8', duration: 5.1 }
+      { particle: '.particle-1', path: '#connection-path-1', duration: 3.5 },
+      { particle: '.particle-2', path: '#connection-path-2', duration: 3.8 },
+      { particle: '.particle-3', path: '#connection-path-3', duration: 3.3 },
+      { particle: '.particle-4', path: '#connection-path-4', duration: 3.6 },
+      { particle: '.particle-5', path: '#connection-path-5', duration: 3.2 },
+      { particle: '.particle-6', path: '#connection-path-6', duration: 3.7 },
+      { particle: '.particle-7', path: '#connection-path-7', duration: 3.4 },
+      { particle: '.particle-8', path: '#connection-path-8', duration: 3.5 }
     ];
 
     particlesPaths.forEach((item, index) => {
@@ -181,14 +181,15 @@
         });
       }
 
-      // Scintillement additionnel
+      // Scintillement additionnel AMPLIFIÉ
       gsap.to(particleEl, {
-        duration: 1.5 + (index * 0.2),
-        scale: 1.3,
+        duration: 1.2 + (index * 0.15),
+        scale: 1.6,
+        opacity: 0.7,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut',
-        delay: index * 0.15
+        delay: index * 0.12
       });
     });
 
@@ -317,11 +318,8 @@
       if (isHovering) return;
       isHovering = true;
 
-      gsap.to('.particle', {
-        duration: 0.5,
-        timeScale: 1.5, // Accélération
-        ease: 'power2.out'
-      });
+      // Accélération en réduisant la durée au lieu de timeScale
+      gsap.globalTimeline.timeScale(1.8);
 
       console.log('⚡ Animation accélérée (hover)');
     });
@@ -329,11 +327,8 @@
     animationContainer.addEventListener('mouseleave', () => {
       isHovering = false;
 
-      gsap.to('.particle', {
-        duration: 1,
-        timeScale: 1, // Vitesse normale
-        ease: 'power2.out'
-      });
+      // Retour vitesse normale
+      gsap.globalTimeline.timeScale(1);
     });
 
     // Click sur nœuds : pulse d'activation
