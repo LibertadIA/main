@@ -228,39 +228,36 @@ ul, ol {
     padding: 0.625rem 1.25rem;
     font-size: var(--font-size-sm);
     position: relative;
-    isolation: isolate;
+    border: 2px solid transparent;
+    background-clip: padding-box;
 }
 
 .nav-cta::before {
     content: '';
     position: absolute;
-    top: -3px;
-    left: -3px;
-    right: -3px;
-    bottom: -3px;
-    background: conic-gradient(
-        from 0deg,
-        transparent,
-        var(--color-primary-blue),
-        var(--color-performance-orange),
-        var(--color-primary-blue),
-        var(--color-performance-orange),
-        var(--color-primary-blue),
-        transparent
-    );
+    inset: -2px;
     border-radius: 0.6rem;
+    background: linear-gradient(
+        var(--angle, 0deg),
+        transparent 0%,
+        transparent 40%,
+        var(--color-primary-blue) 50%,
+        var(--color-performance-orange) 60%,
+        transparent 70%,
+        transparent 100%
+    );
     opacity: 0;
     z-index: -1;
     transition: opacity var(--transition-base);
-    animation: rotate-border 2.5s linear infinite paused;
+    animation: border-rotate 4s linear infinite paused;
 }
 
 .nav-cta:hover::before {
-    opacity: 1;
+    opacity: 0.7;
     animation-play-state: running;
 }
 
-@keyframes rotate-border {
+@keyframes border-rotate {
     0% {
         transform: rotate(0deg);
     }
