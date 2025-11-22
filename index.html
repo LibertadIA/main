@@ -243,11 +243,9 @@
                     <div class="problem-card animate-on-scroll">
                         <div class="problem-icon">
                             <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M8 24L18 34L40 12" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <line x1="16" y1="24" x2="24" y2="32" stroke="#F97316" stroke-width="2" stroke-linecap="round"/>
-                                <circle cx="36" cy="36" r="8" fill="#DC2626" stroke="white" stroke-width="2"/>
-                                <line x1="33" y1="33" x2="39" y2="39" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                                <line x1="39" y1="33" x2="33" y2="39" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M24 4L44 40H4L24 4Z" stroke="#F97316" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M24 18V28" stroke="#F97316" stroke-width="2.5" stroke-linecap="round"/>
+                                <circle cx="24" cy="34" r="1.5" fill="#F97316"/>
                             </svg>
                         </div>
                         <h3 class="problem-title">Erreurs humaines coûteuses</h3>
@@ -707,75 +705,128 @@
             </div>
         </section>
 
-        <!-- Section CTA finale -->
-        <section class="final-cta section section-alt" id="final-cta">
+        <!-- Section CTA finale - Design original -->
+        <section class="final-cta section" id="final-cta">
             <div class="container">
-                <div class="cta-content animate-on-scroll">
-                    <h2 class="cta-title">Prêt à transformer votre entreprise ?</h2>
-                    <p class="cta-text">
-                        Réservez dès maintenant votre audit gratuit et sans engagement. En 90 minutes, nous analysons vos processus et vous présentons un plan d'automatisation chiffré et personnalisé.
-                    </p>
+                <div class="final-cta-header animate-on-scroll">
+                    <span class="cta-badge">Audit stratégique gratuit</span>
+                    <h2 class="cta-title">90 minutes pour identifier exactement où vous perdez de l'argent — et comment le récupérer</h2>
+                    <p class="cta-subtitle">Aucun engagement, aucune carte bancaire. Juste un diagnostic précis de VOS opportunités d'augmenter votre marge.</p>
+                </div>
 
-                    <div class="cta-benefits">
-                        <div class="cta-benefit">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="10" stroke="#10B981" stroke-width="2"/>
-                                <path d="M8 12L11 15L16 9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Audit gratuit de 90 minutes</span>
+                <div class="final-cta-grid">
+                    <!-- Gauche : Promesses de l'audit -->
+                    <div class="audit-promises animate-on-scroll">
+                        <div class="promise-card">
+                            <div class="promise-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="4" y="6" width="24" height="20" rx="2" stroke="#2563EB" stroke-width="2"/>
+                                    <path d="M4 11H28M10 6V11M22 6V11" stroke="#2563EB" stroke-width="2"/>
+                                    <circle cx="16" cy="18" r="1.5" fill="#F97316"/>
+                                </svg>
+                                <span class="promise-time">90 min</span>
+                            </div>
+                            <div class="promise-content">
+                                <h3>Diagnostic complet de vos processus</h3>
+                                <p>Nous analysons ensemble vos workflows actuels et identifions précisément où vous perdez du temps et de l'argent.</p>
+                            </div>
                         </div>
-                        <div class="cta-benefit">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="10" stroke="#10B981" stroke-width="2"/>
-                                <path d="M8 12L11 15L16 9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Sans engagement ni carte bancaire</span>
+
+                        <div class="promise-card">
+                            <div class="promise-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 16L14 22L24 10" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="16" cy="16" r="14" stroke="#2563EB" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="promise-content">
+                                <h3>Plan d'action chiffré personnalisé</h3>
+                                <p>Vous repartez avec un plan d'automatisation sur-mesure, des chiffrages précis et une projection du ROI sur 12 mois.</p>
+                            </div>
                         </div>
-                        <div class="cta-benefit">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="10" stroke="#10B981" stroke-width="2"/>
-                                <path d="M8 12L11 15L16 9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span>Rapport détaillé avec recommandations chiffrées</span>
+
+                        <div class="promise-card">
+                            <div class="promise-icon">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6 16L16 6L26 16M10 12L16 6L22 12M16 26V6" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="promise-badge">Résultats garantis</span>
+                            </div>
+                            <div class="promise-content">
+                                <h3>Estimation des gains de marge</h3>
+                                <p>Nous calculons le montant exact que vous pouvez économiser chaque mois en automatisant VOS processus spécifiques.</p>
+                            </div>
                         </div>
-                        <div class="cta-benefit">
+
+                        <div class="guarantee-box">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="10" stroke="#10B981" stroke-width="2"/>
-                                <path d="M8 12L11 15L16 9" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M12 2L4 6V11C4 16 8 20 12 22C16 20 20 16 20 11V6L12 2Z" stroke="#10B981" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M9 12L11 14L15 10" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <span>Limité à 5 entreprises par mois</span>
+                            <div>
+                                <strong>Zéro engagement, zéro vente forcée</strong>
+                                <p>Cet audit est 100% gratuit. Vous décidez ensuite si vous voulez passer à l'action ou non. Aucune pression commerciale.</p>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Formulaire de contact simplifié -->
-                    <form class="cta-form" id="ctaForm">
-                        <div class="form-row">
+                    <!-- Droite : Formulaire -->
+                    <div class="audit-form-container animate-on-scroll">
+                        <div class="form-header">
+                            <h3>Réservez votre créneau gratuit</h3>
+                            <p class="form-availability">
+                                <span class="availability-dot"></span>
+                                <strong>3 places disponibles</strong> cette semaine
+                            </p>
+                        </div>
+
+                        <form class="audit-form" id="ctaForm">
                             <div class="form-group">
-                                <label for="ctaName" class="form-label">Nom complet *</label>
+                                <label for="ctaName" class="form-label">Votre nom *</label>
                                 <input type="text" id="ctaName" name="name" class="form-input" placeholder="Jean Dupont" required>
                             </div>
+
                             <div class="form-group">
                                 <label for="ctaCompany" class="form-label">Entreprise *</label>
                                 <input type="text" id="ctaCompany" name="company" class="form-input" placeholder="Mon Entreprise SAS" required>
                             </div>
-                        </div>
-                        <div class="form-row">
+
                             <div class="form-group">
                                 <label for="ctaEmail" class="form-label">Email professionnel *</label>
                                 <input type="email" id="ctaEmail" name="email" class="form-input" placeholder="jean.dupont@entreprise.fr" required>
                             </div>
+
                             <div class="form-group">
                                 <label for="ctaPhone" class="form-label">Téléphone *</label>
                                 <input type="tel" id="ctaPhone" name="phone" class="form-input" placeholder="06 12 34 56 78" required>
                             </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary btn-large btn-full">
-                            Réserver mon audit gratuit maintenant
-                        </button>
-                        <p class="form-note">
-                            En soumettant ce formulaire, vous acceptez d'être contacté par LibertadIA concernant nos services d'automatisation. Vos données sont sécurisées et conformes RGPD.
-                        </p>
-                    </form>
+
+                            <button type="submit" class="btn btn-primary btn-xl btn-full">
+                                Je réserve mon audit gratuit
+                            </button>
+
+                            <div class="form-guarantees">
+                                <div class="form-guarantee-item">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="8" cy="8" r="7" stroke="#10B981" stroke-width="2"/>
+                                        <path d="M5 8L7 10L11 6" stroke="#10B981" stroke-width="2" stroke-linecap="round"/>
+                                    </svg>
+                                    <span>Réponse sous 2h</span>
+                                </div>
+                                <div class="form-guarantee-item">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="3" y="6" width="10" height="8" rx="1" stroke="#10B981" stroke-width="1.5"/>
+                                        <path d="M5 6V4C5 2.34315 6.34315 1 8 1C9.65685 1 11 2.34315 11 4V6" stroke="#10B981" stroke-width="1.5"/>
+                                    </svg>
+                                    <span>Données 100% sécurisées</span>
+                                </div>
+                            </div>
+
+                            <p class="form-note">
+                                En soumettant ce formulaire, vous acceptez d'être contacté par LibertadIA. Vos données sont conformes RGPD et ne seront jamais revendues.
+                            </p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
