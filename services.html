@@ -468,6 +468,77 @@
         </div>
     </footer>
 
+    <!-- Widget WhatsApp Chatbot -->
+    <div class="whatsapp-widget">
+        <!-- Bouton flottant WhatsApp -->
+        <button class="whatsapp-button" id="whatsapp-button" aria-label="Ouvrir le chat WhatsApp">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 0C7.164 0 0 7.164 0 16c0 2.828.744 5.584 2.156 8L0.264 31.736l8.12-2.136A15.923 15.923 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0z" fill="#25D366"/>
+                <path d="M25.2 22.4c-.4 1.12-1.96 2.04-3.2 2.32-.88.2-2.028.36-5.884-1.264-4.916-2.068-8.08-7.028-8.32-7.348-.24-.32-1.96-2.608-1.96-4.976 0-2.368 1.24-3.532 1.68-4.012.44-.48 1.012-.6 1.352-.6.34 0 .68.004 1 .02.32.016.756-.12 1.18.9.44 1.04 1.48 3.608 1.6 3.868.12.26.2.56.04.88-.16.32-.24.52-.48.8-.24.28-.5.624-.72.836-.24.24-.488.504-.208.992.28.488 1.24 2.044 2.664 3.312 1.832 1.632 3.372 2.144 3.852 2.384.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.788 1.316 3.268 1.556.48.24.8.36.92.56.12.2.12 1.16-.28 2.28z" fill="white"/>
+            </svg>
+            <span class="whatsapp-badge" id="whatsapp-badge">1</span>
+        </button>
+
+        <!-- Interface de chat -->
+        <div class="whatsapp-chat-window" id="whatsapp-chat-window">
+            <!-- En-tête du chat -->
+            <div class="whatsapp-chat-header">
+                <div class="whatsapp-chat-header-content">
+                    <div class="whatsapp-avatar">
+                        <img src="./assets/logo-libertadia.png" alt="LibertadIA">
+                    </div>
+                    <div class="whatsapp-chat-info">
+                        <h4>LibertadIA</h4>
+                        <p>Répond généralement en quelques minutes</p>
+                    </div>
+                </div>
+                <button class="whatsapp-close" id="whatsapp-close" aria-label="Fermer le chat">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Corps du chat avec messages -->
+            <div class="whatsapp-chat-body">
+                <div class="whatsapp-date">Aujourd'hui</div>
+
+                <div class="whatsapp-message whatsapp-message-received">
+                    <div class="whatsapp-message-content">
+                        <p>Bonjour ! 👋</p>
+                    </div>
+                    <span class="whatsapp-message-time">09:30</span>
+                </div>
+
+                <div class="whatsapp-message whatsapp-message-received">
+                    <div class="whatsapp-message-content">
+                        <p>Je suis Martin, expert en automatisation IA chez LibertadIA.</p>
+                        <p>Comment puis-je vous aider à libérer le potentiel de votre entreprise ?</p>
+                    </div>
+                    <span class="whatsapp-message-time">09:30</span>
+                </div>
+
+                <!-- Suggestions de réponses rapides -->
+                <div class="whatsapp-quick-replies">
+                    <button class="whatsapp-quick-reply" data-message="Je souhaite réserver un audit gratuit">
+                        📊 Réserver un audit gratuit
+                    </button>
+                    <button class="whatsapp-quick-reply" data-message="J'ai des questions sur vos services">
+                        💬 Poser une question
+                    </button>
+                    <button class="whatsapp-quick-reply" data-message="Je veux découvrir vos solutions IA">
+                        🤖 Découvrir vos solutions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pied du chat -->
+            <div class="whatsapp-chat-footer">
+                <p>Continuer la conversation sur WhatsApp</p>
+            </div>
+        </div>
+    </div>
+
     <script src="./js/main.js"></script>
 </body>
 </html>

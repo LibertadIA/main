@@ -427,4 +427,86 @@ document.querySelectorAll('[data-tooltip]').forEach(element => {
     });
 });
 
+/* ============================================
+   WIDGET WHATSAPP CHATBOT
+   ============================================ */
+
+// Configuration - À REMPLACER PAR VOTRE NUMÉRO WHATSAPP
+const WHATSAPP_CONFIG = {
+    // Format: numéro international sans le + (ex: 33612345678 pour la France)
+    phoneNumber: '33612345678', // ⚠️ REMPLACER PAR VOTRE NUMÉRO
+    defaultMessage: 'Bonjour ! Je souhaite en savoir plus sur vos services d\'automatisation IA.'
+};
+
+// Éléments du DOM
+const whatsappButton = document.getElementById('whatsapp-button');
+const whatsappChatWindow = document.getElementById('whatsapp-chat-window');
+const whatsappClose = document.getElementById('whatsapp-close');
+const whatsappBadge = document.getElementById('whatsapp-badge');
+const quickReplyButtons = document.querySelectorAll('.whatsapp-quick-reply');
+
+// État du widget
+let isChatOpen = false;
+
+// Fonction pour ouvrir/fermer le chat
+function toggleChat() {
+    isChatOpen = !isChatOpen;
+
+    if (isChatOpen) {
+        whatsappChatWindow.classList.add('active');
+        whatsappBadge.style.display = 'none';
+    } else {
+        whatsappChatWindow.classList.remove('active');
+    }
+}
+
+// Fonction pour ouvrir WhatsApp avec un message
+function openWhatsApp(message = WHATSAPP_CONFIG.defaultMessage) {
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${WHATSAPP_CONFIG.phoneNumber}?text=${encodedMessage}`;
+
+    // Ouvrir dans un nouvel onglet
+    window.open(whatsappURL, '_blank');
+
+    // Fermer le widget après ouverture
+    setTimeout(() => {
+        toggleChat();
+    }, 500);
+}
+
+// Event listeners
+if (whatsappButton) {
+    whatsappButton.addEventListener('click', toggleChat);
+}
+
+if (whatsappClose) {
+    whatsappClose.addEventListener('click', toggleChat);
+}
+
+// Gérer les clics sur les réponses rapides
+if (quickReplyButtons) {
+    quickReplyButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const message = this.getAttribute('data-message');
+            openWhatsApp(message);
+        });
+    });
+}
+
+// Fermer le widget si on clique en dehors
+document.addEventListener('click', function(event) {
+    if (isChatOpen &&
+        !whatsappChatWindow.contains(event.target) &&
+        !whatsappButton.contains(event.target)) {
+        toggleChat();
+    }
+});
+
+// Afficher le badge après 3 secondes (pour attirer l'attention)
+setTimeout(() => {
+    if (whatsappBadge && !isChatOpen) {
+        whatsappBadge.style.display = 'flex';
+    }
+}, 3000);
+
 console.log('✅ LibertadIA - JavaScript chargé avec succès');
