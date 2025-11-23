@@ -438,6 +438,31 @@ const WHATSAPP_CONFIG = {
     defaultMessage: 'Bonjour ! Je souhaite en savoir plus sur vos services d\'automatisation IA.'
 };
 
+// Fonction pour obtenir l'heure actuelle au format HH:MM
+function getCurrentTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2, '0');
+    const minutes = now.getMinutes().toString().padStart(2, '0');
+    return `${hours}:${minutes}`;
+}
+
+// Mettre à jour l'heure des messages WhatsApp au chargement
+function updateWhatsAppMessageTimes() {
+    const currentTime = getCurrentTime();
+    const messageTimeElements = document.querySelectorAll('.whatsapp-message-time');
+
+    messageTimeElements.forEach(element => {
+        element.textContent = currentTime;
+    });
+}
+
+// Exécuter la mise à jour de l'heure quand le DOM est chargé
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateWhatsAppMessageTimes);
+} else {
+    updateWhatsAppMessageTimes();
+}
+
 // Éléments du DOM
 const whatsappButton = document.getElementById('whatsapp-button');
 const whatsappChatWindow = document.getElementById('whatsapp-chat-window');
