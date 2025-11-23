@@ -227,22 +227,28 @@ ul, ol {
 .nav-cta {
     padding: 0.625rem 1.25rem;
     font-size: var(--font-size-sm);
-    transition: all var(--transition-base);
 }
 
-.nav-cta:hover {
-    animation: glow-pulse 2s ease-in-out infinite;
+/* Glow effect spécifique pour le nav-cta - doit venir après .btn-primary pour override */
+.btn-primary.nav-cta:hover {
+    background-color: var(--color-primary-blue-hover);
+    transform: translateY(-2px);
+    animation: nav-cta-glow 2s ease-in-out infinite;
 }
 
-@keyframes glow-pulse {
+@keyframes nav-cta-glow {
     0%, 100% {
-        box-shadow: 0 0 8px rgba(37, 99, 235, 0.4),
-                    0 0 15px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 0 20px rgba(37, 99, 235, 0.8),
+                    0 0 35px rgba(37, 99, 235, 0.6),
+                    0 0 50px rgba(37, 99, 235, 0.4),
+                    0 4px 6px rgba(0, 0, 0, 0.1);
     }
     50% {
-        box-shadow: 0 0 12px rgba(249, 115, 22, 0.5),
-                    0 0 25px rgba(249, 115, 22, 0.3),
-                    0 0 35px rgba(37, 99, 235, 0.15);
+        box-shadow: 0 0 25px rgba(249, 115, 22, 0.9),
+                    0 0 45px rgba(249, 115, 22, 0.7),
+                    0 0 60px rgba(249, 115, 22, 0.5),
+                    0 0 80px rgba(37, 99, 235, 0.3),
+                    0 4px 6px rgba(0, 0, 0, 0.1);
     }
 }
 
