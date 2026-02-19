@@ -1,0 +1,58 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Éditeurs et IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dépendances (si vous utilisez npm/yarn plus tard)
+node_modules/
+package-lock.json
+yarn.lock
+
+# Fichiers de build/dist
+dist/
+build/
+*.min.js
+*.min.css
+
+# Environnement
+.env
+.env.local
+.env.*.local
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.cache/
+
+# Backup files
+*.bak
+*.backup
+
+# OS generated files
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Fichiers de tests
+coverage/
+.nyc_output/
+
+# Fichiers spécifiques au projet (si nécessaire)
+# diagnostic-immersion.html
+# test.html

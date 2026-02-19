@@ -3,178 +3,542 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - LibertadIA</title>
-    <meta name="description" content="Découvrez mes services d'automatisation IA : audit, diagnostic et installation de systèmes intelligents pour PME.">
-    <link rel="icon" type="image/png" href="logo-libertadia.png">
-    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="Découvrez notre méthodologie en 4 étapes pour automatiser vos processus : audit gratuit, immersion en entreprise, installation du système IA et accompagnement au ROI.">
+    <meta name="keywords" content="méthodologie automatisation, audit gratuit, immersion entreprise, N8N, workflow automatisé, ROI garanti">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Notre Méthodologie d'Automatisation | LibertadIA">
+    <meta property="og:description" content="De l'audit gratuit au retour sur investissement garanti en 4 mois, découvrez notre approche sur-mesure pour automatiser votre PME">
+    <meta property="og:image" content="./assets/logo-libertadia.png">
+    <meta property="og:url" content="https://libertadia.fr/services">
+    <meta property="og:type" content="website">
+
+    <link rel="canonical" href="https://libertadia.fr/services">
+    <title>Services & Méthodologie | LibertadIA - Automatisation IA pour PME</title>
+    <link rel="icon" type="image/png" href="./assets/Favicon.png">
+
+    <!-- Préconnexion Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
+    <!-- Barre de progression -->
+    <div class="progress-bar" id="progressBar"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
-        <div class="container">
-            <a href="index.html" class="nav-brand">
-                <img src="logo-libertadia.png" alt="LibertadIA Logo" class="logo">
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="./index.html" class="nav-logo">
+                <img src="./assets/logo-libertadia.png" alt="Logo LibertadIA" class="logo-image">
             </a>
-            <ul class="nav-menu">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="services.html" class="active">Services</a></li>
-                <li><a href="contact.html" class="btn-nav">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
+
+            <div class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="./index.html" class="nav-link">Accueil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./services.html" class="nav-link active" aria-current="page">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./contact.html" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+                <a href="./contact.html" class="btn btn-primary nav-cta">Réserver un audit</a>
             </div>
-        </div>
-    </nav>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Mes Services</h1>
-            <p>Des solutions sur mesure pour automatiser votre entreprise</p>
-        </div>
-    </section>
+            <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu de navigation">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </nav>
+    </header>
 
-    <!-- Services Section -->
-    <section class="services-detail">
-        <div class="container">
-            <div class="service-item">
-                <div class="service-content">
-                    <div class="service-number">01</div>
-                    <h2>Audit des systèmes existants</h2>
-                    <p class="service-description">
-                        Je plonge au cœur de votre entreprise pour comprendre vos processus actuels, identifier les goulots d'étranglement et repérer les tâches répétitives qui vous font perdre du temps.
-                    </p>
-                    <ul class="service-features">
-                        <li>Analyse complète de vos processus métier</li>
-                        <li>Identification des tâches automatisables</li>
-                        <li>Évaluation du potentiel de gain de temps</li>
-                        <li>Rapport détaillé avec recommandations</li>
-                    </ul>
-                    <div class="service-result">
-                        <strong>Résultat :</strong> Une vision claire des opportunités d'automatisation dans votre entreprise
+    <!-- Contenu principal -->
+    <main class="main">
+        <!-- Hero Section Services -->
+        <section class="services-hero section">
+            <div class="container">
+                <h1 class="hero-title animate-on-scroll">Une méthodologie éprouvée en 4 étapes</h1>
+                <p class="hero-subtitle animate-on-scroll">
+                    De l'audit gratuit au retour sur investissement garanti, nous vous accompagnons à chaque étape de votre transformation digitale
+                </p>
+            </div>
+        </section>
+
+        <!-- Section Méthodologie en 4 étapes -->
+        <section class="methodology section">
+            <div class="container">
+                <!-- Étape 1 : Audit gratuit -->
+                <div class="methodology-step animate-on-scroll">
+                    <div class="step-number">
+                        <span class="number-circle">1</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="40" r="38" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+                                <path d="M30 40L36 46L50 32" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M25 50L32 57L46 43" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+                            </svg>
+                        </div>
+                        <div class="step-info">
+                            <h2 class="step-title">Audit gratuit et sans engagement</h2>
+                            <p class="step-description">
+                                Nous analysons gratuitement vos processus actuels pour identifier les opportunités d'automatisation les plus rentables. Cet audit approfondi de 90 minutes vous permet de découvrir concrètement le potentiel de gains pour votre entreprise.
+                            </p>
+                            <ul class="step-list">
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Analyse complète de vos processus actuels
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Identification des gains potentiels mesurables
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Diagnostic précis des processus prioritaires
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Rapport détaillé avec recommandations chiffrées
+                                </li>
+                            </ul>
+                            <div class="step-highlight">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#F97316"/>
+                                </svg>
+                                <span><strong>100% gratuit</strong> et aucune obligation de suite</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Étape 2 : Immersion -->
+                <div class="methodology-step animate-on-scroll">
+                    <div class="step-number">
+                        <span class="number-circle">2</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="40" r="38" fill="#FFF7ED" stroke="#F97316" stroke-width="2"/>
+                                <rect x="25" y="30" width="30" height="25" rx="2" stroke="#F97316" stroke-width="2.5"/>
+                                <circle cx="32" cy="38" r="3" fill="#F97316"/>
+                                <circle cx="40" cy="38" r="3" fill="#F97316"/>
+                                <circle cx="48" cy="38" r="3" fill="#F97316"/>
+                                <path d="M28 47H52" stroke="#F97316" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <div class="step-info">
+                            <h2 class="step-title">Immersion en entreprise</h2>
+                            <p class="step-description">
+                                Nous passons du temps physiquement dans votre entreprise pour comprendre en profondeur vos workflows réels. Cette immersion nous permet d'identifier les points de friction invisibles que seule l'observation sur le terrain peut révéler.
+                            </p>
+                            <ul class="step-list">
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#F97316" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Observation terrain des workflows réels
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#F97316" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Identification des points de friction invisibles
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#F97316" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Échanges avec les équipes opérationnelles
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#F97316" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Cartographie précise de tous les processus
+                                </li>
+                            </ul>
+                            <div class="step-highlight">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#F97316"/>
+                                </svg>
+                                <span>Chaque entreprise est unique, nous prenons le temps de comprendre la vôtre</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Étape 3 : Installation -->
+                <div class="methodology-step animate-on-scroll">
+                    <div class="step-number">
+                        <span class="number-circle">3</span>
+                        <div class="step-line"></div>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="40" r="38" fill="#EFF6FF" stroke="#2563EB" stroke-width="2"/>
+                                <path d="M25 40L32 47L55 24" stroke="#2563EB" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="40" cy="40" r="12" stroke="#2563EB" stroke-width="2" opacity="0.3"/>
+                                <circle cx="40" cy="40" r="20" stroke="#2563EB" stroke-width="2" opacity="0.2"/>
+                            </svg>
+                        </div>
+                        <div class="step-info">
+                            <h2 class="step-title">Installation du système IA</h2>
+                            <p class="step-description">
+                                Nous développons et déployons des workflows N8N sur mesure, parfaitement intégrés à vos outils existants. Formation complète de vos équipes incluse pour garantir une adoption réussie et des résultats immédiats.
+                            </p>
+                            <ul class="step-list">
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Développement de workflows N8N sur mesure
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Intégration transparente avec vos outils (CRM, ERP, etc.)
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Installation sécurisée conforme RGPD
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#2563EB" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#2563EB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Formation complète de vos équipes
+                                </li>
+                            </ul>
+                            <div class="step-highlight">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#F97316"/>
+                                </svg>
+                                <span>Disponible pendant toute la phase d'adoption pour vous accompagner</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Étape 4 : ROI garanti -->
+                <div class="methodology-step animate-on-scroll">
+                    <div class="step-number">
+                        <span class="number-circle">4</span>
+                    </div>
+                    <div class="step-content">
+                        <div class="step-icon">
+                            <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="40" cy="40" r="38" fill="#FFF7ED" stroke="#F97316" stroke-width="2"/>
+                                <path d="M30 50L30 35L38 30L46 35L54 28L62 33L62 50" stroke="#F97316" stroke-width="3" fill="none"/>
+                                <path d="M30 35L38 30L46 35L54 28L62 33" stroke="#F97316" stroke-width="3.5" fill="none"/>
+                                <circle cx="38" cy="30" r="3" fill="#F97316"/>
+                                <circle cx="46" cy="35" r="3" fill="#F97316"/>
+                                <circle cx="54" cy="28" r="3" fill="#F97316"/>
+                            </svg>
+                        </div>
+                        <div class="step-info">
+                            <h2 class="step-title">ROI garanti en moins de 4 mois</h2>
+                            <p class="step-description">
+                                Nous ne vous abandonnons pas après l'installation. Un suivi post-déploiement régulier, des ajustements continus et un reporting mensuel des gains réalisés garantissent que vous atteignez le retour sur investissement promis.
+                            </p>
+                            <ul class="step-list">
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#F97316" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Suivi post-déploiement régulier
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#F97316" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Ajustements et optimisations continues
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#F97316" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Accompagnement personnalisé première année
+                                </li>
+                                <li>
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="9" stroke="#F97316" stroke-width="2"/>
+                                        <path d="M6 10L9 13L14 8" stroke="#F97316" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    Reporting mensuel des gains réalisés
+                                </li>
+                            </ul>
+                            <div class="step-highlight highlight-orange">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" fill="#F97316"/>
+                                </svg>
+                                <span><strong class="text-orange">ROI garanti en moins de 4 mois</strong> avec reporting mensuel des économies réalisées</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="service-item service-reverse">
-                <div class="service-content">
-                    <div class="service-number">02</div>
-                    <h2>Diagnostic de fiabilité & faisabilité</h2>
-                    <p class="service-description">
-                        J'évalue précisément la viabilité technique et économique de votre projet d'automatisation IA. Vous savez exactement ce qui est possible, combien ça coûte et quel sera votre retour sur investissement.
-                    </p>
-                    <ul class="service-features">
-                        <li>Étude de faisabilité technique détaillée</li>
-                        <li>Calcul du ROI prévisionnel</li>
-                        <li>Évaluation des risques et contraintes</li>
-                        <li>Plan d'action personnalisé</li>
-                    </ul>
-                    <div class="service-result">
-                        <strong>Résultat :</strong> Un plan d'action clair avec budget et délais précis
+        <!-- Section Témoignages -->
+        <section class="testimonials section section-alt">
+            <div class="container">
+                <h2 class="section-title animate-on-scroll">Ce que disent nos clients</h2>
+                <p class="section-subtitle animate-on-scroll">Des PME qui ont transformé leur activité grâce à l'automatisation</p>
+
+                <div class="testimonials-grid">
+                    <!-- Placeholder pour témoignage 1 -->
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="testimonial-content">
+                            <div class="testimonial-quote">"</div>
+                            <p class="testimonial-text">
+                                [Témoignage client à venir]
+                            </p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <p class="author-name">[Nom Client]</p>
+                                <p class="author-role">[Poste], [Entreprise]</p>
+                            </div>
+                            <div class="testimonial-result">
+                                <span class="text-orange">[Résultat chiffré]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder pour témoignage 2 -->
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="testimonial-content">
+                            <div class="testimonial-quote">"</div>
+                            <p class="testimonial-text">
+                                [Témoignage client à venir]
+                            </p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <p class="author-name">[Nom Client]</p>
+                                <p class="author-role">[Poste], [Entreprise]</p>
+                            </div>
+                            <div class="testimonial-result">
+                                <span class="text-orange">[Résultat chiffré]</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Placeholder pour témoignage 3 -->
+                    <div class="testimonial-card animate-on-scroll">
+                        <div class="testimonial-content">
+                            <div class="testimonial-quote">"</div>
+                            <p class="testimonial-text">
+                                [Témoignage client à venir]
+                            </p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-info">
+                                <p class="author-name">[Nom Client]</p>
+                                <p class="author-role">[Poste], [Entreprise]</p>
+                            </div>
+                            <div class="testimonial-result">
+                                <span class="text-orange">[Résultat chiffré]</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="service-item">
-                <div class="service-content">
-                    <div class="service-number">03</div>
-                    <h2>Installation du système d'automatisation IA</h2>
-                    <p class="service-description">
-                        Je mets en place votre solution d'automatisation IA clé en main. Formation de vos équipes incluse pour une adoption réussie et des résultats immédiats.
+        <!-- Section CTA -->
+        <section class="services-cta section">
+            <div class="container">
+                <div class="cta-content animate-on-scroll">
+                    <h2 class="cta-title">Prêt à démarrer votre transformation ?</h2>
+                    <p class="cta-text">
+                        Réservez votre audit gratuit de 90 minutes et découvrez concrètement combien vous pourriez économiser chaque mois
                     </p>
-                    <ul class="service-features">
-                        <li>Développement et intégration de l'IA</li>
-                        <li>Tests et optimisation du système</li>
-                        <li>Formation de vos équipes</li>
-                        <li>Support et ajustements post-lancement</li>
-                    </ul>
-                    <div class="service-result">
-                        <strong>Résultat :</strong> Un système opérationnel qui génère du temps, des clients ou de la marge
-                    </div>
+                    <a href="./contact.html" class="btn btn-primary btn-large">Réserver mon audit gratuit</a>
+                    <p class="cta-note">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="2"/>
+                            <path d="M6 8L7.5 9.5L10 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Sans engagement - Limité à 5 entreprises par mois
+                    </p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="projects">
-        <div class="container">
-            <h2 class="section-title">Cas d'usage & projets réalisables</h2>
-            <p class="section-subtitle">Voici quelques exemples de ce que je peux automatiser pour vous</p>
-
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Automatisation du Service Client</h3>
-                    <p>Chatbot IA intelligent qui répond 24/7 aux questions courantes de vos clients et qualifie les prospects</p>
-                    <div class="project-benefit">+ 60% de temps gagné</div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Prospection Automatisée</h3>
-                    <p>Système d'IA qui identifie, qualifie et contacte automatiquement vos prospects sur mesure</p>
-                    <div class="project-benefit">+ 200% de leads qualifiés</div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Gestion Administrative Intelligente</h3>
-                    <p>Automatisation de la facturation, relances clients, gestion des devis et suivi comptable</p>
-                    <div class="project-benefit">- 70% de tâches manuelles</div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Analyse de Données & Reporting</h3>
-                    <p>Tableaux de bord automatisés et analyses prédictives pour piloter votre activité en temps réel</p>
-                    <div class="project-benefit">Décisions data-driven</div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Automatisation Marketing</h3>
-                    <p>Création automatique de contenu, newsletters personnalisées et campagnes ciblées par IA</p>
-                    <div class="project-benefit">+ 150% d'engagement</div>
-                </div>
-
-                <div class="project-card">
-                    <h3>Gestion des Stocks & Commandes</h3>
-                    <p>Prévision intelligente des besoins, commandes automatiques et optimisation des stocks</p>
-                    <div class="project-benefit">- 40% de coûts de stock</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Votre projet n'est pas dans la liste ?</h2>
-                <p>Chaque entreprise est unique. Discutons de vos besoins spécifiques et créons la solution qui vous correspond</p>
-                <a href="contact.html" class="btn btn-primary btn-large">Parler de mon projet</a>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-brand">
-                    <img src="logo-libertadia.png" alt="LibertadIA Logo" class="footer-logo">
-                    <p>Expert en automatisation IA pour PME</p>
+                    <img src="./assets/logo-libertadia.png" alt="Logo LibertadIA" class="footer-logo">
+                    <p class="footer-tagline">Libérez le potentiel de votre entreprise grâce à l'automatisation IA</p>
                 </div>
+
                 <div class="footer-links">
-                    <a href="index.html">Accueil</a>
-                    <a href="services.html">Services</a>
-                    <a href="contact.html">Contact</a>
+                    <div class="footer-column">
+                        <h4 class="footer-title">Navigation</h4>
+                        <ul class="footer-list">
+                            <li><a href="./index.html" class="footer-link">Accueil</a></li>
+                            <li><a href="./services.html" class="footer-link">Services</a></li>
+                            <li><a href="./contact.html" class="footer-link">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4 class="footer-title">Informations</h4>
+                        <ul class="footer-list">
+                            <li><a href="./mentions-legales.html" class="footer-link">Mentions légales</a></li>
+                            <li><a href="./politique-confidentialite.html" class="footer-link">Politique de confidentialité</a></li>
+                            <li><a href="./conditions-generales.html" class="footer-link">Conditions générales</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4 class="footer-title">Réassurance</h4>
+                        <ul class="footer-list">
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 1L10 6L15 8L10 10L8 15L6 10L1 8L6 6L8 1Z" fill="currentColor"/>
+                                </svg>
+                                Audit gratuit et sans engagement
+                            </li>
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="6" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M5 6V4C5 2.34315 6.34315 1 8 1C9.65685 1 11 2.34315 11 4V6" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="8" cy="10" r="1" fill="currentColor"/>
+                                </svg>
+                                Données sécurisées et conformes RGPD
+                            </li>
+                            <li class="footer-reassurance">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="8" cy="8" r="7" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M8 4V8L11 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                Support disponible 7j/7
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+
             <div class="footer-bottom">
-                <p>&copy; 2024 LibertadIA. Tous droits réservés.</p>
+                <p class="footer-copyright">© 2024 LibertadIA. Tous droits réservés.</p>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- Widget WhatsApp Chatbot -->
+    <div class="whatsapp-widget">
+        <!-- Bouton flottant WhatsApp -->
+        <button class="whatsapp-button" id="whatsapp-button" aria-label="Ouvrir le chat WhatsApp">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 0C7.164 0 0 7.164 0 16c0 2.828.744 5.584 2.156 8L0.264 31.736l8.12-2.136A15.923 15.923 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0z" fill="#25D366"/>
+                <path d="M25.2 22.4c-.4 1.12-1.96 2.04-3.2 2.32-.88.2-2.028.36-5.884-1.264-4.916-2.068-8.08-7.028-8.32-7.348-.24-.32-1.96-2.608-1.96-4.976 0-2.368 1.24-3.532 1.68-4.012.44-.48 1.012-.6 1.352-.6.34 0 .68.004 1 .02.32.016.756-.12 1.18.9.44 1.04 1.48 3.608 1.6 3.868.12.26.2.56.04.88-.16.32-.24.52-.48.8-.24.28-.5.624-.72.836-.24.24-.488.504-.208.992.28.488 1.24 2.044 2.664 3.312 1.832 1.632 3.372 2.144 3.852 2.384.48.24.76.2 1.04-.12.28-.32 1.2-1.4 1.52-1.88.32-.48.64-.4 1.08-.24.44.16 2.788 1.316 3.268 1.556.48.24.8.36.92.56.12.2.12 1.16-.28 2.28z" fill="white"/>
+            </svg>
+            <span class="whatsapp-badge" id="whatsapp-badge">1</span>
+        </button>
+
+        <!-- Interface de chat -->
+        <div class="whatsapp-chat-window" id="whatsapp-chat-window">
+            <!-- En-tête du chat -->
+            <div class="whatsapp-chat-header">
+                <div class="whatsapp-chat-header-content">
+                    <div class="whatsapp-avatar">
+                        <img src="./assets/logo-libertadia.png" alt="LibertadIA">
+                    </div>
+                    <div class="whatsapp-chat-info">
+                        <h4>LibertadIA</h4>
+                        <p>Répond généralement en quelques minutes</p>
+                    </div>
+                </div>
+                <button class="whatsapp-close" id="whatsapp-close" aria-label="Fermer le chat">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 6L6 18M6 6l12 12" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Corps du chat avec messages -->
+            <div class="whatsapp-chat-body">
+                <div class="whatsapp-date">Aujourd'hui</div>
+
+                <div class="whatsapp-message whatsapp-message-received">
+                    <div class="whatsapp-message-content">
+                        <p>Bonjour ! 👋</p>
+                    </div>
+                    <span class="whatsapp-message-time">09:30</span>
+                </div>
+
+                <div class="whatsapp-message whatsapp-message-received">
+                    <div class="whatsapp-message-content">
+                        <p>Je suis Martin, expert en automatisation IA chez LibertadIA.</p>
+                        <p>Comment puis-je vous aider à libérer le potentiel de votre entreprise ?</p>
+                    </div>
+                    <span class="whatsapp-message-time">09:30</span>
+                </div>
+
+                <!-- Suggestions de réponses rapides -->
+                <div class="whatsapp-quick-replies">
+                    <button class="whatsapp-quick-reply" data-message="Bonjour, je souhaite réserver un appel avec vous. Cependant j'ai des questions sur (Votre question).">
+                        📊 Réserver un audit gratuit
+                    </button>
+                    <button class="whatsapp-quick-reply" data-message="Bonjour, j'ai une question concernant (Votre question).">
+                        💬 Poser une question
+                    </button>
+                    <button class="whatsapp-quick-reply" data-message="Bonjour, j'aimerais découvrir vos solutions pour mon entreprise (Votre entreprise) à propos de (Sujet que vous souhaitez automatiser).">
+                        🤖 Découvrir vos solutions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pied du chat -->
+            <div class="whatsapp-chat-footer">
+                <p>Continuer la conversation sur WhatsApp</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="./js/main.js"></script>
 </body>
 </html>
