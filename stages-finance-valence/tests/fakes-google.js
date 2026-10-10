@@ -20,8 +20,6 @@ function installerFakesGoogle({ monEmail = 'lea.dupre@gmail.com', onglets = {}, 
     })
   };
 
-  globalThis.Session = { getActiveUser: () => ({ getEmail: () => monEmail }) };
-
   const fil = (id) => ({
     getId: () => id,
     addLabel: () => {},
@@ -54,6 +52,7 @@ function installerFakesGoogle({ monEmail = 'lea.dupre@gmail.com', onglets = {}, 
 
   globalThis.Gmail = {
     Users: {
+      getProfile: (utilisateur) => ({ emailAddress: utilisateur === 'me' ? monEmail : '' }),
       Drafts: {
         create: (ressource) => {
           journal.brouillonsRelance.push(ressource);

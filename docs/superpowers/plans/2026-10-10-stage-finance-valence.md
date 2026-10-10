@@ -928,8 +928,6 @@ function installerFakesGoogle({ monEmail = 'lea.dupre@gmail.com', onglets = {}, 
     })
   };
 
-  globalThis.Session = { getActiveUser: () => ({ getEmail: () => monEmail }) };
-
   const fil = (id) => ({
     getId: () => id,
     addLabel: () => {},
@@ -962,6 +960,7 @@ function installerFakesGoogle({ monEmail = 'lea.dupre@gmail.com', onglets = {}, 
 
   globalThis.Gmail = {
     Users: {
+      getProfile: (utilisateur) => ({ emailAddress: utilisateur === 'me' ? monEmail : '' }),
       Drafts: {
         create: (ressource) => {
           journal.brouillonsRelance.push(ressource);
@@ -1346,8 +1345,12 @@ function exporterPdf(idFichier, nom) {
 ```javascript
 // Brouillons et lecture des fils Gmail (GmailApp, Gmail avancé).
 
+// Adresse de la boîte Gmail réellement utilisée. Session.getActiveUser() peut renvoyer une chaîne vide
+// quand le classeur appartient à un autre compte que celui qui exécute le script.
 function monEmail() {
-  return Session.getActiveUser().getEmail();
+  var email = Gmail.Users.getProfile('me').emailAddress;
+  if (!email) throw new Error('Adresse Gmail introuvable : relancer « Installer / réparer le classeur »');
+  return email;
 }
 
 function destinataireEffectif(ligne, reglages) {

@@ -21,7 +21,7 @@ Outil **personnel** pour décrocher un **stage court (1-3 mois)** en finance aut
 | Zone | Valence + 30 km (Drôme 26 et Ardèche 07 limitrophe) |
 | Secteurs | Banques de réseau, assurance / gestion de patrimoine, cabinets comptables / audit, services finance de PME |
 | Contrat | Stage court 1-3 mois |
-| Boîte mail | Gmail |
+| Boîte mail | Gmail du candidat ; dossier Drive et Sheet créés dans le compte connecté à Claude et partagés en modification avec ce compte, qui installe le script |
 | Suivi | Google Sheet |
 | Fichiers | Google Drive |
 | Base CV | CV existant de l'utilisateur |

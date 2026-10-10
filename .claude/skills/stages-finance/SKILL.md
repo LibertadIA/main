@@ -17,13 +17,13 @@ Design : `docs/superpowers/specs/2026-10-10-stage-finance-valence-design.md`. Co
 ## 0. Début de session
 
 1. `cd stages-finance-valence && npm test` : tout doit passer.
-2. Lire `donnees/config.json` (`{"idDossierRacine": "...", "idClasseur": "..."}`). S'il manque : chercher « Stages Finance Valence » avec la recherche Google Drive, sinon demander les liens à l'utilisateur, puis l'écrire.
+2. Lire `donnees/config.json` (`{"idDossierRacine": "...", "idClasseur": "...", "compteEnvoi": "...", "exclusions": ["..."]}`). S'il manque : chercher « Stages Finance Valence » avec la recherche Google Drive, sinon demander les liens à l'utilisateur, puis l'écrire. Le Sheet et le dossier sont partagés avec `compteEnvoi`, qui a installé le script : c'est sa boîte Gmail qui reçoit les brouillons.
 3. Télécharger `cv-maitre.json` (racine du dossier Drive) vers `donnees/cv-maitre.json`.
 
 ## 1. Repérage
 
 1. `node outils/reperer.js --par-secteur 25` → `donnees/reperage/entreprises-<date>.json` (`colonnes`, `lignes`). Les coupures réseau sont réessayées automatiquement ; relancer si la commande échoue quand même.
-2. Lire la colonne A de l'onglet `Entreprises` (`Entreprises!A:A`) et retirer les SIREN déjà présents.
+2. Lire la colonne A de l'onglet `Entreprises` (`Entreprises!A:A`) et retirer les SIREN déjà présents, ainsi que les entreprises dont le nom contient un des motifs `exclusions` de `config.json` (anciens employeurs, sans tenir compte de la casse).
 3. Ajouter les nouvelles lignes : `append_values` sur `Entreprises!A1`.
 4. Résumer en une ligne par secteur.
 

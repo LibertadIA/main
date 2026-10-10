@@ -6,8 +6,8 @@ Design : [`docs/superpowers/specs/2026-10-10-stage-finance-valence-design.md`](.
 
 ## Installation du Google Sheet (une fois, environ 10 minutes)
 
-1. Claude crée le dossier Drive « Stages Finance Valence » et, dedans, le Google Sheet « Suivi candidatures ».
-2. Ouvre le Sheet → **Extensions → Apps Script**.
+1. Claude crée le dossier Drive « Stages Finance Valence » et, dedans, le Google Sheet « Suivi candidatures », puis partage le dossier en modification avec le compte Gmail qui enverra les candidatures.
+2. **Depuis ce compte Gmail-là** (celui qui envoie), ouvre le Sheet → **Extensions → Apps Script**. Le script agit sur la boîte Gmail du compte qui l'installe.
 3. **Paramètres du projet** (roue dentée) → coche **Afficher le fichier manifeste « appsscript.json » dans l'éditeur**.
 4. Dans l'éditeur, remplace tout le contenu de `appsscript.json` par celui de `apps-script/appsscript.json`.
 5. Remplace tout le contenu de `Code.gs` par celui de `dist/Code.gs` (Claude te l'envoie ; il est produit par `npm run assembler`).
