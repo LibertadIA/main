@@ -13,7 +13,7 @@ Design : [`docs/superpowers/specs/2026-10-10-stage-finance-valence-design.md`](.
 5. Remplace tout le contenu de `Code.gs` par celui de `dist/Code.gs` (Claude te l'envoie ; il est produit par `npm run assembler`).
 6. Enregistre (icône disquette), puis **recharge l'onglet du Sheet** : le menu **Candidatures** apparaît à droite de « Aide ».
 7. **Candidatures → Installer / réparer le classeur**, puis accepte les autorisations (Sheets, Drive, Gmail). Si Google affiche « Cette application n'a pas été validée » : **Paramètres avancés → Accéder au projet** (c'est ton propre script). Relance l'élément de menu une fois les autorisations données : les onglets Entreprises, Candidatures et Réglages apparaissent.
-   Ne lance pas le script depuis le bouton **Exécuter** de l'éditeur : la liste propose par défaut la première fonction du fichier (`ajouterJours`), qui n'installe rien.
+   Autre possibilité : dans l'éditeur, vérifier que la liste à côté d'**Exécuter** affiche `installer` (c'est la fonction proposée par défaut), puis cliquer sur **Exécuter**.
 8. Remplis l'onglet **Réglages** : Prénom Nom, Signature, Dates de stage. Laisse **Mode test** à `oui` jusqu'à la fin des tests.
 
 ## Utilisation

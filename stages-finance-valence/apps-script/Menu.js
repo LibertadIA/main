@@ -1,13 +1,5 @@
 // Menu « Candidatures », actions et déclencheur quotidien.
-
-function onOpen() {
-  SpreadsheetApp.getUi().createMenu('Candidatures')
-    .addItem('Créer les brouillons', 'creerBrouillons')
-    .addItem('Mettre à jour maintenant', 'mettreAJourSuivi')
-    .addSeparator()
-    .addItem('Installer / réparer le classeur', 'installer')
-    .addToUi();
-}
+// `installer` reste la première fonction de Code.gs : c'est celle que l'éditeur lance par défaut.
 
 function installer() {
   initialiserClasseur();
@@ -16,6 +8,15 @@ function installer() {
   });
   ScriptApp.newTrigger('mettreAJourSuivi').timeBased().everyDays(1).atHour(8).create();
   classeur().toast('Classeur prêt, suivi quotidien programmé à 8 h.', 'Candidatures', 10);
+}
+
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('Candidatures')
+    .addItem('Créer les brouillons', 'creerBrouillons')
+    .addItem('Mettre à jour maintenant', 'mettreAJourSuivi')
+    .addSeparator()
+    .addItem('Installer / réparer le classeur', 'installer')
+    .addToUi();
 }
 
 function creerBrouillons() {

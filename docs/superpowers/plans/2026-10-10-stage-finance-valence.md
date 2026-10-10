@@ -1421,15 +1421,7 @@ function creerBrouillonRelance(ligne, reglages, idMessageOrigine) {
 
 ```javascript
 // Menu « Candidatures », actions et déclencheur quotidien.
-
-function onOpen() {
-  SpreadsheetApp.getUi().createMenu('Candidatures')
-    .addItem('Créer les brouillons', 'creerBrouillons')
-    .addItem('Mettre à jour maintenant', 'mettreAJourSuivi')
-    .addSeparator()
-    .addItem('Installer / réparer le classeur', 'installer')
-    .addToUi();
-}
+// `installer` reste la première fonction de Code.gs : c'est celle que l'éditeur lance par défaut.
 
 function installer() {
   initialiserClasseur();
@@ -1438,6 +1430,15 @@ function installer() {
   });
   ScriptApp.newTrigger('mettreAJourSuivi').timeBased().everyDays(1).atHour(8).create();
   classeur().toast('Classeur prêt, suivi quotidien programmé à 8 h.', 'Candidatures', 10);
+}
+
+function onOpen() {
+  SpreadsheetApp.getUi().createMenu('Candidatures')
+    .addItem('Créer les brouillons', 'creerBrouillons')
+    .addItem('Mettre à jour maintenant', 'mettreAJourSuivi')
+    .addSeparator()
+    .addItem('Installer / réparer le classeur', 'installer')
+    .addToUi();
 }
 
 function creerBrouillons() {
@@ -1580,6 +1581,11 @@ test('le fichier assemblé est du JavaScript valide sans déclaration globale le
   assert.doesNotMatch(code, /^(let|const) /m);
 });
 
+test('installer est la première fonction du fichier, donc celle que l’éditeur lance par défaut', () => {
+  const premiere = assembler().match(/^function (\w+)/m);
+  assert.equal(premiere[1], 'installer');
+});
+
 test('le fichier assemblé ne contient aucun caractère combinant invisible (fragile au copier-coller)', () => {
   assert.doesNotMatch(assembler(), /[\u0300-\u036f]/);
 });
@@ -1607,7 +1613,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { DOSSIER_APPS_SCRIPT } = require('./lib/charger-apps-script');
 
-const ORDRE = ['Schema.js', 'Logique.js', 'Feuilles.js', 'Documents.js', 'Messagerie.js', 'Menu.js'];
+// Menu.js en premier : l'éditeur Apps Script lance par défaut la première fonction du fichier (installer).
+const ORDRE = ['Menu.js', 'Schema.js', 'Logique.js', 'Feuilles.js', 'Documents.js', 'Messagerie.js'];
 
 function assembler() {
   return ORDRE.map((fichier) => {

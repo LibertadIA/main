@@ -20,6 +20,11 @@ test('le fichier assemblé est du JavaScript valide sans déclaration globale le
   assert.doesNotMatch(code, /^(let|const) /m);
 });
 
+test('installer est la première fonction du fichier, donc celle que l’éditeur lance par défaut', () => {
+  const premiere = assembler().match(/^function (\w+)/m);
+  assert.equal(premiere[1], 'installer');
+});
+
 test('le fichier assemblé ne contient aucun caractère combinant invisible (fragile au copier-coller)', () => {
   assert.doesNotMatch(assembler(), /[\u0300-\u036f]/);
 });

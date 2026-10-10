@@ -3,7 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { DOSSIER_APPS_SCRIPT } = require('./lib/charger-apps-script');
 
-const ORDRE = ['Schema.js', 'Logique.js', 'Feuilles.js', 'Documents.js', 'Messagerie.js', 'Menu.js'];
+// Menu.js en premier : l'éditeur Apps Script lance par défaut la première fonction du fichier (installer).
+const ORDRE = ['Menu.js', 'Schema.js', 'Logique.js', 'Feuilles.js', 'Documents.js', 'Messagerie.js'];
 
 function assembler() {
   return ORDRE.map((fichier) => {
