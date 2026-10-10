@@ -10,7 +10,7 @@ const LIMITES = {
 };
 
 function normaliser(texte) {
-  return ' ' + String(texte || '').normalize('NFD').replace(/[̀-ͯ]/g, '')
+  return ' ' + String(texte || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim() + ' ';
 }
 

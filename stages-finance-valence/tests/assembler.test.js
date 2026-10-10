@@ -20,6 +20,10 @@ test('le fichier assemblé est du JavaScript valide sans déclaration globale le
   assert.doesNotMatch(code, /^(let|const) /m);
 });
 
+test('le fichier assemblé ne contient aucun caractère combinant invisible (fragile au copier-coller)', () => {
+  assert.doesNotMatch(assembler(), /[\u0300-\u036f]/);
+});
+
 test('le manifeste active Gmail et Drive avancés en Europe/Paris', () => {
   const manifeste = JSON.parse(fs.readFileSync(DOSSIER_APPS_SCRIPT + '/appsscript.json', 'utf8'));
   assert.equal(manifeste.timeZone, 'Europe/Paris');

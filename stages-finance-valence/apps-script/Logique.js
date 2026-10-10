@@ -16,7 +16,7 @@ function formaterDate(date) {
 }
 
 function sansAccents(texte) {
-  return String(texte).normalize('NFD').replace(/[̀-ͯ]/g, '');
+  return String(texte).normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
 function nomFichier(prefixe, prenomNom, entreprise) {
