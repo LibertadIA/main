@@ -2559,12 +2559,14 @@ test('echapper neutralise le HTML', () => {
 test('cvHtml contient identité, titre, sections et expériences dans l’ordre donné', () => {
   const html = cvHtml(candidatureEmail.cv, maitre.identite);
   assert.match(html, /^<!doctype html>/);
-  assert.ok(html.includes('<h1 style="font-size:20pt;color:#1F3864;margin:0">Léa Dupré</h1>'));
+  assert.ok(html.includes('<p style="font-size:20pt;color:#1F3864;margin:0"><b>Léa Dupré</b></p>'));
   assert.ok(html.includes('Valence (26) · 06 00 00 00 00 · lea.dupre@example.com'));
   assert.ok(html.includes('<b>Stage en expertise comptable – avril à juin 2027</b>'));
   for (const titre of ['EXPÉRIENCES', 'FORMATION', 'COMPÉTENCES', 'LANGUES', 'CENTRES D’INTÉRÊT']) {
-    assert.ok(html.includes('>' + titre + '</h2>'), titre);
+    assert.ok(html.includes('<p style="font-size:11pt;color:#1F3864;margin:8pt 0 2pt 0"><b>' + titre + '</b></p>'), titre);
   }
+  // Pas de <h1>/<h2> ni de bordure : une fois convertis en Google Docs, ils ajoutent des lignes vides.
+  assert.doesNotMatch(html, /<h[12]|border/);
   assert.ok(html.indexOf('Trésorière') < html.indexOf('Vendeuse conseil'));
   assert.ok(html.includes('<li>Suivi du budget annuel de 12 000 €</li>'));
 });
@@ -2618,8 +2620,8 @@ function echapper(texte) {
 
 function section(titre, contenu) {
   if (!contenu) return '';
-  return '<h2 style="font-size:11pt;color:' + COULEUR + ';border-bottom:1px solid ' + COULEUR +
-    ';margin:10pt 0 3pt 0">' + echapper(titre.toUpperCase()) + '</h2>' + contenu;
+  return '<p style="font-size:11pt;color:' + COULEUR + ';margin:8pt 0 2pt 0"><b>' +
+    echapper(titre.toUpperCase()) + '</b></p>' + contenu;
 }
 
 function document(titre, corps) {
@@ -2646,7 +2648,7 @@ function cvHtml(cv, identite) {
   const ligne = (elements) => ((elements || []).length ? '<p style="margin:3pt 0">' + elements.map(echapper).join(' · ') + '</p>' : '');
 
   return document('CV – ' + identite.prenomNom,
-    '<h1 style="font-size:20pt;color:' + COULEUR + ';margin:0">' + echapper(identite.prenomNom) + '</h1>' +
+    '<p style="font-size:20pt;color:' + COULEUR + ';margin:0"><b>' + echapper(identite.prenomNom) + '</b></p>' +
     '<p style="margin:2pt 0;color:#555555">' + coordonnees + '</p>' +
     '<p style="font-size:12pt;color:' + COULEUR + ';margin:8pt 0 2pt 0"><b>' + echapper(cv.titre) + '</b></p>' +
     (cv.accroche ? '<p style="margin:0 0 4pt 0">' + echapper(cv.accroche) + '</p>' : '') +

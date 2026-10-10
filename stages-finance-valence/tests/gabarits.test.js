@@ -11,12 +11,14 @@ test('echapper neutralise le HTML', () => {
 test('cvHtml contient identité, titre, sections et expériences dans l’ordre donné', () => {
   const html = cvHtml(candidatureEmail.cv, maitre.identite);
   assert.match(html, /^<!doctype html>/);
-  assert.ok(html.includes('<h1 style="font-size:20pt;color:#1F3864;margin:0">Léa Dupré</h1>'));
+  assert.ok(html.includes('<p style="font-size:20pt;color:#1F3864;margin:0"><b>Léa Dupré</b></p>'));
   assert.ok(html.includes('Valence (26) · 06 00 00 00 00 · lea.dupre@example.com'));
   assert.ok(html.includes('<b>Stage en expertise comptable – avril à juin 2027</b>'));
   for (const titre of ['EXPÉRIENCES', 'FORMATION', 'COMPÉTENCES', 'LANGUES', 'CENTRES D’INTÉRÊT']) {
-    assert.ok(html.includes('>' + titre + '</h2>'), titre);
+    assert.ok(html.includes('<p style="font-size:11pt;color:#1F3864;margin:8pt 0 2pt 0"><b>' + titre + '</b></p>'), titre);
   }
+  // Pas de <h1>/<h2> ni de bordure : une fois convertis en Google Docs, ils ajoutent des lignes vides.
+  assert.doesNotMatch(html, /<h[12]|border/);
   assert.ok(html.indexOf('Trésorière') < html.indexOf('Vendeuse conseil'));
   assert.ok(html.includes('<li>Suivi du budget annuel de 12 000 €</li>'));
 });

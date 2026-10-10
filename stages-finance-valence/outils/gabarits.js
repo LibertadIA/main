@@ -9,8 +9,8 @@ function echapper(texte) {
 
 function section(titre, contenu) {
   if (!contenu) return '';
-  return '<h2 style="font-size:11pt;color:' + COULEUR + ';border-bottom:1px solid ' + COULEUR +
-    ';margin:10pt 0 3pt 0">' + echapper(titre.toUpperCase()) + '</h2>' + contenu;
+  return '<p style="font-size:11pt;color:' + COULEUR + ';margin:8pt 0 2pt 0"><b>' +
+    echapper(titre.toUpperCase()) + '</b></p>' + contenu;
 }
 
 function document(titre, corps) {
@@ -37,7 +37,7 @@ function cvHtml(cv, identite) {
   const ligne = (elements) => ((elements || []).length ? '<p style="margin:3pt 0">' + elements.map(echapper).join(' · ') + '</p>' : '');
 
   return document('CV – ' + identite.prenomNom,
-    '<h1 style="font-size:20pt;color:' + COULEUR + ';margin:0">' + echapper(identite.prenomNom) + '</h1>' +
+    '<p style="font-size:20pt;color:' + COULEUR + ';margin:0"><b>' + echapper(identite.prenomNom) + '</b></p>' +
     '<p style="margin:2pt 0;color:#555555">' + coordonnees + '</p>' +
     '<p style="font-size:12pt;color:' + COULEUR + ';margin:8pt 0 2pt 0"><b>' + echapper(cv.titre) + '</b></p>' +
     (cv.accroche ? '<p style="margin:0 0 4pt 0">' + echapper(cv.accroche) + '</p>' : '') +
