@@ -151,3 +151,81 @@ function compterPagesPdf(texte) {
   var pages = String(texte).match(/\/Type\s*\/Page(?![A-Za-z])/g);
   return pages ? pages.length : 0;
 }
+
+// --- Suivi -----------------------------------------------------------------------
+
+// messages : [{ de, date, estBrouillon, corps, idMessage }] dans l'ordre du fil.
+function analyserFil(messages, monEmail) {
+  var moi = String(monEmail || '').toLowerCase();
+  var faits = { brouillonPresent: false, envoi: null, relance: null, reponse: null, rebond: false };
+  messages.forEach(function (message) {
+    if (message.estBrouillon) {
+      faits.brouillonPresent = true;
+    } else if (estRebond(message.de)) {
+      faits.rebond = true;
+    } else if (adresseDe(message.de) === moi) {
+      if (!faits.envoi) faits.envoi = { date: message.date, idMessage: message.idMessage };
+      else if (!faits.relance) faits.relance = { date: message.date };
+    } else if (!faits.reponse) {
+      faits.reponse = { date: message.date, extrait: extrait(message.corps, 200) };
+    }
+  });
+  return faits;
+}
+
+// Renvoie les cellules à mettre à jour et l'éventuelle action à mener ('BROUILLON_RELANCE').
+function prochainEtat(ligne, faits, reglages, aujourdhui) {
+  var statut = ligne['Statut'];
+  var maj = {};
+  if (STATUTS_SUIVIS.indexOf(statut) === -1) return { maj: maj, action: null };
+
+  if (faits.envoi && !ligne['Date envoi']) maj['Date envoi'] = faits.envoi.date;
+
+  if (faits.rebond) {
+    maj['Statut'] = STATUTS.EMAIL_INVALIDE;
+    return { maj: maj, action: null };
+  }
+  if (faits.reponse) {
+    maj['Statut'] = STATUTS.REPONSE_RECUE;
+    maj['Date réponse'] = faits.reponse.date;
+    maj['Extrait réponse'] = faits.reponse.extrait;
+    return { maj: maj, action: null };
+  }
+
+  if (statut === STATUTS.BROUILLON_CREE) {
+    if (faits.envoi) {
+      maj['Statut'] = STATUTS.ENVOYE;
+      maj['Relance prévue'] = ajouterJours(faits.envoi.date, reglages.delaiRelance);
+      maj['Erreur'] = '';
+    } else if (!faits.brouillonPresent) {
+      maj['Erreur'] = 'Brouillon supprimé sans envoi : repasser la ligne en « Prêt » et vider « ID brouillon » pour le recréer';
+    }
+    return { maj: maj, action: null };
+  }
+
+  if (statut === STATUTS.ENVOYE) {
+    var prevue = ligne['Relance prévue'];
+    if (faits.envoi && prevue && aujourdhui >= prevue) {
+      maj['Statut'] = STATUTS.A_RELANCER;
+      return { maj: maj, action: 'BROUILLON_RELANCE' };
+    }
+    return { maj: maj, action: null };
+  }
+
+  if (statut === STATUTS.A_RELANCER) {
+    if (faits.relance) {
+      maj['Statut'] = STATUTS.RELANCE;
+      maj['Date relance'] = faits.relance.date;
+      return { maj: maj, action: null };
+    }
+    var aRecreer = faits.envoi && !ligne['ID brouillon relance'];
+    return { maj: maj, action: aRecreer ? 'BROUILLON_RELANCE' : null };
+  }
+
+  // Relancé
+  var dateRelance = ligne['Date relance'];
+  if (dateRelance && aujourdhui >= ajouterJours(dateRelance, reglages.delaiSansSuite)) {
+    maj['Statut'] = STATUTS.SANS_SUITE;
+  }
+  return { maj: maj, action: null };
+}
