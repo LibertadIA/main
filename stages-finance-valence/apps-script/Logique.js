@@ -85,3 +85,69 @@ function reglagesDepuisPaires(paires) {
     modeTest: /^(oui|true|1)$/i.test(String(brut['Mode test']).trim())
   };
 }
+
+// --- Brouillons et messages -----------------------------------------------------
+
+function validerPourBrouillon(ligne) {
+  if (!estEmailValide(ligne['Email'])) return 'Email manquant ou invalide';
+  if (!String(ligne['Objet'] || '').trim()) return 'Objet manquant';
+  if (!String(ligne['Corps'] || '').trim()) return 'Corps du mail manquant';
+  if (!String(ligne['ID doc CV'] || '').trim()) return 'ID doc CV manquant';
+  return null;
+}
+
+function doublonsEntreprise(lignes) {
+  var vus = {};
+  var doublons = [];
+  lignes.forEach(function (ligne) {
+    var id = String(ligne['ID entreprise'] || '').trim();
+    if (!id) return;
+    if (vus[id] && doublons.indexOf(id) === -1) doublons.push(id);
+    vus[id] = true;
+  });
+  return doublons;
+}
+
+function corpsAvecSignature(corps, signature) {
+  return signature ? corps + '\n\n' + signature : corps;
+}
+
+function corpsRelance(ligne, reglages) {
+  var salutation = ligne['Destinataire'] ? 'Bonjour ' + ligne['Destinataire'] + ',' : 'Bonjour,';
+  var dates = reglages.datesStage ? ' (' + reglages.datesStage + ')' : '';
+  var lignes = [
+    salutation,
+    '',
+    'Je me permets de revenir vers vous au sujet de ma candidature pour un stage' + dates +
+      ' au sein de ' + ligne['Entreprise'] + ', envoyée le ' + formaterDate(ligne['Date envoi']) + '.',
+    'Je reste disponible pour un échange à votre convenance.',
+    '',
+    'Bien cordialement,'
+  ];
+  if (reglages.signature) lignes.push(reglages.signature);
+  return lignes.join('\n');
+}
+
+function requeteFilEnvoye(email, objet) {
+  return 'in:sent to:' + email + ' subject:"' + String(objet).replace(/"/g, '') + '"';
+}
+
+function construireMimeRelance(parametres, encoderBase64) {
+  var sujet = /^re:/i.test(parametres.objet) ? parametres.objet : 'Re: ' + parametres.objet;
+  return [
+    'To: ' + parametres.a,
+    'Subject: =?UTF-8?B?' + encoderBase64(sujet) + '?=',
+    'In-Reply-To: ' + parametres.idMessageOrigine,
+    'References: ' + parametres.idMessageOrigine,
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=UTF-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    encoderBase64(parametres.corps)
+  ].join('\r\n');
+}
+
+function compterPagesPdf(texte) {
+  var pages = String(texte).match(/\/Type\s*\/Page(?![A-Za-z])/g);
+  return pages ? pages.length : 0;
+}
