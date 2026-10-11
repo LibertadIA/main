@@ -24,7 +24,7 @@ Design : `docs/superpowers/specs/2026-10-10-stage-finance-valence-design.md`. Co
 
 1. `node outils/reperer.js --par-secteur 25` → `donnees/reperage/entreprises-<date>.json` (`colonnes`, `lignes`). Les coupures réseau sont réessayées automatiquement ; relancer si la commande échoue quand même.
 2. Lire la colonne A de l'onglet `Entreprises` (`Entreprises!A:A`) et retirer les SIREN déjà présents, ainsi que les entreprises dont le nom contient un des motifs `exclusions` de `config.json` (anciens employeurs, sans tenir compte de la casse).
-3. Ajouter les nouvelles lignes : `append_values` sur `Entreprises!A1`.
+3. Ajouter les nouvelles lignes : `append_values` sur `Entreprises!A1`. Préfixer d'une apostrophe (`'`) le SIREN et la taille : sinon Google Sheets supprime les zéros en tête (`061500542`) et prend « 1-2 » ou « 10-19 » pour des dates. Faire de même pour la colonne « ID entreprise » de `Candidatures`.
 4. Résumer en une ligne par secteur.
 
 ## 2. Enrichissement (seulement pour les cibles de la prochaine vague)
