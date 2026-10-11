@@ -11,16 +11,23 @@ test('echapper neutralise le HTML', () => {
 test('cvHtml contient identité, titre, sections et expériences dans l’ordre donné', () => {
   const html = cvHtml(candidatureEmail.cv, maitre.identite);
   assert.match(html, /^<!doctype html>/);
-  assert.ok(html.includes('<p style="font-size:20pt;color:#1F3864;margin:0"><b>Léa Dupré</b></p>'));
-  assert.ok(html.includes('Valence (26) · 06 00 00 00 00 · lea.dupre@example.com'));
+  assert.ok(html.includes('<p style="margin:0;font-size:22pt;color:#FFFFFF"><b>Léa Dupré</b></p>'));
+  assert.ok(html.includes('Valence (26)   |   06 00 00 00 00   |   lea.dupre@example.com'));
   assert.ok(html.includes('<b>Stage en expertise comptable – avril à juin 2027</b>'));
-  for (const titre of ['EXPÉRIENCES', 'FORMATION', 'COMPÉTENCES', 'LANGUES', 'CENTRES D’INTÉRÊT']) {
-    assert.ok(html.includes('<p style="font-size:11pt;color:#1F3864;margin:8pt 0 2pt 0"><b>' + titre + '</b></p>'), titre);
+  for (const titre of ['EXPÉRIENCES', 'FORMATION', 'COMPÉTENCES', 'LANGUES ET CENTRES D’INTÉRÊT']) {
+    assert.ok(html.includes('<p style="margin:0;font-size:10pt;color:#1F3864"><b>' + titre + '</b></p>'), titre);
   }
-  // Pas de <h1>/<h2> ni de bordure : une fois convertis en Google Docs, ils ajoutent des lignes vides.
-  assert.doesNotMatch(html, /<h[12]|border/);
   assert.ok(html.indexOf('Trésorière') < html.indexOf('Vendeuse conseil'));
-  assert.ok(html.includes('<li>Suivi du budget annuel de 12 000 €</li>'));
+  assert.ok(html.includes('</span>  Suivi du budget annuel de 12 000 €</p>'));
+});
+
+test('cvHtml tient dans un seul tableau à la largeur importée par Google Docs', () => {
+  const html = cvHtml(candidatureEmail.cv, maitre.identite);
+  // Docs insère un paragraphe vide entre deux tableaux, transforme h1/h2 en titres espacés
+  // et les listes HTML en grosses puces en retrait.
+  assert.equal(html.match(/<table/g).length, 1);
+  assert.ok(html.includes('<table style="width:468pt;'));
+  assert.doesNotMatch(html, /<h[12]|<ul|<li/);
 });
 
 test('cvHtml omet les sections vides et échappe le contenu', () => {
@@ -28,6 +35,13 @@ test('cvHtml omet les sections vides et échappe le contenu', () => {
   assert.ok(html.includes('Stage &lt;test&gt;'));
   assert.ok(!html.includes('EXPÉRIENCES'));
   assert.ok(!html.includes('LANGUES'));
+  assert.ok(!html.includes('CENTRES'));
+});
+
+test('cvHtml titre la dernière section selon ce qui est rempli', () => {
+  const html = cvHtml({ titre: 'Stage', langues: ['Anglais B2'] }, maitre.identite);
+  assert.ok(html.includes('<b>LANGUES</b>'));
+  assert.ok(!html.includes('CENTRES'));
 });
 
 test('formuleAppel suit le destinataire', () => {

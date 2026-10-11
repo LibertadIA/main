@@ -1,7 +1,8 @@
 // Conversion des fichiers déposés par Claude (HTML ou Google Docs) en PDF A4 (DriveApp, DocumentApp, Drive avancé).
 
 var MIME_GOOGLE_DOCS = 'application/vnd.google-apps.document';
-var POINTS_A4 = { largeur: 595.28, hauteur: 841.89, marge: 42.5 };
+// Marges latérales : (595,28 - 468) / 2, pour garder la largeur des tableaux importés depuis le HTML (page Letter).
+var POINTS_A4 = { largeur: 595.28, hauteur: 841.89, margeHautBas: 42.5, margeCotes: 63.64 };
 
 // Si le fichier est resté en HTML, le convertit en Google Docs dans le même dossier et renvoie l'ID du Doc.
 function assurerGoogleDoc(idFichier) {
@@ -20,8 +21,8 @@ function exporterPdf(idFichier, nom) {
   var doc = DocumentApp.openById(idDoc);
   doc.getBody()
     .setPageWidth(POINTS_A4.largeur).setPageHeight(POINTS_A4.hauteur)
-    .setMarginTop(POINTS_A4.marge).setMarginBottom(POINTS_A4.marge)
-    .setMarginLeft(POINTS_A4.marge).setMarginRight(POINTS_A4.marge);
+    .setMarginTop(POINTS_A4.margeHautBas).setMarginBottom(POINTS_A4.margeHautBas)
+    .setMarginLeft(POINTS_A4.margeCotes).setMarginRight(POINTS_A4.margeCotes);
   doc.saveAndClose();
 
   var fichier = DriveApp.getFileById(idDoc);
