@@ -122,3 +122,10 @@ test('Relancé sans réponse après le délai → Sans suite', () => {
   assert.deepEqual(gas.prochainEtat(ligne, faits, reglages, j(22)), { maj: {}, action: null });
   assert.deepEqual(gas.prochainEtat(ligne, faits, reglages, j(23)), { maj: { Statut: STATUTS.SANS_SUITE }, action: null });
 });
+
+test('analyserFil retire le texte cité de l’extrait de réponse', () => {
+  const citee = { ...reponse, corps: 'Bien reçu\n\nLe lun. 2 nov. 2026 à 09:00, Léa <lea.dupre@gmail.com> a écrit :\n> Bonjour' };
+  assert.equal(gas.analyserFil([envoi, citee], MOI).reponse.extrait, 'Bien reçu');
+  const queCitation = { ...reponse, corps: '> Bonjour' };
+  assert.equal(gas.analyserFil([envoi, queCitation], MOI).reponse.extrait, '> Bonjour');
+});

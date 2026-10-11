@@ -98,3 +98,14 @@ test('compterPagesPdf compte les objets /Type /Page sans compter /Pages', () => 
   assert.equal(gas.compterPagesPdf(pdf), 2);
   assert.equal(gas.compterPagesPdf('rien'), 0);
 });
+
+test('sansCitation garde seulement le texte nouveau d’une réponse', () => {
+  assert.equal(
+    gas.sansCitation('bien reçu\n\nLe dim. 11 oct. 2026 à 16:41, Gabrie\nl <g@gmail.com> a écrit :\n> Bonjour'),
+    'bien reçu'
+  );
+  assert.equal(gas.sansCitation('Thanks!\nOn Sun, Oct 11, 2026 at 4:41 PM Gabriel <g@gmail.com> wrote:\n> Hi'), 'Thanks!');
+  assert.equal(gas.sansCitation("Merci\n\n-----Message d'origine-----\nDe : Gabriel"), 'Merci');
+  assert.equal(gas.sansCitation('Réponse\n> citation'), 'Réponse');
+  assert.equal(gas.sansCitation('  Pas de citation  '), 'Pas de citation');
+});

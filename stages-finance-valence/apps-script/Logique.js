@@ -147,6 +147,22 @@ function construireMimeRelance(parametres, encoderBase64) {
   ].join('\r\n');
 }
 
+// Coupe la citation du message d'origine (« Le … a écrit : », « On … wrote: », lignes « > », Outlook).
+function sansCitation(corps) {
+  var texte = String(corps || '');
+  var marqueurs = [
+    /(^|\n)[ \t]*(Le|On) [^\n]*(\n[^\n]*){0,2}?(a écrit|wrote)[ \t]*:/,
+    /(^|\n)[ \t]*>/,
+    /(^|\n)[ \t]*-{2,}[ \t]*(Original Message|Message d'origine)/i
+  ];
+  var fin = texte.length;
+  marqueurs.forEach(function (marqueur) {
+    var trouve = marqueur.exec(texte);
+    if (trouve && trouve.index < fin) fin = trouve.index;
+  });
+  return texte.slice(0, fin).trim();
+}
+
 function compterPagesPdf(texte) {
   var pages = String(texte).match(/\/Type\s*\/Page(?![A-Za-z])/g);
   return pages ? pages.length : 0;
@@ -167,7 +183,7 @@ function analyserFil(messages, monEmail) {
       if (!faits.envoi) faits.envoi = { date: message.date, idMessage: message.idMessage };
       else if (!faits.relance) faits.relance = { date: message.date };
     } else if (!faits.reponse) {
-      faits.reponse = { date: message.date, extrait: extrait(message.corps, 200) };
+      faits.reponse = { date: message.date, extrait: extrait(sansCitation(message.corps) || message.corps, 200) };
     }
   });
   return faits;

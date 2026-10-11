@@ -561,6 +561,17 @@ test('compterPagesPdf compte les objets /Type /Page sans compter /Pages', () => 
   assert.equal(gas.compterPagesPdf(pdf), 2);
   assert.equal(gas.compterPagesPdf('rien'), 0);
 });
+
+test('sansCitation garde seulement le texte nouveau d’une réponse', () => {
+  assert.equal(
+    gas.sansCitation('bien reçu\n\nLe dim. 11 oct. 2026 à 16:41, Gabrie\nl <g@gmail.com> a écrit :\n> Bonjour'),
+    'bien reçu'
+  );
+  assert.equal(gas.sansCitation('Thanks!\nOn Sun, Oct 11, 2026 at 4:41 PM Gabriel <g@gmail.com> wrote:\n> Hi'), 'Thanks!');
+  assert.equal(gas.sansCitation("Merci\n\n-----Message d'origine-----\nDe : Gabriel"), 'Merci');
+  assert.equal(gas.sansCitation('Réponse\n> citation'), 'Réponse');
+  assert.equal(gas.sansCitation('  Pas de citation  '), 'Pas de citation');
+});
 ```
 
 - [ ] **Step 2 : vérifier l'échec**
@@ -630,6 +641,22 @@ function construireMimeRelance(parametres, encoderBase64) {
     '',
     encoderBase64(parametres.corps)
   ].join('\r\n');
+}
+
+// Coupe la citation du message d'origine (« Le … a écrit : », « On … wrote: », lignes « > », Outlook).
+function sansCitation(corps) {
+  var texte = String(corps || '');
+  var marqueurs = [
+    /(^|\n)[ \t]*(Le|On) [^\n]*(\n[^\n]*){0,2}?(a écrit|wrote)[ \t]*:/,
+    /(^|\n)[ \t]*>/,
+    /(^|\n)[ \t]*-{2,}[ \t]*(Original Message|Message d'origine)/i
+  ];
+  var fin = texte.length;
+  marqueurs.forEach(function (marqueur) {
+    var trouve = marqueur.exec(texte);
+    if (trouve && trouve.index < fin) fin = trouve.index;
+  });
+  return texte.slice(0, fin).trim();
 }
 
 function compterPagesPdf(texte) {
@@ -787,6 +814,13 @@ test('Relancé sans réponse après le délai → Sans suite', () => {
   assert.deepEqual(gas.prochainEtat(ligne, faits, reglages, j(22)), { maj: {}, action: null });
   assert.deepEqual(gas.prochainEtat(ligne, faits, reglages, j(23)), { maj: { Statut: STATUTS.SANS_SUITE }, action: null });
 });
+
+test('analyserFil retire le texte cité de l’extrait de réponse', () => {
+  const citee = { ...reponse, corps: 'Bien reçu\n\nLe lun. 2 nov. 2026 à 09:00, Léa <lea.dupre@gmail.com> a écrit :\n> Bonjour' };
+  assert.equal(gas.analyserFil([envoi, citee], MOI).reponse.extrait, 'Bien reçu');
+  const queCitation = { ...reponse, corps: '> Bonjour' };
+  assert.equal(gas.analyserFil([envoi, queCitation], MOI).reponse.extrait, '> Bonjour');
+});
 ```
 
 - [ ] **Step 2 : vérifier l'échec**
@@ -812,7 +846,7 @@ function analyserFil(messages, monEmail) {
       if (!faits.envoi) faits.envoi = { date: message.date, idMessage: message.idMessage };
       else if (!faits.relance) faits.relance = { date: message.date };
     } else if (!faits.reponse) {
-      faits.reponse = { date: message.date, extrait: extrait(message.corps, 200) };
+      faits.reponse = { date: message.date, extrait: extrait(sansCitation(message.corps) || message.corps, 200) };
     }
   });
   return faits;
@@ -2949,13 +2983,13 @@ Design : `docs/superpowers/specs/2026-10-10-stage-finance-valence-design.md`. Co
 ## 0. Début de session
 
 1. `cd stages-finance-valence && npm test` : tout doit passer.
-2. Lire `donnees/config.json` (`{"idDossierRacine": "...", "idClasseur": "..."}`). S'il manque : chercher « Stages Finance Valence » avec la recherche Google Drive, sinon demander les liens à l'utilisateur, puis l'écrire.
+2. Lire `donnees/config.json` (`{"idDossierRacine": "...", "idClasseur": "...", "compteEnvoi": "...", "exclusions": ["..."]}`). S'il manque : chercher « Stages Finance Valence » avec la recherche Google Drive, sinon demander les liens à l'utilisateur, puis l'écrire. Le Sheet et le dossier sont partagés avec `compteEnvoi`, qui a installé le script : c'est sa boîte Gmail qui reçoit les brouillons.
 3. Télécharger `cv-maitre.json` (racine du dossier Drive) vers `donnees/cv-maitre.json`.
 
 ## 1. Repérage
 
 1. `node outils/reperer.js --par-secteur 25` → `donnees/reperage/entreprises-<date>.json` (`colonnes`, `lignes`). Les coupures réseau sont réessayées automatiquement ; relancer si la commande échoue quand même.
-2. Lire la colonne A de l'onglet `Entreprises` (`Entreprises!A:A`) et retirer les SIREN déjà présents.
+2. Lire la colonne A de l'onglet `Entreprises` (`Entreprises!A:A`) et retirer les SIREN déjà présents, ainsi que les entreprises dont le nom contient un des motifs `exclusions` de `config.json` (anciens employeurs, sans tenir compte de la casse).
 3. Ajouter les nouvelles lignes : `append_values` sur `Entreprises!A1`.
 4. Résumer en une ligne par secteur.
 
@@ -3040,13 +3074,14 @@ Design : [`docs/superpowers/specs/2026-10-10-stage-finance-valence-design.md`](.
 
 ## Installation du Google Sheet (une fois, environ 10 minutes)
 
-1. Claude crée le dossier Drive « Stages Finance Valence » et, dedans, le Google Sheet « Suivi candidatures ».
-2. Ouvre le Sheet → **Extensions → Apps Script**.
+1. Claude crée le dossier Drive « Stages Finance Valence » et, dedans, le Google Sheet « Suivi candidatures », puis partage le dossier en modification avec le compte Gmail qui enverra les candidatures.
+2. **Depuis ce compte Gmail-là** (celui qui envoie), ouvre le Sheet → **Extensions → Apps Script**. Le script agit sur la boîte Gmail du compte qui l'installe.
 3. **Paramètres du projet** (roue dentée) → coche **Afficher le fichier manifeste « appsscript.json » dans l'éditeur**.
 4. Dans l'éditeur, remplace tout le contenu de `appsscript.json` par celui de `apps-script/appsscript.json`.
 5. Remplace tout le contenu de `Code.gs` par celui de `dist/Code.gs` (Claude te l'envoie ; il est produit par `npm run assembler`).
-6. Enregistre, choisis la fonction **installer** dans la liste en haut, clique sur **Exécuter** et accepte les autorisations (Sheets, Drive, Gmail). Si Google affiche « Cette application n'a pas été validée » : **Paramètres avancés → Accéder au projet** (c'est ton propre script).
-7. Recharge le Sheet : le menu **Candidatures** apparaît.
+6. Enregistre (icône disquette), puis **recharge l'onglet du Sheet** : le menu **Candidatures** apparaît à droite de « Aide ».
+7. **Candidatures → Installer / réparer le classeur**, puis accepte les autorisations (Sheets, Drive, Gmail). Si Google affiche « Cette application n'a pas été validée » : **Paramètres avancés → Accéder au projet** (c'est ton propre script). Relance l'élément de menu une fois les autorisations données : les onglets Entreprises, Candidatures et Réglages apparaissent.
+   Autre possibilité : dans l'éditeur, vérifier que la liste à côté d'**Exécuter** affiche `installer` (c'est la fonction proposée par défaut), puis cliquer sur **Exécuter**.
 8. Remplis l'onglet **Réglages** : Prénom Nom, Signature, Dates de stage. Laisse **Mode test** à `oui` jusqu'à la fin des tests.
 
 ## Utilisation
