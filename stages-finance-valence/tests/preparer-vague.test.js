@@ -25,7 +25,8 @@ test('numeroVague lit le numéro du dossier', () => {
 });
 
 test('preparerVague génère HTML et lignes pour une vague valide', () => {
-  const dossier = dossierVague(2, { '111111111.json': candidatureEmail, '552120222.json': candidaturePortail });
+  const portailAvecNotes = { ...candidaturePortail, notes: 'Dépôt en agence, 2 place de la République' };
+  const dossier = dossierVague(2, { '111111111.json': candidatureEmail, '552120222.json': portailAvecNotes });
   const resultat = preparerVague(dossier, { maitre, date: new Date('2026-10-10T08:00:00Z') });
 
   assert.equal(resultat.ok, true);
@@ -44,6 +45,8 @@ test('preparerVague génère HTML et lignes pour une vague valide', () => {
   assert.equal(champ(portail, 'Statut'), 'À postuler (portail)');
   assert.equal(champ(portail, 'Corps'), '');
   assert.equal(champ(portail, 'Lien offre'), 'https://careers.societegenerale.com/offre-exemple');
+  assert.equal(champ(email, 'Notes'), '');
+  assert.equal(champ(portail, 'Notes'), 'Dépôt en agence, 2 place de la République');
 
   const enregistre = JSON.parse(fs.readFileSync(path.join(dossier, 'lignes.json'), 'utf8'));
   assert.deepEqual(enregistre.colonnes, COLONNES_CANDIDATURES);

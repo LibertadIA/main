@@ -27,7 +27,8 @@ function ligneCandidature(c, vague, date) {
     'Corps': c.canal === 'Email' ? c.corpsMail : '',
     'Lien offre': c.lienOffre || '',
     'Statut': c.canal === 'Email' ? STATUTS.PRET : STATUTS.A_POSTULER_PORTAIL,
-    'Date prêt': date.toISOString().slice(0, 10)
+    'Date prêt': date.toISOString().slice(0, 10),
+    'Notes': c.notes || ''
   };
   return COLONNES_CANDIDATURES.map((colonne) => (colonne in valeurs ? valeurs[colonne] : ''));
 }

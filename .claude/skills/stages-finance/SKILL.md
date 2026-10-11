@@ -64,7 +64,7 @@ Pour chaque entreprise retenue :
 }
 ```
 
-3. **Banques : relais local.** En plus de la candidature portail, écrire `<SIREN>-relais.json` (canal Email, même `entreprise`, `idEntreprise` = `<SIREN>-relais`) adressé à **une seule** agence ou au centre d'affaires de Valence, avec une adresse publiée sur le site officiel. Le corps dit que la candidature vient d'être déposée sur le site carrières et demande un échange ou une orientation. Dans le Sheet, mettre « À envoyer après la candidature portail » dans Notes.
+3. **Banques : relais local.** En plus de la candidature portail, écrire `<SIREN>-relais.json` (canal Email, même `entreprise`, `idEntreprise` = `<SIREN>-relais`) adressé à **une seule** agence ou au centre d'affaires de Valence, avec une adresse publiée sur le site officiel. Le corps dit que la candidature vient d'être déposée sur le site carrières et demande un échange ou une orientation. Mettre « À envoyer après la candidature portail » dans son champ `notes` (il remplit la colonne Notes du Sheet). Même champ pour les consignes de dépôt en agence ou de formulaire.
 4. `node outils/preparer-vague.js donnees/vagues/vague-N` ; corriger les fichiers jusqu'au « ✓ ».
 5. **Vague 1** : montrer à l'utilisateur chaque corps de mail et le CV de chaque secteur, puis attendre sa validation avant tout dépôt.
 6. Dépôt Drive, pour chaque candidature :
