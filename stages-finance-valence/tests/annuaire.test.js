@@ -57,6 +57,16 @@ test('normaliserResultats (siège) exige un siège dans la zone', () => {
   assert.equal(champ(entreprises[0], 'Ville'), 'ROMANS-SUR-ISERE');
 });
 
+test('normaliserResultats (siège) écarte les organismes publics et les associations', () => {
+  const entreprises = annuaire.normaliserResultats([f.pmeLocale, f.mairie, f.association], 'PME', 'siege');
+  assert.deepEqual(entreprises.map((e) => e.siren), ['555555555']);
+});
+
+test('normaliserResultats (proximité) garde les mutuelles et assureurs quelle que soit leur forme juridique', () => {
+  const mutuelle = { ...f.cabinetPME, siren: '999999999', nature_juridique: '8210' };
+  assert.deepEqual(annuaire.normaliserResultats([mutuelle], 'Assurance/CGP', 'proximite').map((e) => e.siren), ['999999999']);
+});
+
 test('selectionner garde les plus grosses structures de chaque secteur', () => {
   const entreprises = [
     { secteur: 'Banque', rang: 53, nom: 'B1' },

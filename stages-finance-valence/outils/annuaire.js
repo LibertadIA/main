@@ -80,10 +80,16 @@ function estEmployeur(resultat) {
   return rangTranche(resultat.tranche_effectif_salarie) >= 1 || resultat.caractere_employeur === 'O';
 }
 
+// Formes juridiques 7xxx (droit public), 8xxx (organismes sociaux) et 9xxx (associations…) :
+// hors cible pour les services finance d'entreprises (mode 'siege' uniquement, les mutuelles restent en proximité).
+function estHorsCiblePme(resultat, mode) {
+  return mode === 'siege' && /^[789]/.test(String(resultat.nature_juridique || ''));
+}
+
 function normaliserResultats(resultats, secteur, mode) {
   const entreprises = [];
   for (const resultat of resultats) {
-    if (resultat.etat_administratif !== 'A' || !estEmployeur(resultat)) continue;
+    if (resultat.etat_administratif !== 'A' || !estEmployeur(resultat) || estHorsCiblePme(resultat, mode)) continue;
     const etablissement = etablissementRetenu(resultat, mode);
     if (!etablissement) continue;
     const rang = rangTranche(resultat.tranche_effectif_salarie);

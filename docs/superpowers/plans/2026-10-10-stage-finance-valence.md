@@ -1870,9 +1870,21 @@ const pmeParisienne = {
   siege: PARIS, matching_etablissements: [ROMANS]
 };
 
+const mairie = {
+  siren: '777777777', nom_complet: 'COMMUNE DE VALENCE', etat_administratif: 'A', categorie_entreprise: 'GE',
+  tranche_effectif_salarie: '42', caractere_employeur: 'O', nature_juridique: '7210', dirigeants: [],
+  siege: VALENCE, matching_etablissements: [VALENCE]
+};
+
+const association = {
+  siren: '888888888', nom_complet: 'ASSOCIATION EXEMPLE', etat_administratif: 'A', categorie_entreprise: 'PME',
+  tranche_effectif_salarie: '21', caractere_employeur: 'O', nature_juridique: '9220', dirigeants: [],
+  siege: ROMANS, matching_etablissements: [ROMANS]
+};
+
 const page = (results, totalPages) => ({ results, total_results: results.length, page: 1, per_page: 25, total_pages: totalPages });
 
-module.exports = { banqueGE, cabinetPME, cabinetFerme, cgpSolo, cabinetPetit, pmeLocale, pmeParisienne, page };
+module.exports = { banqueGE, cabinetPME, cabinetFerme, cgpSolo, cabinetPetit, pmeLocale, pmeParisienne, mairie, association, page };
 ```
 
 - [ ] **Step 2 : écrire le test qui échoue**
@@ -1937,6 +1949,16 @@ test('normaliserResultats (siège) exige un siège dans la zone', () => {
   const entreprises = annuaire.normaliserResultats([f.pmeLocale, f.pmeParisienne], 'PME', 'siege');
   assert.deepEqual(entreprises.map((e) => e.siren), ['555555555']);
   assert.equal(champ(entreprises[0], 'Ville'), 'ROMANS-SUR-ISERE');
+});
+
+test('normaliserResultats (siège) écarte les organismes publics et les associations', () => {
+  const entreprises = annuaire.normaliserResultats([f.pmeLocale, f.mairie, f.association], 'PME', 'siege');
+  assert.deepEqual(entreprises.map((e) => e.siren), ['555555555']);
+});
+
+test('normaliserResultats (proximité) garde les mutuelles et assureurs quelle que soit leur forme juridique', () => {
+  const mutuelle = { ...f.cabinetPME, siren: '999999999', nature_juridique: '8210' };
+  assert.deepEqual(annuaire.normaliserResultats([mutuelle], 'Assurance/CGP', 'proximite').map((e) => e.siren), ['999999999']);
 });
 
 test('selectionner garde les plus grosses structures de chaque secteur', () => {
@@ -2042,10 +2064,16 @@ function estEmployeur(resultat) {
   return rangTranche(resultat.tranche_effectif_salarie) >= 1 || resultat.caractere_employeur === 'O';
 }
 
+// Formes juridiques 7xxx (droit public), 8xxx (organismes sociaux) et 9xxx (associations…) :
+// hors cible pour les services finance d'entreprises (mode 'siege' uniquement, les mutuelles restent en proximité).
+function estHorsCiblePme(resultat, mode) {
+  return mode === 'siege' && /^[789]/.test(String(resultat.nature_juridique || ''));
+}
+
 function normaliserResultats(resultats, secteur, mode) {
   const entreprises = [];
   for (const resultat of resultats) {
-    if (resultat.etat_administratif !== 'A' || !estEmployeur(resultat)) continue;
+    if (resultat.etat_administratif !== 'A' || !estEmployeur(resultat) || estHorsCiblePme(resultat, mode)) continue;
     const etablissement = etablissementRetenu(resultat, mode);
     if (!etablissement) continue;
     const rang = rangTranche(resultat.tranche_effectif_salarie);

@@ -58,6 +58,18 @@ const pmeParisienne = {
   siege: PARIS, matching_etablissements: [ROMANS]
 };
 
+const mairie = {
+  siren: '777777777', nom_complet: 'COMMUNE DE VALENCE', etat_administratif: 'A', categorie_entreprise: 'GE',
+  tranche_effectif_salarie: '42', caractere_employeur: 'O', nature_juridique: '7210', dirigeants: [],
+  siege: VALENCE, matching_etablissements: [VALENCE]
+};
+
+const association = {
+  siren: '888888888', nom_complet: 'ASSOCIATION EXEMPLE', etat_administratif: 'A', categorie_entreprise: 'PME',
+  tranche_effectif_salarie: '21', caractere_employeur: 'O', nature_juridique: '9220', dirigeants: [],
+  siege: ROMANS, matching_etablissements: [ROMANS]
+};
+
 const page = (results, totalPages) => ({ results, total_results: results.length, page: 1, per_page: 25, total_pages: totalPages });
 
-module.exports = { banqueGE, cabinetPME, cabinetFerme, cgpSolo, cabinetPetit, pmeLocale, pmeParisienne, page };
+module.exports = { banqueGE, cabinetPME, cabinetFerme, cgpSolo, cabinetPetit, pmeLocale, pmeParisienne, mairie, association, page };
