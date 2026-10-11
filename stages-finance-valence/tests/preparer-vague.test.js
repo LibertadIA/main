@@ -69,3 +69,16 @@ test('preparerVague refuse deux candidatures pour la même entreprise', () => {
   assert.deepEqual(resultat.rapport.map((r) => r.fichier), ['b.json']);
   assert.ok(resultat.rapport[0].erreurs.includes('Même entreprise que a.json'));
 });
+
+test('preparerVague accepte un mail de relais pour une entreprise déjà candidatée par portail', () => {
+  const relais = {
+    ...candidatureEmail,
+    idEntreprise: candidaturePortail.idEntreprise + '-relais',
+    entreprise: candidaturePortail.entreprise,
+    corpsMail: candidatureEmail.corpsMail.replace('Le Cabinet Exemple Expertise', 'La Société Générale')
+  };
+  const dossier = dossierVague(5, { '552120222.json': candidaturePortail, '552120222-relais.json': relais });
+  const resultat = preparerVague(dossier, { maitre });
+  assert.equal(resultat.ok, true, JSON.stringify(resultat.rapport));
+  assert.deepEqual(resultat.lignes.map((l) => champ(l, 'ID candidature')).sort(), ['V5-552120222', 'V5-552120222-relais']);
+});

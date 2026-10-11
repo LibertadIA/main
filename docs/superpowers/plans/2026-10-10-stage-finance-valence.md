@@ -2861,6 +2861,19 @@ test('preparerVague refuse deux candidatures pour la même entreprise', () => {
   assert.deepEqual(resultat.rapport.map((r) => r.fichier), ['b.json']);
   assert.ok(resultat.rapport[0].erreurs.includes('Même entreprise que a.json'));
 });
+
+test('preparerVague accepte un mail de relais pour une entreprise déjà candidatée par portail', () => {
+  const relais = {
+    ...candidatureEmail,
+    idEntreprise: candidaturePortail.idEntreprise + '-relais',
+    entreprise: candidaturePortail.entreprise,
+    corpsMail: candidatureEmail.corpsMail.replace('Le Cabinet Exemple Expertise', 'La Société Générale')
+  };
+  const dossier = dossierVague(5, { '552120222.json': candidaturePortail, '552120222-relais.json': relais });
+  const resultat = preparerVague(dossier, { maitre });
+  assert.equal(resultat.ok, true, JSON.stringify(resultat.rapport));
+  assert.deepEqual(resultat.lignes.map((l) => champ(l, 'ID candidature')).sort(), ['V5-552120222', 'V5-552120222-relais']);
+});
 ```
 
 - [ ] **Step 2 : vérifier l'échec**
@@ -2917,8 +2930,9 @@ function preparerVague(dossier, { maitre, date = new Date() }) {
   const rapport = [];
   const vus = new Map();
   for (const c of candidatures) {
+    // Un mail de relais (ID « <SIREN>-relais ») vise la même entreprise qu'une candidature portail : pas une « autre ».
     const autres = candidatures
-      .filter((o) => o.donnees.idEntreprise !== c.donnees.idEntreprise)
+      .filter((o) => o.donnees.idEntreprise !== c.donnees.idEntreprise && o.donnees.entreprise !== c.donnees.entreprise)
       .map((o) => o.donnees.entreprise);
     const erreurs = controlerCandidature(c.donnees, maitre, autres);
     if (vus.has(c.donnees.idEntreprise)) erreurs.push('Même entreprise que ' + vus.get(c.donnees.idEntreprise));
@@ -3058,15 +3072,16 @@ Pour chaque entreprise retenue :
 }
 ```
 
-3. `node outils/preparer-vague.js donnees/vagues/vague-N` ; corriger les fichiers jusqu'au « ✓ ».
-4. **Vague 1** : montrer à l'utilisateur chaque corps de mail et le CV de chaque secteur, puis attendre sa validation avant tout dépôt.
-5. Dépôt Drive, pour chaque candidature :
+3. **Banques : relais local.** En plus de la candidature portail, écrire `<SIREN>-relais.json` (canal Email, même `entreprise`, `idEntreprise` = `<SIREN>-relais`) adressé à **une seule** agence ou au centre d'affaires de Valence, avec une adresse publiée sur le site officiel. Le corps dit que la candidature vient d'être déposée sur le site carrières et demande un échange ou une orientation. Dans le Sheet, mettre « À envoyer après la candidature portail » dans Notes.
+4. `node outils/preparer-vague.js donnees/vagues/vague-N` ; corriger les fichiers jusqu'au « ✓ ».
+5. **Vague 1** : montrer à l'utilisateur chaque corps de mail et le CV de chaque secteur, puis attendre sa validation avant tout dépôt.
+6. Dépôt Drive, pour chaque candidature :
    - créer le dossier de l'entreprise : `create_file`, `title` = nom de l'entreprise, `parentId` = `idDossierRacine`, type dossier `application/vnd.google-apps.folder` ;
    - `create_file`, `title` = `CV_<Prénom>_<Nom>_<Entreprise>`, `parentId` = dossier, `contentMimeType` = `text/html`, `textContent` = contenu de `<SIREN>.cv.html` → noter l'ID ;
    - Portail : même chose pour `<SIREN>.lettre.html` (`LM_…`).
-6. Reporter les ID dans les colonnes « ID doc CV » / « ID doc lettre » des lignes de `lignes.json`, puis `append_values` sur `Candidatures!A1`. Ne pas remplir « Lien dossier » : le script s'en charge.
-7. Passer la colonne `État` des entreprises concernées à `Vague N`.
-8. Dire à l'utilisateur : « Ouvre le Sheet → menu Candidatures → Créer les brouillons, puis relis et envoie depuis Gmail. Pour les portails, les PDF sont dans le lien du dossier. »
+7. Reporter les ID dans les colonnes « ID doc CV » / « ID doc lettre » des lignes de `lignes.json`, puis `append_values` sur `Candidatures!A1`. Ne pas remplir « Lien dossier » : le script s'en charge.
+8. Passer la colonne `État` des entreprises concernées à `Vague N`.
+9. Dire à l'utilisateur : « Ouvre le Sheet → menu Candidatures → Créer les brouillons, puis relis et envoie depuis Gmail. Pour les portails, les PDF sont dans le lien du dossier. »
 
 ## Règles de rédaction
 

@@ -42,8 +42,9 @@ function preparerVague(dossier, { maitre, date = new Date() }) {
   const rapport = [];
   const vus = new Map();
   for (const c of candidatures) {
+    // Un mail de relais (ID « <SIREN>-relais ») vise la même entreprise qu'une candidature portail : pas une « autre ».
     const autres = candidatures
-      .filter((o) => o.donnees.idEntreprise !== c.donnees.idEntreprise)
+      .filter((o) => o.donnees.idEntreprise !== c.donnees.idEntreprise && o.donnees.entreprise !== c.donnees.entreprise)
       .map((o) => o.donnees.entreprise);
     const erreurs = controlerCandidature(c.donnees, maitre, autres);
     if (vus.has(c.donnees.idEntreprise)) erreurs.push('Même entreprise que ' + vus.get(c.donnees.idEntreprise));
