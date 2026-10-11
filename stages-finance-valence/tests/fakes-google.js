@@ -1,7 +1,8 @@
 // Fausses versions minimales des services Google utilisés par le script, pour les tests d'intégration.
 
-function installerFakesGoogle({ monEmail = 'lea.dupre@gmail.com', onglets = {}, fils = {}, fichiers = {}, pagesPdf = 1 } = {}) {
-  const journal = { brouillons: [], brouillonsRelance: [], pdf: [], toasts: [], recherches: [] };
+// largeurPage : 612 pt (Letter) pour un document importé depuis du HTML, 595,28 pt pour un Word A4 converti.
+function installerFakesGoogle({ monEmail = 'lea.dupre@gmail.com', onglets = {}, fils = {}, fichiers = {}, pagesPdf = 1, largeurPage = 612 } = {}) {
+  const journal = { brouillons: [], brouillonsRelance: [], pdf: [], toasts: [], recherches: [], miseEnPage: [] };
 
   const feuille = (nom) => ({
     getDataRange: () => ({ getValues: () => onglets[nom].map((ligne) => ligne.slice()) }),
@@ -107,9 +108,12 @@ function installerFakesGoogle({ monEmail = 'lea.dupre@gmail.com', onglets = {}, 
     }
   };
 
-  const corps = {};
+  const corps = { getPageWidth: () => largeurPage };
   for (const methode of ['setPageWidth', 'setPageHeight', 'setMarginTop', 'setMarginBottom', 'setMarginLeft', 'setMarginRight']) {
-    corps[methode] = () => corps;
+    corps[methode] = () => {
+      journal.miseEnPage.push(methode);
+      return corps;
+    };
   }
   globalThis.DocumentApp = { openById: () => ({ getBody: () => corps, saveAndClose: () => {} }) };
 

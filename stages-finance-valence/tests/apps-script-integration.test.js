@@ -69,6 +69,27 @@ test('creerBrouillons convertit un CV resté en HTML avant export', () => {
   assert.equal(valeur(onglets, 2, 'ID doc CV'), 'converti-cv-111');
 });
 
+test('creerBrouillons passe en A4 un CV importé depuis du HTML et laisse intact un CV Word déjà en A4', () => {
+  const importe = installerFakesGoogle({
+    monEmail: MOI,
+    onglets: { Candidatures: [COLONNES_CANDIDATURES, ligne(pret)], Réglages: reglages(false) },
+    fichiers: { 'cv-111': DOC }
+  });
+  gas.creerBrouillons();
+  assert.ok(importe.journal.miseEnPage.includes('setPageWidth'));
+  assert.ok(importe.journal.miseEnPage.includes('setMarginLeft'));
+
+  const word = installerFakesGoogle({
+    monEmail: MOI,
+    onglets: { Candidatures: [COLONNES_CANDIDATURES, ligne(pret)], Réglages: reglages(false) },
+    fichiers: { 'cv-111': DOC },
+    largeurPage: 595.28
+  });
+  gas.creerBrouillons();
+  assert.deepEqual(word.journal.miseEnPage, []);
+  assert.deepEqual(word.journal.pdf, ['CV_Lea_Dupre_Cabinet_Exemple.pdf']);
+});
+
 test('creerBrouillons refuse un CV de 2 pages, un doublon et une ligne incomplète', () => {
   const { journal, onglets } = installerFakesGoogle({
     monEmail: MOI,

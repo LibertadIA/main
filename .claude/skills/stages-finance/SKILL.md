@@ -1,6 +1,6 @@
 ---
 name: stages-finance
-description: Procédure de la recherche de stage finance autour de Valence (dossier stages-finance-valence/) - repérage des entreprises via l'annuaire officiel puis Apollo, préparation d'une vague de candidatures (CV adapté + lettre courte dans le mail), dépôt dans Google Drive et ajout au Google Sheet « Suivi candidatures ». À utiliser dès que l'utilisateur dit « lance le repérage », « prépare la vague N », « trouve les contacts », « mets à jour mon CV maître » ou demande où en sont ses candidatures.
+description: Procédure de la recherche de stage finance autour de Valence (dossier stages-finance-valence/) - repérage des entreprises via l'annuaire officiel puis Apollo, préparation d'une vague de candidatures (CV Word de l'utilisateur tel quel + lettre courte dans le mail), dépôt dans Google Drive et ajout au Google Sheet « Suivi candidatures ». À utiliser dès que l'utilisateur dit « lance le repérage », « prépare la vague N », « trouve les contacts », « mets à jour mon CV maître » ou demande où en sont ses candidatures.
 ---
 
 # Stages finance Valence
@@ -66,10 +66,10 @@ Pour chaque entreprise retenue :
 
 3. **Banques : relais local.** En plus de la candidature portail, écrire `<SIREN>-relais.json` (canal Email, même `entreprise`, `idEntreprise` = `<SIREN>-relais`) adressé à **une seule** agence ou au centre d'affaires de Valence, avec une adresse publiée sur le site officiel. Le corps dit que la candidature vient d'être déposée sur le site carrières et demande un échange ou une orientation. Mettre « À envoyer après la candidature portail » dans son champ `notes` (il remplit la colonne Notes du Sheet). Même champ pour les consignes de dépôt en agence ou de formulaire.
 4. `node outils/preparer-vague.js donnees/vagues/vague-N` ; corriger les fichiers jusqu'au « ✓ ».
-5. **Vague 1** : montrer à l'utilisateur chaque corps de mail et le CV de chaque secteur, puis attendre sa validation avant tout dépôt.
+5. **Vague 1** : montrer à l'utilisateur chaque corps de mail et chaque lettre, puis attendre sa validation avant tout dépôt.
 6. Dépôt Drive, pour chaque candidature :
    - créer le dossier de l'entreprise : `create_file`, `title` = nom de l'entreprise, `parentId` = `idDossierRacine`, type dossier `application/vnd.google-apps.folder` ;
-   - `create_file`, `title` = `CV_<Prénom>_<Nom>_<Entreprise>`, `parentId` = dossier, `contentMimeType` = `text/html`, `textContent` = contenu de `<SIREN>.cv.html` → noter l'ID ;
+   - CV : l'utilisateur veut son CV Word **tel quel**, sans adaptation. `copy_file` du Doc `idCvOriginal` (config.json), `title` = `CV_<Prénom>_<Nom>`, `parentId` = dossier → noter l'ID. Ne pas déposer `<SIREN>.cv.html`. Le script n'applique pas la mise en page A4 à un document déjà en A4 : le PDF reste identique au Word ;
    - Portail : même chose pour `<SIREN>.lettre.html` (`LM_…`).
 7. Reporter les ID dans les colonnes « ID doc CV » / « ID doc lettre » des lignes de `lignes.json`, puis `append_values` sur `Candidatures!A1`. Ne pas remplir « Lien dossier » : le script s'en charge.
 8. Passer la colonne `État` des entreprises concernées à `Vague N`.
@@ -77,7 +77,7 @@ Pour chaque entreprise retenue :
 
 ## Règles de rédaction
 
-- **CV** : partir du CV maître ; adapter le titre (poste + dates), l'accroche, l'ordre des expériences, le choix des compétences (libellés exacts du maître, 12 au plus), reformuler les points sans ajouter de fait. 4 expériences × 4 points au plus.
+- **CV** : le CV envoyé est le Word original (voir étape 6). Le champ `cv` du JSON ne sert qu'au contrôle de `preparer-vague` : partir du CV maître ; adapter le titre (poste + dates), l'accroche, l'ordre des expériences, le choix des compétences (libellés exacts du maître, 12 au plus), reformuler les points sans ajouter de fait. 4 expériences × 4 points au plus.
   - Banque : relation client, rigueur, conformité.
   - Cabinet comptable / audit : Excel, logiciels comptables, précision.
   - Assurance / gestion de patrimoine : pédagogie, produits financiers.
@@ -94,3 +94,5 @@ Pour chaque entreprise retenue :
 ## 5. Mise à jour du CV maître
 
 Quand l'utilisateur donne une nouvelle expérience ou compétence : modifier `donnees/cv-maitre.json`, puis remplacer `cv-maitre.json` dans Drive.
+
+Quand l'utilisateur fournit un nouveau CV Word : le déposer dans le dossier racine (`create_file`, `base64Content`, type docx, converti en Google Docs), vérifier l'export PDF (1 page, A4), puis mettre son ID dans `idCvOriginal`.

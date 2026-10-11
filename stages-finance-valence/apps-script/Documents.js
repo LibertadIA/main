@@ -19,10 +19,14 @@ function assurerGoogleDoc(idFichier) {
 function exporterPdf(idFichier, nom) {
   var idDoc = assurerGoogleDoc(idFichier);
   var doc = DocumentApp.openById(idDoc);
-  doc.getBody()
-    .setPageWidth(POINTS_A4.largeur).setPageHeight(POINTS_A4.hauteur)
-    .setMarginTop(POINTS_A4.margeHautBas).setMarginBottom(POINTS_A4.margeHautBas)
-    .setMarginLeft(POINTS_A4.margeCotes).setMarginRight(POINTS_A4.margeCotes);
+  var corps = doc.getBody();
+  // Docs importe le HTML sur une page Letter : on la passe en A4. Un document déjà en A4 (CV Word converti) reste intact.
+  if (Math.abs(corps.getPageWidth() - POINTS_A4.largeur) > 1) {
+    corps
+      .setPageWidth(POINTS_A4.largeur).setPageHeight(POINTS_A4.hauteur)
+      .setMarginTop(POINTS_A4.margeHautBas).setMarginBottom(POINTS_A4.margeHautBas)
+      .setMarginLeft(POINTS_A4.margeCotes).setMarginRight(POINTS_A4.margeCotes);
+  }
   doc.saveAndClose();
 
   var fichier = DriveApp.getFileById(idDoc);
