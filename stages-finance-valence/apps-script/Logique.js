@@ -15,8 +15,13 @@ function formaterDate(date) {
   return jj + '/' + mm + '/' + date.getFullYear();
 }
 
+// Retire les accents après décomposition NFD (U+0300 à U+036F). Le code n'écrit ni caractère combinant ni
+// séquence d'échappement unicode : les deux se perdent quand le code est copié depuis un document.
 function sansAccents(texte) {
-  return String(texte).normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  return String(texte).normalize('NFD').split('').filter(function (caractere) {
+    var code = caractere.charCodeAt(0);
+    return code < 0x300 || code > 0x36f;
+  }).join('');
 }
 
 function nomFichier(prefixe, prenomNom, entreprise) {

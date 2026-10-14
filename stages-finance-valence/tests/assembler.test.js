@@ -29,6 +29,10 @@ test('le fichier assemblé ne contient aucun caractère combinant invisible (fra
   assert.doesNotMatch(assembler(), /[\u0300-\u036f]/);
 });
 
+test('le fichier assemblé ne contient aucune séquence \\u (convertie en caractère combinant à la copie)', () => {
+  assert.doesNotMatch(assembler(), /\\u[0-9a-fA-F]{4}/);
+});
+
 test('le manifeste active Gmail et Drive avancés en Europe/Paris', () => {
   const manifeste = JSON.parse(fs.readFileSync(DOSSIER_APPS_SCRIPT + '/appsscript.json', 'utf8'));
   assert.equal(manifeste.timeZone, 'Europe/Paris');
