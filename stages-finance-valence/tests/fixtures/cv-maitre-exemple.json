@@ -1,0 +1,42 @@
+{
+  "identite": {
+    "prenomNom": "Léa Dupré",
+    "email": "lea.dupre@example.com",
+    "telephone": "06 00 00 00 00",
+    "ville": "Valence (26)",
+    "linkedin": "linkedin.com/in/lea-dupre-exemple"
+  },
+  "experiences": [
+    {
+      "poste": "Vendeuse conseil (job d'été)",
+      "structure": "Magasin Exemple",
+      "lieu": "Valence",
+      "dates": "Juillet – août 2025",
+      "points": ["Conseil et encaissement de 80 clients par jour", "Clôture et comptage de caisse quotidiens"]
+    },
+    {
+      "poste": "Trésorière",
+      "structure": "BDE Exemple",
+      "lieu": "Valence",
+      "dates": "2024 – 2025",
+      "points": ["Suivi du budget annuel de 12 000 €", "Relances des cotisations impayées"]
+    }
+  ],
+  "formations": [
+    {
+      "diplome": "BUT Gestion des entreprises et des administrations – 2e année",
+      "etablissement": "IUT Exemple",
+      "dates": "2025 – 2026",
+      "details": "Parcours gestion comptable, fiscale et financière"
+    },
+    {
+      "diplome": "Baccalauréat général, mention bien",
+      "etablissement": "Lycée Exemple",
+      "dates": "2024",
+      "details": ""
+    }
+  ],
+  "competences": ["Excel (tableaux croisés dynamiques, RECHERCHEX)", "Sage Comptabilité", "Rigueur", "Relation client"],
+  "langues": ["Anglais B2", "Espagnol B1"],
+  "centresInteret": ["Handball en club", "Bénévolat aux Restos du Cœur"]
+}
