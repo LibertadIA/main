@@ -1,0 +1,54 @@
+name: Tri Photos
+
+on:
+  push:
+    branches: ['**']
+    tags: ['tri-photos-v*']
+    paths:
+      - 'tri-photos/**'
+      - '.github/workflows/tri-photos.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    working-directory: tri-photos
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tri-photos/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: xvfb-run -a npm run test:e2e
+
+  windows:
+    needs: test
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tri-photos/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - run: npm run dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: TriPhotos
+          path: tri-photos/dist/TriPhotos.exe
+      - name: Publier la release
+        if: startsWith(github.ref, 'refs/tags/tri-photos-v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: tri-photos/dist/TriPhotos.exe
