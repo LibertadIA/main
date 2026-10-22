@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src file: data:; media-src file:">
+  <title>Tri Photos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <section id="home" class="screen center">
+    <div class="logo" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.5 1.1 4.3 2.4.8-1.3 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>
+    </div>
+    <h1>Tri Photos</h1>
+    <p class="lead">Garde le meilleur, envoie le reste à la corbeille.</p>
+    <button id="pick" class="primary">Choisir un dossier</button>
+    <p class="hint">Glisse à droite pour garder, à gauche pour supprimer.</p>
+  </section>
+
+  <section id="sorter" class="screen" hidden>
+    <header class="topbar">
+      <button id="change" class="ghost">← Changer de dossier</button>
+      <div id="folderName" class="folder"></div>
+      <div id="counter" class="counter"></div>
+    </header>
+    <div class="progress"><div id="progressBar"></div></div>
+    <main id="stage" class="stage"></main>
+    <footer class="actions">
+      <button id="undo" class="round small undo" title="Annuler (Ctrl+Z)" aria-label="Annuler" disabled>
+        <svg viewBox="0 0 24 24"><path d="M12.5 8c-2.65 0-5.05 1-6.9 2.6L2 7v9h9l-3.62-3.62A7.95 7.95 0 0 1 12.5 10.5c3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z"/></svg>
+      </button>
+      <button id="nope" class="round nope" title="Supprimer (←)" aria-label="Supprimer">
+        <svg viewBox="0 0 24 24"><path d="M18.3 5.71 12 12.01l-6.3-6.3-1.41 1.41 6.3 6.3-6.3 6.3 1.41 1.41 6.3-6.3 6.3 6.3 1.41-1.41-6.3-6.3 6.3-6.3z"/></svg>
+      </button>
+      <button id="like" class="round like" title="Garder (→)" aria-label="Garder">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2.1 0 3.5 1.1 4.3 2.4.8-1.3 2.2-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg>
+      </button>
+      <span class="round small spacer" aria-hidden="true"></span>
+    </footer>
+    <p class="keys"><kbd>←</kbd> supprimer · <kbd>→</kbd> garder · <kbd>Ctrl</kbd>+<kbd>Z</kbd> annuler · <kbd>Espace</kbd> lecture vidéo</p>
+  </section>
+
+  <section id="end" class="screen center" hidden>
+    <h2>Tri terminé</h2>
+    <p id="endFolder" class="lead"></p>
+    <div class="stats">
+      <div class="stat keep"><strong id="statKept"></strong><span>gardés</span></div>
+      <div class="stat nope"><strong id="statDeleted"></strong><span>supprimés</span></div>
+      <div class="stat"><strong id="statBytes"></strong><span>envoyés à la corbeille</span></div>
+    </div>
+    <div id="errors" class="errors" hidden>
+      <p>Ces fichiers n'ont pas pu être mis à la corbeille :</p>
+      <ul id="errorList"></ul>
+    </div>
+    <button id="endPick" class="primary">Trier un autre dossier</button>
+  </section>
+
+  <section id="empty" class="screen center" hidden>
+    <h2 id="emptyTitle"></h2>
+    <p id="emptyText" class="lead"></p>
+    <div class="row">
+      <button id="restart" class="secondary">Recommencer le tri</button>
+      <button id="emptyPick" class="primary">Choisir un autre dossier</button>
+    </div>
+  </section>
+
+  <div id="toast" class="toast" role="status" hidden></div>
+  <script src="app.js"></script>
+</body>
+</html>

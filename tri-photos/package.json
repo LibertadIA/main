@@ -1,0 +1,42 @@
+{
+  "name": "tri-photos",
+  "productName": "Tri Photos",
+  "version": "1.0.0",
+  "description": "Trier les photos et vidéos d'un dossier façon Tinder",
+  "author": "Martin Schappler",
+  "main": "src/main/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test \"tests/unit/*.test.js\"",
+    "test:e2e": "node --test --test-concurrency=1 \"tests/e2e/*.test.js\"",
+    "dist": "electron-builder --win portable --publish never"
+  },
+  "devDependencies": {
+    "electron": "44.5.1",
+    "electron-builder": "26.17.0",
+    "playwright-core": "1.63.0"
+  },
+  "build": {
+    "appId": "fr.triphotos.app",
+    "productName": "Tri Photos",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "win": {
+      "target": "portable",
+      "icon": "build/icon.png"
+    },
+    "portable": {
+      "artifactName": "TriPhotos.exe"
+    },
+    "electronLanguages": [
+      "fr"
+    ]
+  }
+}
